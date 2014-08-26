@@ -160,5 +160,9 @@ function loadComplete(evt)
 	mainButton.on("mousedown", function(evt) { mainButton.gotoAndStop("mainDown"); });
     stage.addChild(mainButton);
 
+	initJon();
+	initDan();
+	initDevon();
+	
 	gameState = TITLE;
 }
