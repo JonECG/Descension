@@ -152,18 +152,23 @@ function mouseInit() {
     });
 	stage.on("mousedown", function(evt) {
 		willMouseDown = true;
+        //console.log("down");
     });
 	stage.on("mouseout", function(evt) {
 		willMouseDown = false;
+        //console.log("out");
     });
 	stage.on("pressmove", function(evt) {
 		willMouseDown = true;
+        //console.log("move");
     });
 	stage.on("click", function(evt) {
 		willMouseDown = false;
+        //console.log("click");
     });
 	stage.on("pressup", function(evt) {
 		willMouseDown = false;
+        //console.log("up");
     });
 }
 

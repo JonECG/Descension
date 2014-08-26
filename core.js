@@ -43,7 +43,7 @@ function gameLoop( dt )
 			mainButton.visible = true;
 		break;
 		case PLAY:
-			
+			instructionScreen.visible = true;
 			cheating = isKeyPressed( 'J' ) ? !cheating : cheating;
 			debugText.visible = true;
 			gameStage.visible = true;

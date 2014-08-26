@@ -2,7 +2,7 @@
 
 var rectangleMan;
 var movementSpeed=5;
-var bulRep[];
+var bulRep;
 
 function initDevon()
 {
@@ -11,6 +11,7 @@ function initDevon()
     rectangleMan.x=300;
     rectangleMan.y=100;
     stage.addChild(rectangleMan);
+    bulRep=new Array();
 }
 
 function runDevon( dt )
@@ -25,21 +26,23 @@ function runDevon( dt )
     if(isKeyDown("D"))
         rectangleMan.x+=movementSpeed;
     
-    if(isMousePressed())
+    if(isMouseDown())
     {
+        console.log("BOOM");
         var bullet=new createjs.Shape();
         bullet.graphics.beginFill("#447").drawCircle(0,0,40);
-        var vec=new 2DVector(getMouseX()-rectangleMan.x, getMouseY-rectangleMan.y);
+        var vec=new vector2D(getMouseX()-rectangleMan.x, getMouseY-rectangleMan.y);
         bulRep.push(new Bullet(vec, bullet));
     }
     
     for(i=0; i<bulRep.length; i++)
     {
-        
+        bulRep[i].bul.x+=bulRep.vec2.x;
+        bulRep[i].bul.y+=bulRep.vec2.y;
     }
 }
 
-function 2DVector(x,y)
+function vector2D(x,y)
 {
     this.x=x;
     this.y=y;
