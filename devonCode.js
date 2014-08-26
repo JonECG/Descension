@@ -29,7 +29,7 @@ function runDevon( dt )
     if(isMousePressed())
     {
         var bullet=new createjs.Shape();
-        bullet.graphics.beginFill("#447").drawCircle(0,0,40);
+        bullet.graphics.beginFill("#447").drawCircle(0,0,10);
         bullet.x=rectangleMan.x;
         bullet.y=rectangleMan.y;
         var vec=new vector2D(getMouseX()-rectangleMan.x, getMouseY()-rectangleMan.y);
@@ -41,13 +41,12 @@ function runDevon( dt )
     {
         bulRep[i].bullet.x+=bulRep[i].vec2.x*dt;
         bulRep[i].bullet.y+=bulRep[i].vec2.y*dt;
-        console.log("X:"+bulRep[i].bullet.x);
-        console.log("Y:"+bulRep[i].bullet.y);
     }
 }
 
 function vector2D(x,y)
 {
+    this.length=Math.sqrt((x*x)+(y*y));
     this.x=x;
     this.y=y;
     this.getVector=function()
@@ -56,8 +55,11 @@ function vector2D(x,y)
     }
 }
 
-function Bullet(vector, bul)
+function Bullet(vector, bul, spd)
 {
     this.vec2=vector;
+    this.vec2.x=(this.vec2.x/this.vec2.length)*500;
+    this.vec2.y=(this.vec2.y/this.vec2.length)*500;
     this.bullet=bul;
+    this.speed=spd;
 }
