@@ -144,7 +144,7 @@ function isKeyReleased( keyId )
 }
 
 var mouseX = 0, mouseY = 0;
-var willMouseDown = false, isMouseDown = false, wasMouseDown = false;
+var willMouseDown = false, isaMouseDown = false, wasMouseDown = false;
 function mouseInit() {
     stage.on("stagemousemove", function(evt) {
 		mouseX = Math.floor(evt.stageX);
@@ -169,25 +169,25 @@ function mouseInit() {
 
 function updateMouse()
 {
-	wasMouseDown = isMouseDown;
-	isMouseDown = willMouseDown;
+	wasMouseDown = isaMouseDown;
+	isaMouseDown = willMouseDown;
 }
 
 function isMouseDown()
 {
-	return isMouseDown;
+	return isaMouseDown;
 }
 function isMouseUp()
 {
-	return !isMouseDown;
+	return !isaMouseDown;
 }
 function isMousePressed()
 {
-	return isMouseDown && !wasMouseDown;
+	return isaMouseDown && !wasMouseDown;
 }
 function isMouseReleased()
 {
-	return !isMouseDown && wasMouseDown;
+	return !isaMouseDown && wasMouseDown;
 }
 function getMouseX()
 {
