@@ -20,8 +20,6 @@ function gameInit()
 	stage.addChild(debugText);
 }
 
-var players, dolphins, gameCharacters;
-
 function gameLoop( dt )
 {
 	var count = stage.getNumChildren();
@@ -50,6 +48,10 @@ function gameLoop( dt )
 			debugText.visible = true;
 			gameStage.visible = true;
 			uiStage.visible = true;
+			
+			runJon( dt );
+			runDan( dt );
+			runDevon( dt );
 			
 			if( isKeyPressed( 'G' ) )
 			{
@@ -84,7 +86,6 @@ var queue;
 
 function loadFiles() {
 	createjs.Sound.alternateExtensions = ["mp3"];
-	//createjs.Sound.registerSound({id:"punch", src:"assets/bing.mp3"});
 
     queue = new createjs.LoadQueue(true, "assets/");
 	queue.installPlugin(createjs.Sound);
