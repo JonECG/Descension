@@ -137,9 +137,13 @@ TestCharacter.prototype.innerUpdate = function( dt )
 {
 	if( isMouseDown() )
 	{
-		this.x = getMouseX();
-		this.y = getMouseY();
+		this.move( dt );
 	}
+}
+TestCharacter.prototype.move = function( dt )
+{
+	this.x = getMouseX();
+	this.y = getMouseY();
 }
 
 function initJon()
