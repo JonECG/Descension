@@ -44,6 +44,12 @@ function runDevon( dt )
     }
 }
 
+function removeBullet(index)
+{
+    gameStage.removeChild(bulRep[index].bullet);
+    bulRep.splice(index, 1);
+}
+
 function vector2D(x,y)
 {
     this.length=Math.sqrt((x*x)+(y*y));
