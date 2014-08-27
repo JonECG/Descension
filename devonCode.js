@@ -32,9 +32,9 @@ Character.prototype.FireBullet = function()
 {
     var bul=new Bullet();
     var bulRep=new createjs.Shape();
-    bulRep.graphics.beginFill("#1AF").drawCircle(32,32,10);
-    bulRep.regX=32;
-    bulRep.regX=32;
+    bulRep.graphics.beginFill("#1AF").drawCircle(10,10,10);
+    bulRep.regX=10;
+    bulRep.regY=10;
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
