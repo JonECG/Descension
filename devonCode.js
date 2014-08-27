@@ -25,14 +25,58 @@ Character.prototype.innerUpdate = function( dt )
     
     if(isMousePressed())
     {
-        var bullet=new createjs.Shape();
-        bullet.graphics.beginFill("#447").drawCircle(0,0,10);
-        bullet.x=this.x;
-        bullet.y=this.y;
-        var vec=new vector2D(getMouseX()-this.x, getMouseY()-this.y);
-        bulRep.push(new Bullet(vec, bullet));
-        gameStage.addChild(bulRep[bulRep.length-1].bullet);
+        this.FireBullet();
     }
+}
+Character.prototype.FireBullet = function()
+{
+    var bul=new Bullet();
+    var bulRep=new createjs.Shape();
+    bulRep.graphics.beginFill("#1AF").drawCircle(32,32,10);
+    bulRep.regX=32;
+    bulRep.regX=32;
+    var vec=new vector2D(getMouseX()-this.x, getMouseY()-this.y);
+    var vec2=new vector2D(this.x, this.y);
+    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
+    gameCharacters.push(bul);
+}
+    
+function Bullet()
+{
+    CharacterObject.call(this);
+    this.radius=10;
+    this.alignment=2;
+    this.representation;
+    this.speed;
+    this.vector;
+    
+    this.containingStage;
+}
+
+Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
+{
+    this.representation=spriteRef.clone();
+    this.representation.x=posRef.x;
+    this.representation.y=posRef.y;
+    this.shadow=shadowRef.clone();
+    this.shadow.x=posRef.x;
+    this.shadow.y=posRef.y;
+    this.speed=speedRef;
+    this.vector=new vector2D((vecRef.x/vecRef.length)*speedRef, (vecRef.y/vecRef.length)*speedRef);
+    
+	stage.addChild(this.representation);
+    
+    this.containingStage=stage;
+}
+Bullet.prototype.destroy = function()
+{
+    gameStage.removeChild(this);
+    //bulRep.splice(index, 1);
+}
+Bullet.prototype.update = function( dt )
+{
+    this.representation.x+=this.vector.x*dt;
+    this.representation.y+=this.vector.y*dt;
 }
 
 function initDevon()
@@ -50,17 +94,7 @@ function initDevon()
 
 function runDevon( dt )
 {   
-    for(i=0; i<bulRep.length; i++)
-    {
-        bulRep[i].bullet.x+=bulRep[i].vec2.x*dt;
-        bulRep[i].bullet.y+=bulRep[i].vec2.y*dt;
-    }
-}
 
-function removeBullet(index)
-{
-    gameStage.removeChild(bulRep[index].bullet);
-    bulRep.splice(index, 1);
 }
 
 function vector2D(x,y)
@@ -72,13 +106,4 @@ function vector2D(x,y)
     {
         return "("+this.x+", "+this.y+")";
     }
-}
-
-function Bullet(vector, bul, spd)
-{
-    this.vec2=vector;
-    this.vec2.x=(this.vec2.x/this.vec2.length)*500;
-    this.vec2.y=(this.vec2.y/this.vec2.length)*500;
-    this.bullet=bul;
-    this.speed=spd;
 }
