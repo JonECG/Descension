@@ -38,7 +38,7 @@ Character.prototype.FireBullet = function()
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
-    gameCharacters.push(bul);
+    gameBullets.push(bul);
 }
     
 function Bullet()
