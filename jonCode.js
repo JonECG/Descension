@@ -165,12 +165,12 @@ function initJon()
 
 function getMouseXInGame()
 {
-	return getMouseX() + gameStage.x;
+	return getMouseX() - gameStage.x;
 }
 
 function getMouseYInGame()
 {
-	return getMouseY() + gameStage.y;
+	return getMouseY() - gameStage.y;
 }
 
 function runJon( dt )
