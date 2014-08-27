@@ -7,12 +7,16 @@ var LOADING = -1, TITLE = 0, INSTRUCT = 1, PLAY = 2, GAMEOVER = 3;
 
 var gameState = LOADING;
 
+var gameCharacters, gameWalls;
+
 function gameInit()
 {
 	gameStage = new createjs.Container();
 	uiStage = new createjs.Container();
 	stage.addChild( gameStage );
 	stage.addChild( uiStage );
+	gameCharacters = [];
+	gameWalls = [];
 	loadFiles();
 	debugText = new createjs.Text("debugstuff", "24px Arial", "#38c");
 	debugText.x = 20;
@@ -52,6 +56,11 @@ function gameLoop( dt )
 			runJon( dt );
 			runDan( dt );
 			runDevon( dt );
+			
+			for(var i = 0; i < gameCharacters.length; i++) 
+			{
+				gameCharacters[i].update( dt );
+			}
 			
 			if( isKeyPressed( 'G' ) )
 			{
