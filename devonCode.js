@@ -2,16 +2,18 @@
 
 var movementSpeed=5;
 var bulRep;
+var Player;
 
-function Player()
+function Character()
 {
 	CharacterObject.call( this );
 	this.radius = 32;
+    this.alignment=0;
 }
 
-Player.prototype = Object.create(CharacterObject.prototype);
-Player.prototype.constructor = Player;
-Player.prototype.innerUpdate = function( dt )
+Character.prototype = Object.create(CharacterObject.prototype);
+Character.prototype.constructor = Character;
+Character.prototype.innerUpdate = function( dt )
 {
 	if(isKeyDown("W"))
        this.y-=movementSpeed;
@@ -26,6 +28,14 @@ Player.prototype.innerUpdate = function( dt )
 function initDevon()
 {
     bulRep=new Array();
+    
+    Player = new Character();
+	var charRep = new createjs.Shape();  //creates object to hold a shape
+	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
+	charRep.regX = 32;
+	charRep.regY = 32;
+	Player.init( gameStage, charRep, charRep );
+	gameCharacters.push( Player );
 }
 
 function runDevon( dt )
