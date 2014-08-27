@@ -1,44 +1,46 @@
 //Dan's Code
 
-var AIRectangle;
-var activated =false;
-function initDan()
+
+
+
+function EnemyCharacter()
 {
-   AIRectangle = new createjs.Shape();
-    AIRectangle.graphics.beginFill("#99FF99").drawRect(-10, -10, 20, 20);
-    AIRectangle.x=500;
-    AIRectangle.y=300;
-    stage.addChild(AIRectangle);
+	CharacterObject.call( this );
+	this.radius = 32;
+    this.alignment=1;
 }
 
-function runDan( dt )
+EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
+EnemyCharacter.prototype.constructor = EnemyCharacter;
+EnemyCharacter.prototype.innerUpdate = function( dt )
 {
-    AIRectangle.visible=true;
-    if(!activated)
-    {
-        activate();
-    }
-    else
-    {
-        move();
-    }
+   
+    
+    
+        this.activate();
     
 }
-function activate()
+EnemyCharacter.prototype.activate = function()
 {
-    if(Player.x<= AIRectangle.x+65 && Player.x>= AIRectangle.x-65 &&
-       Player.y<= AIRectangle.y+65 && Player.y>= AIRectangle.y-65 )
-    {
-        activated=true;
-    }
+    for(i=0;i<gameCharacters.length;i++)
+        {
+            if(gameCharacters[i].alignment!=this.alignment)
+            {
+                    if(Math.sqrt( Math.pow( (gameCharacters[i].x - this.x), 2 ) + Math.pow( (gameCharacters[i].y - this.y), 2 ) )<200)
+                    {
+                        this.move(gameCharacters[i]);
+                    }
+            }
+        }
 }
-function move()
+EnemyCharacter.prototype.move=function(character)  
 {
-  var velocityX=  normalized((Player.x-AIRectangle.x),length((Player.x-AIRectangle.x), (Player.y-AIRectangle.y)))*2;
-    var velocityY=  normalized((Player.y-AIRectangle.y),length((Player.x-AIRectangle.x), (Player.y-AIRectangle.y)))*2;
     
-    AIRectangle.x+=velocityX;
-    AIRectangle.y+=velocityY;
+  var velocityX=  normalized((character.x-this.x),length((character.x-this.x), (character.y-this.y)))*4;
+    var velocityY=  normalized((character.y-this.y),length((character.x-this.x), (character.y-this.y)))*4;
+    
+    this.x+=velocityX;
+    this.y+=velocityY;
     
 }
 function length(x, y)
@@ -52,4 +54,23 @@ function normalized(data,length)
 {
  return (data/length);
 
+}
+function initDan()
+{
+    var enemy1= new EnemyCharacter();
+  var AIRectangle = new createjs.Shape();
+    AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
+   
+    
+   enemy1.init( gameStage, AIRectangle, AIRectangle );
+  enemy1.x=500;
+    enemy1.y=300;
+    gameCharacters.push(enemy1);
+ 
+}
+
+function runDan( dt )
+{
+  
+    
 }
