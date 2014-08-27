@@ -185,7 +185,7 @@ function cameraFollowPlayer( dt )
 	
 	for( var i = 0; i < gameCharacters.length; i++ )
 	{
-		//if( gameCharacters[i].alignment === 0 )
+		if( gameCharacters[i].alignment === 0 )
 		{
 			count++;
 			avx -= gameCharacters[i].x;
