@@ -35,7 +35,7 @@ Character.prototype.FireBullet = function()
     bulRep.graphics.beginFill("#1AF").drawCircle(32,32,10);
     bulRep.regX=32;
     bulRep.regX=32;
-    var vec=new vector2D(getMouseX()-this.x, getMouseY()-this.y);
+    var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
     gameCharacters.push(bul);
