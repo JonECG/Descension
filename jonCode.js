@@ -109,10 +109,10 @@ CharacterObject.prototype.update = function(dt)
 		{
 			var xDiff = this.x - (gameCharacters[i].x + rad * (this.x - gameCharacters[i].x) / mag);
 			var yDiff = this.y - (gameCharacters[i].y + rad * (this.y - gameCharacters[i].y) / mag);
-			this.x = this.x - xDiff/2;
-			this.y = this.y - yDiff/2;
-			gameCharacters[i].x = gameCharacters[i].x + xDiff/2;
-			gameCharacters[i].y = gameCharacters[i].y + yDiff/2;
+			this.x = this.x - xDiff;
+			this.y = this.y - yDiff;
+			gameCharacters[i].x = gameCharacters[i].x + xDiff;
+			gameCharacters[i].y = gameCharacters[i].y + yDiff;
 		}
 	}
 	
@@ -163,6 +163,16 @@ function initJon()
 	gameWalls.push( wall );
 }
 
+function getMouseXInGame()
+{
+	return getMouseX() + gameStage.x;
+}
+
+function getMouseYInGame()
+{
+	return getMouseY() + gameStage.y;
+}
+
 function runJon( dt )
 {
 	cameraFollowPlayer( dt );
@@ -175,7 +185,7 @@ function cameraFollowPlayer( dt )
 	
 	for( var i = 0; i < gameCharacters.length; i++ )
 	{
-		if( gameCharacters[i].alignment === 0 )
+		//if( gameCharacters[i].alignment === 0 )
 		{
 			count++;
 			avx -= gameCharacters[i].x;
