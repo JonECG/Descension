@@ -26,8 +26,8 @@ function runDan( dt )
 }
 function activate()
 {
-    if(rectangleMan.x<= AIRectangle.x+25 && rectangleMan.x>= AIRectangle.x-25 &&
-       rectangleMan.y<= AIRectangle.y+25 && rectangleMan.y>= AIRectangle.y-25 )
+    if(rectangleMan.x<= AIRectangle.x+65 && rectangleMan.x>= AIRectangle.x-65 &&
+       rectangleMan.y<= AIRectangle.y+65 && rectangleMan.y>= AIRectangle.y-65 )
     {
         activated=true;
     }
