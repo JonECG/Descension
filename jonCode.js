@@ -78,6 +78,16 @@ CharacterObject.prototype.update = function(dt)
 	{
 		var wall = gameWalls[i];
 		
+		//Side checks
+		if( this.x > wall.x - this.radius && this.x < wall.x + wall.w + this.radius && this.y > wall.y && this.y < wall.y + wall.h )
+		{
+			this.x = ( this.x < wall.x + wall.w/2 ) ? wall.x - this.radius : wall.x + wall.w + this.radius;
+		}
+		if( this.y > wall.y - this.radius && this.y < wall.y + wall.h + this.radius && this.x > wall.x && this.x < wall.x + wall.w )
+		{
+			this.y = ( this.y < wall.y + wall.h/2 ) ? wall.y - this.radius : wall.y + wall.h + this.radius;
+		}
+		
 		//Corner checks
 		for( var j = 0; j < wall.corners.length; j++ )
 		{
@@ -87,16 +97,6 @@ CharacterObject.prototype.update = function(dt)
 				this.x = wall.corners[j].x - this.radius*(wall.corners[j].x - this.x) / mag;
 				this.y = wall.corners[j].y - this.radius*(wall.corners[j].y - this.y) / mag;
 			}
-		}
-		
-		//Side checks
-		if( this.x > wall.x - this.radius && this.x < wall.x + wall.w + this.radius && this.y > wall.y && this.y < wall.y + wall.h )
-		{
-			this.x = ( this.x < wall.x + wall.w/2 ) ? wall.x - this.radius : wall.x + wall.w + this.radius;
-		}
-		if( this.y > wall.y - this.radius && this.y < wall.y + wall.h + this.radius && this.x > wall.x && this.x < wall.x + wall.w )
-		{
-			this.y = ( this.y < wall.y + wall.h/2 ) ? wall.y - this.radius : wall.y + wall.h + this.radius;
 		}
 	}
 	
@@ -161,4 +161,35 @@ function initJon()
 
 function runJon( dt )
 {
+	cameraFollowPlayer( dt );
+}
+
+function cameraFollowPlayer( dt )
+{
+	var count = 0;
+	var avx = 0, avy = 0;
+	
+	for( var i = 0; i < gameCharacters.length; i++ )
+	{
+		if( gameCharacters[i].alignment === 0 )
+		{
+			count++;
+			avx -= gameCharacters[i].x;
+			avy -= gameCharacters[i].y;
+		}
+	}
+	
+	if( count != 0 )
+	{
+		avx /= count;
+		avy /= count;
+		
+		avx += stage.canvas.width/2;
+		avy += stage.canvas.height/2;
+		
+		var tweenAmount = 30;
+		gameStage.x = ( gameStage.x * tweenAmount + avx ) / ( tweenAmount + 1 );
+		gameStage.y = ( gameStage.y * tweenAmount + avy ) / ( tweenAmount + 1 );
+	}
+	//console.log( count );
 }
