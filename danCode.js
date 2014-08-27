@@ -26,16 +26,16 @@ function runDan( dt )
 }
 function activate()
 {
-    if(rectangleMan.x<= AIRectangle.x+65 && rectangleMan.x>= AIRectangle.x-65 &&
-       rectangleMan.y<= AIRectangle.y+65 && rectangleMan.y>= AIRectangle.y-65 )
+    if(Player.x<= AIRectangle.x+65 && Player.x>= AIRectangle.x-65 &&
+       Player.y<= AIRectangle.y+65 && Player.y>= AIRectangle.y-65 )
     {
         activated=true;
     }
 }
 function move()
 {
-  var velocityX=  normalized((rectangleMan.x-AIRectangle.x),length((rectangleMan.x-AIRectangle.x), (rectangleMan.y-AIRectangle.y)))*2;
-    var velocityY=  normalized((rectangleMan.y-AIRectangle.y),length((rectangleMan.x-AIRectangle.x), (rectangleMan.y-AIRectangle.y)))*2;
+  var velocityX=  normalized((Player.x-AIRectangle.x),length((Player.x-AIRectangle.x), (Player.y-AIRectangle.y)))*2;
+    var velocityY=  normalized((Player.y-AIRectangle.y),length((Player.x-AIRectangle.x), (Player.y-AIRectangle.y)))*2;
     
     AIRectangle.x+=velocityX;
     AIRectangle.y+=velocityY;
