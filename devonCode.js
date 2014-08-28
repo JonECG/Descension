@@ -50,7 +50,7 @@ function Bullet()
     this.speed;
     this.vector;
 
-	this.solid=true;
+	this.solid=false;
 	this.markedForDestroy=false;
 	this.type = TYPE_BULLET;
 }
