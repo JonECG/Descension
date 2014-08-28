@@ -65,7 +65,7 @@ Bullet.prototype.collide = function( other )
         case TYPE_BULLET:
             break;
         case TYPE_CHARACTER:
-            if(other.alignment!=0)
+            if(other.alignment!=this.alignment)
             {
                 other.health-=10;
                 this.markedForDestroy=true;
@@ -127,11 +127,16 @@ function overLay(h)
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
    this.HPBar=new createjs.Shape();
-   this.HPBar.graphics.beginFill("#E62020").drawRect(0, 0, 200, 20);
+   this.HPBar.graphics.beginFill("#23A31A").drawRect(0, 0, 200, 50);
     this.HPBar.x=50;
-    this.HPBar.y=this.offset+40;
+    this.HPBar.y=this.offset+25;
     
-    this.container.addChild(this.background, this.HPBar);
+    this.HPMaxBar=new createjs.Shape();
+    this.HPMaxBar.graphics.beginFill("#E62020").drawRect(0,0,200,50);
+    this.HPMaxBar.x=50;
+    this.HPMaxBar.y=this.offset+25;
+    
+    this.container.addChild(this.background, this.HPMaxBar, this.HPBar);
     
     uiStage.addChild(this.container);
     
