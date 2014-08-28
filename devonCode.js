@@ -37,7 +37,7 @@ Character.prototype.FireBullet = function()
     bulRep.regY=10;
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
-    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
+    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
     gameObjects.push(bul);
 }
     
@@ -79,7 +79,7 @@ Bullet.prototype.collide = function( other )
     }
 }
 
-Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
+Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef, al)
 {
     this.representation=spriteRef.clone();
     this.representation.x=posRef.x;
@@ -89,7 +89,7 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     this.shadow.y=posRef.y;
     this.speed=speedRef;
     
-    this.alignment=2;
+    this.alignment=al;
     
     this.vector=new vector2D((vecRef.x/vecRef.length)*speedRef, (vecRef.y/vecRef.length)*speedRef);
     
@@ -115,6 +115,31 @@ Bullet.prototype.update = function( dt )
     this.representation.y=this.y;
 }
 
+function overLay(h)
+{
+    this.height=h;
+    this.width=800;
+    this.offset=600-h;
+    
+    this.container=new createjs.Container();
+    
+    this.background=new createjs.Shape();
+    this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
+    
+   this.HPBar=new createjs.Shape();
+   this.HPBar.graphics.beginFill("#E62020").drawRect(0+50, this.offset+40, 200, 20);
+    
+    this.container.addChild(this.background, this.HPBar);
+    
+    uiStage.addChild(this.container);
+    
+    this.update=function(hp)
+    {
+        this.HPBar.scaleX=hp/100;
+    }
+}
+
+var OL;
 function initDevon()
 {
     bulRep=new Array();
@@ -126,11 +151,22 @@ function initDevon()
 	charRep.regY = 32;
 	Player.init( gameStage, charRep, charRep );
 	gameObjects.push( Player );
+    
+    OL=new overLay(100);
 }
 
 function runDevon( dt )
 {   
-
+    for(var i=0; i<gameObjects.length; i++)
+    {
+        if(gameObjects[i].type==TYPE_CHARACTER && gameObjects[i].alignment==0)
+        {
+            OL.update(gameObjects[i].health);
+            
+            if(isKeyDown("H"))
+                gameObjects[i].health-=10;
+        }
+    }
 }
 
 function vector2D(x,y)
