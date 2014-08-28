@@ -174,6 +174,9 @@ CharacterObject.prototype.update = function(dt)
 	
 	GameObject.prototype.update.call( this, dt );
 	
+	if( health <= 0 )
+		this.markedForDestroy = true;
+		
 	this.representation.x = this.x;
 	this.representation.y = this.y;
 	this.shadow.x = this.x;
