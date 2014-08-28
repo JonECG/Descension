@@ -55,6 +55,10 @@ function Bullet()
 	this.type = TYPE_BULLET;
 }
 
+Bullet.prototype.collide = function( other )
+{
+}
+
 Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
 {
     this.representation=spriteRef.clone();
