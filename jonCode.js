@@ -115,6 +115,8 @@ Wall.prototype.init = function( stage, spriteReference )
 	
 	this.representation.x = this.x;
 	this.representation.y = this.y;
+	this.representation.scaleX = (this.w+0.01) / this.representation.getBounds().width;
+	this.representation.scaleY = (this.h+0.01) / this.representation.getBounds().height;
 }
 
 Wall.prototype.destroy = function()
@@ -214,8 +216,33 @@ TestCharacter.prototype.move = function( dt )
 	this.y = getMouseY();
 }
 
+var floorImage;
+var floors;
+var wallRep;
+
+function createWall( x, y, w, h )
+{
+	var wall = new Wall( x, y, w, h );
+	wall.init( gameStage, wallRep );
+	gameWalls.push( wall );
+}
+
 function initJon()
 {
+	floorImage = new createjs.Bitmap(queue.getResult("gameFloor"));
+	floors = [];
+	for( var i = -floorImage.getBounds().width; i < 800; i+= floorImage.getBounds().width )
+	{
+		for( var j = -floorImage.getBounds().height; j < 600; j+= floorImage.getBounds().height )
+		{
+			var cloning = floorImage.clone();
+			floors.push( cloning );
+			gameStage.addChild( cloning );
+		}
+	}
+	
+	wallRep = new createjs.Bitmap(queue.getResult("wallImage"));
+	
 	// var chara = new TestCharacter();
 	// var charRep = new createjs.Shape();  //creates object to hold a shape
 	// charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
@@ -224,11 +251,11 @@ function initJon()
 	// chara.init( gameStage, charRep, charRep );
 	// gameCharacters.push( chara );
 	
-	var wall = new Wall( 128, 128, 64, 256 );
-	var wallRep = new createjs.Shape();  //creates object to hold a shape
-	wallRep.graphics.beginFill("#111").drawRect(0, 0, 64, 256);  //creates circle at 0,0, with radius of 40
-	wall.init( gameStage, wallRep );
-	gameWalls.push( wall );
+		
+	createWall( 128, 128, 64, 256 );
+	createWall( 0, 256, 256, 64 );
+	//createWall( 128, 128, 64, 256 );
+	
 }
 
 function getMouseXInGame()
@@ -244,6 +271,7 @@ function getMouseYInGame()
 function runJon( dt )
 {
 	cameraFollowPlayer( dt );
+	moveFloor();
 }
 
 function cameraFollowPlayer( dt )
@@ -274,4 +302,24 @@ function cameraFollowPlayer( dt )
 		gameStage.y = ( gameStage.y * tweenAmount + avy ) / ( tweenAmount + 1 );
 	}
 	//console.log( count );
+}
+
+function nmod( x, y )
+{
+	var modded = Math.abs( x ) % y;
+	return ( x < 0 ) ? y - modded : modded;
+}
+
+function moveFloor()
+{
+	var index = 0;
+	for( var i = -floorImage.getBounds().width; i < 800; i+= floorImage.getBounds().width )
+	{
+		for( var j = -floorImage.getBounds().height; j < 600; j+= floorImage.getBounds().height )
+		{
+			var currentTile = floors[index++];
+			currentTile.x = -gameStage.x + i + nmod( gameStage.x, floorImage.getBounds().width );
+			currentTile.y = -gameStage.y + j + nmod( gameStage.y, floorImage.getBounds().height );
+		}
+	}
 }

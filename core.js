@@ -47,7 +47,7 @@ function gameLoop( dt )
 			mainButton.visible = true;
 		break;
 		case PLAY:
-			instructionScreen.visible = true;
+			//instructionScreen.visible = true;
 			cheating = isKeyPressed( 'J' ) ? !cheating : cheating;
 			debugText.visible = true;
 			gameStage.visible = true;
@@ -98,6 +98,8 @@ manifest = [
     {src:"instructions.png", id:"instructions"},
     {src:"gameover.png", id:"gameover"},
     {src:"buttons.png", id:"buttons"},
+	{src:"gameFloor.png", id:"gameFloor"},
+	{src:"wallImage.png", id:"wallImage"}
 ];
 
 var queue;
