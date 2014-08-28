@@ -7,7 +7,7 @@ function GameObject()
 	this.x;
 	this.y;
 	this.radius;
-	this.solid;
+	this.solid = true;
 	this.markedForDestroy=false;
 	this.type = TYPE_NOTHING;
 }

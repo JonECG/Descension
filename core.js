@@ -7,7 +7,7 @@ var LOADING = -1, TITLE = 0, INSTRUCT = 1, PLAY = 2, GAMEOVER = 3;
 
 var gameState = LOADING;
 
-var gameCharacters, gameWalls, gameBullets;
+var gameObjects, gameWalls;
 
 function gameInit()
 {
@@ -58,15 +58,18 @@ function gameLoop( dt )
 			runDan( dt );
 			runDevon( dt );
 			
-			for(var i = 0; i < gameCharacters.length; i++) 
+			for(var i = 0; i < gameObjects.length; i++) 
 			{
-				gameCharacters[i].update( dt );
+				gameObjects[i].update( dt );
 			}
-            
-            for(var i=0; i<gameBullets.length; i++)
-            {
-                gameBullets[i].update(dt);
-            }
+			for(var i = 0; i < gameObjects.length; i++) 
+			{
+				if( gameObjects[i].markedForDestroy )
+				{
+					gameObjects[i].splice( i, 1 );
+					i--;
+				}
+			}
 			
 			if( isKeyPressed( 'G' ) )
 			{
