@@ -159,13 +159,17 @@ function initDevon()
 
 function runDevon( dt )
 {   
+    var playerFound=false;
     for(var i=0; i<gameObjects.length; i++)
     {
         if(gameObjects[i].type==TYPE_CHARACTER && gameObjects[i].alignment==0)
         {
             OL.update(gameObjects[i].health);
+            playerFound=true;
         }
     }
+    if(!playerFound)
+        OL.update(0);
 }
 
 function vector2D(x,y)
