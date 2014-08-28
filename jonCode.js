@@ -61,20 +61,20 @@ GameObject.prototype.update = function( dt )
 	}
 	
 	// Collision with other characters
-	for( var i = 0; i < gameCharacters.length; i++ )
+	for( var i = 0; i < gameObjects.length; i++ )
 	{
-		var rad = this.radius+gameCharacters[i].radius;
-		var mag = Math.sqrt( Math.pow( (gameCharacters[i].x - this.x), 2 ) + Math.pow( (gameCharacters[i].y - this.y), 2 ) );
-		gameCharacters[i].collide( this );
-		this.collide( gameCharacters[i] );
-		if( this.solid && gameCharacters[i].solid && mag > 0 && mag < rad )
+		var rad = this.radius+gameObjects[i].radius;
+		var mag = Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) );
+		gameObjects[i].collide( this );
+		this.collide( gameObjects[i] );
+		if( this.solid && gameObjects[i].solid && mag > 0 && mag < rad )
 		{
-			var xDiff = this.x - (gameCharacters[i].x + rad * (this.x - gameCharacters[i].x) / mag);
-			var yDiff = this.y - (gameCharacters[i].y + rad * (this.y - gameCharacters[i].y) / mag);
+			var xDiff = this.x - (gameObjects[i].x + rad * (this.x - gameObjects[i].x) / mag);
+			var yDiff = this.y - (gameObjects[i].y + rad * (this.y - gameObjects[i].y) / mag);
 			this.x = this.x - xDiff;
 			this.y = this.y - yDiff;
-			gameCharacters[i].x = gameCharacters[i].x + xDiff;
-			gameCharacters[i].y = gameCharacters[i].y + yDiff;
+			gameObjects[i].x = gameObjects[i].x + xDiff;
+			gameObjects[i].y = gameObjects[i].y + yDiff;
 		}
 	}
 }
