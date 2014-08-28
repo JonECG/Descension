@@ -38,19 +38,21 @@ Character.prototype.FireBullet = function()
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2);
-    gameBullets.push(bul);
+    gameObjects.push(bul);
 }
     
 function Bullet()
 {
-    CharacterObject.call(this);
+    GameObject.call(this);
     this.radius=10;
     this.alignment=2;
     this.representation;
     this.speed;
     this.vector;
-    
-    this.containingStage;
+
+	this.solid=true;
+	this.markedForDestroy=false;
+	this.type = TYPE_BULLET;
 }
 
 Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
@@ -64,14 +66,14 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     this.speed=speedRef;
     this.vector=new vector2D((vecRef.x/vecRef.length)*speedRef, (vecRef.y/vecRef.length)*speedRef);
     
-	stage.addChild(this.representation);
+	gameStage.addChild(this.representation);
     
     this.containingStage=stage;
 }
-Bullet.prototype.destroy = function()
+Bullet.prototype.destroy = function(index)
 {
-    gameStage.removeChild(this);
-    //bulRep.splice(index, 1);
+    gameStage.removeChild(this.representation);
+    gameObjects.splice(index, 1);
 }
 Bullet.prototype.update = function( dt )
 {
@@ -89,7 +91,7 @@ function initDevon()
 	charRep.regX = 32;
 	charRep.regY = 32;
 	Player.init( gameStage, charRep, charRep );
-	gameCharacters.push( Player );
+	gameObjects.push( Player );
 }
 
 function runDevon( dt )
