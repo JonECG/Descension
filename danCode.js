@@ -8,6 +8,7 @@ function EnemyCharacter()
 	CharacterObject.call( this );
 	this.radius = 32;
     this.alignment=1;
+    this.health=100;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -62,10 +63,18 @@ function initDan()
     AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
    
     
-   enemy1.init( gameStage, AIRectangle, AIRectangle );
-  enemy1.x=500;
-    enemy1.y=300;
-gameObjects.push(enemy1);
+   
+    
+    for(i=0;i<10;i++)
+    {
+        enemy1= new EnemyCharacter();
+        enemy1.init( gameStage, AIRectangle, AIRectangle );
+        enemy1.x=500;
+        enemy1.y=300;
+        enemy1.x+=Math.random()*10;
+         enemy1.y+=Math.random()*10;
+        gameObjects.push(enemy1);
+    }
  
 }
 
