@@ -127,7 +127,9 @@ function overLay(h)
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
    this.HPBar=new createjs.Shape();
-   this.HPBar.graphics.beginFill("#E62020").drawRect(0+50, this.offset+40, 200, 20);
+   this.HPBar.graphics.beginFill("#E62020").drawRect(0, 0, 200, 20);
+    this.HPBar.x=50;
+    this.HPBar.y=this.offset+40;
     
     this.container.addChild(this.background, this.HPBar);
     
@@ -162,9 +164,6 @@ function runDevon( dt )
         if(gameObjects[i].type==TYPE_CHARACTER && gameObjects[i].alignment==0)
         {
             OL.update(gameObjects[i].health);
-            
-            if(isKeyDown("H"))
-                gameObjects[i].health-=10;
         }
     }
 }
