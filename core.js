@@ -15,9 +15,8 @@ function gameInit()
 	uiStage = new createjs.Container();
 	stage.addChild( gameStage );
 	stage.addChild( uiStage );
-	gameCharacters = [];
+	gameObjects = [];
 	gameWalls = [];
-    gameBullets=[];
 	loadFiles();
 	debugText = new createjs.Text("debugstuff", "24px Arial", "#38c");
 	debugText.x = 20;
