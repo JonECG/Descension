@@ -65,7 +65,8 @@ function gameLoop( dt )
 			{
 				if( gameObjects[i].markedForDestroy )
 				{
-					gameObjects[i].splice( i, 1 );
+					gameObjects[i].destroy();
+					gameObjects.splice( i, 1 );
 					i--;
 				}
 			}

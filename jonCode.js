@@ -28,13 +28,13 @@ GameObject.prototype.update = function( dt )
 		if( this.x > wall.x - this.radius && this.x < wall.x + wall.w + this.radius && this.y > wall.y && this.y < wall.y + wall.h )
 		{
 			collided = true;
-			if( solid )
+			if( this.solid )
 				this.x = ( this.x < wall.x + wall.w/2 ) ? wall.x - this.radius : wall.x + wall.w + this.radius;
 		}
 		if( this.y > wall.y - this.radius && this.y < wall.y + wall.h + this.radius && this.x > wall.x && this.x < wall.x + wall.w )
 		{
 			collided = true;
-			if( solid )
+			if( this.solid )
 				this.y = ( this.y < wall.y + wall.h/2 ) ? wall.y - this.radius : wall.y + wall.h + this.radius;
 		}
 		
@@ -45,7 +45,7 @@ GameObject.prototype.update = function( dt )
 			if( mag < this.radius )
 			{
 				collided = true;
-				if( solid )
+				if( this.solid )
 				{
 					this.x = wall.corners[j].x - this.radius*(wall.corners[j].x - this.x) / mag;
 					this.y = wall.corners[j].y - this.radius*(wall.corners[j].y - this.y) / mag
