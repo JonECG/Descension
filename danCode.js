@@ -1,7 +1,7 @@
 //Dan's Code
 
 
-var wait=0;
+
 
 function EnemyCharacter()
 {
@@ -10,6 +10,8 @@ function EnemyCharacter()
     this.alignment=1;
     this.health=100;
     this.shoots=false;
+    this.attackrate=15;
+    this.wait=0;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -35,7 +37,7 @@ EnemyCharacter.prototype.shoot=function(character)
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
     gameObjects.push(bul);
 }
-EnemyCharacter.prototype.activate = function()
+EnemyCharacter.prototype.activate = function(dt)
 {
     for(i=0;i<gameObjects.length;i++)
         {
@@ -45,12 +47,12 @@ EnemyCharacter.prototype.activate = function()
                     {
                         if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<350)
                         {
-                            if(wait=1000)
+                            if(this.wait==this.attackrate)
                             {
                                 this.shoot(gameObjects[i]);
-                                wait=0;
+                                 this.wait=0;
                             }
-                            wait++;
+                            this.wait++;
                         }
                     }
                     else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
