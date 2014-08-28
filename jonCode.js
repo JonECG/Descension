@@ -234,13 +234,13 @@ function cameraFollowPlayer( dt )
 	var count = 0;
 	var avx = 0, avy = 0;
 	
-	for( var i = 0; i < gameCharacters.length; i++ )
+	for( var i = 0; i < gameObjects.length; i++ )
 	{
-		if( gameCharacters[i].alignment === 0 )
+		if( gameObjects[i].alignment === 0 && gameObjects[i].type == TYPE_CHARACTER )
 		{
 			count++;
-			avx -= gameCharacters[i].x;
-			avy -= gameCharacters[i].y;
+			avx -= gameObjects[i].x;
+			avy -= gameObjects[i].y;
 		}
 	}
 	
