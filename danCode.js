@@ -22,13 +22,13 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
 }
 EnemyCharacter.prototype.activate = function()
 {
-    for(i=0;i<gameCharacters.length;i++)
+    for(i=0;i<gameObjects.length;i++)
         {
-            if(gameCharacters[i].alignment!=this.alignment)
+            if(gameObjects[i].alignment!=this.alignment)
             {
-                    if(Math.sqrt( Math.pow( (gameCharacters[i].x - this.x), 2 ) + Math.pow( (gameCharacters[i].y - this.y), 2 ) )<200)
+                    if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
                     {
-                        this.move(gameCharacters[i]);
+                        this.move(gameObjects[i]);
                     }
             }
         }
@@ -65,7 +65,7 @@ function initDan()
    enemy1.init( gameStage, AIRectangle, AIRectangle );
   enemy1.x=500;
     enemy1.y=300;
-    gameCharacters.push(enemy1);
+gameObjects.push(enemy1);
  
 }
 
