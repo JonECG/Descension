@@ -67,6 +67,9 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     this.shadow.x=posRef.x;
     this.shadow.y=posRef.y;
     this.speed=speedRef;
+    
+    this.alignment=2;
+    
     this.vector=new vector2D((vecRef.x/vecRef.length)*speedRef, (vecRef.y/vecRef.length)*speedRef);
     
 	gameStage.addChild(this.representation);
