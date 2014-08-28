@@ -65,16 +65,20 @@ GameObject.prototype.update = function( dt )
 	{
 		var rad = this.radius+gameObjects[i].radius;
 		var mag = Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) );
-		gameObjects[i].collide( this );
-		this.collide( gameObjects[i] );
-		if( this.solid && gameObjects[i].solid && mag > 0 && mag < rad )
+
+		if( mag > 0 && mag < rad )
 		{
-			var xDiff = this.x - (gameObjects[i].x + rad * (this.x - gameObjects[i].x) / mag);
-			var yDiff = this.y - (gameObjects[i].y + rad * (this.y - gameObjects[i].y) / mag);
-			this.x = this.x - xDiff;
-			this.y = this.y - yDiff;
-			gameObjects[i].x = gameObjects[i].x + xDiff;
-			gameObjects[i].y = gameObjects[i].y + yDiff;
+			this.collide( gameObjects[i] );
+			gameObjects[i].collide( this );
+			if( this.solid && gameObjects[i].solid )
+			{
+				var xDiff = this.x - (gameObjects[i].x + rad * (this.x - gameObjects[i].x) / mag);
+				var yDiff = this.y - (gameObjects[i].y + rad * (this.y - gameObjects[i].y) / mag);
+				this.x = this.x - xDiff;
+				this.y = this.y - yDiff;
+				gameObjects[i].x = gameObjects[i].x + xDiff;
+				gameObjects[i].y = gameObjects[i].y + yDiff;
+			}
 		}
 	}
 }
@@ -174,6 +178,16 @@ CharacterObject.prototype.update = function(dt)
 	this.representation.y = this.y;
 	this.shadow.x = this.x;
 	this.shadow.y = this.y;
+}
+
+CharacterObject.prototype.collide = function( other )
+{
+	switch( other.type )
+	{
+		case TYPE_CHARACTER:
+			//this.x -= 10;
+		break;
+	}
 }
 
 function TestCharacter()
