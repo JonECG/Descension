@@ -58,6 +58,27 @@ function Bullet()
 Bullet.prototype = Object.create(GameObject.prototype);
 Bullet.prototype.constructor = Bullet;
 
+Bullet.prototype.collide = function( other )
+{
+    switch(other.type)
+    {
+        case TYPE_BULLET:
+            break;
+        case TYPE_CHARACTER:
+            if(other.alignment!=0)
+            {
+                other.health-=10;
+                this.markedForDestroy=true;
+            }
+            break;
+        case TYPE_WALL:
+            this.markedForDestroy=true;
+            break;
+        case TYPE_NOTHING:
+            break;
+    }
+}
+
 Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
 {
     this.representation=spriteRef.clone();
