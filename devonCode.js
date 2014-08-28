@@ -76,10 +76,9 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     
     this.containingStage=stage;
 }
-Bullet.prototype.destroy = function(index)
+Bullet.prototype.destroy = function()
 {
     gameStage.removeChild(this.representation);
-    gameObjects.splice(index, 1);
 }
 Bullet.prototype.update = function( dt )
 {
