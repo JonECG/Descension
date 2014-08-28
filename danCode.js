@@ -24,7 +24,7 @@ EnemyCharacter.prototype.activate = function()
 {
     for(i=0;i<gameObjects.length;i++)
         {
-            if(gameObjects[i].alignment!=this.alignment)
+            if(gameObjects[i].alignment!=this.alignment && gameObjects[i].type===TYPE_CHARACTER)
             {
                     if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
                     {
