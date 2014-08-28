@@ -1,7 +1,91 @@
 //Jon's Code
 
+var TYPE_NOTHING = 0, TYPE_CHARACTER = 1, TYPE_WALL = 2, TYPE_BULLET = 3;
+
+function GameObject()
+{
+	this.x;
+	this.y;
+	this.radius;
+	this.solid;
+	this.markedForDestroy=false;
+	this.type = TYPE_NOTHING;
+}
+GameObject.prototype.destroy = function()
+{
+}
+
+GameObject.prototype.update = function( dt )
+{
+	// Collision with walls
+	for( var i = 0; i < gameWalls.length; i++ )
+	{
+		var wall = gameWalls[i];
+		
+		var collided = false;
+		
+		//Side checks
+		if( this.x > wall.x - this.radius && this.x < wall.x + wall.w + this.radius && this.y > wall.y && this.y < wall.y + wall.h )
+		{
+			collided = true;
+			if( solid )
+				this.x = ( this.x < wall.x + wall.w/2 ) ? wall.x - this.radius : wall.x + wall.w + this.radius;
+		}
+		if( this.y > wall.y - this.radius && this.y < wall.y + wall.h + this.radius && this.x > wall.x && this.x < wall.x + wall.w )
+		{
+			collided = true;
+			if( solid )
+				this.y = ( this.y < wall.y + wall.h/2 ) ? wall.y - this.radius : wall.y + wall.h + this.radius;
+		}
+		
+		//Corner checks
+		for( var j = 0; j < wall.corners.length; j++ )
+		{
+			var mag = Math.sqrt( Math.pow( (wall.corners[j].x - this.x), 2 ) + Math.pow( (wall.corners[j].y - this.y), 2 ) );
+			if( mag < this.radius )
+			{
+				collided = true;
+				if( solid )
+				{
+					this.x = wall.corners[j].x - this.radius*(wall.corners[j].x - this.x) / mag;
+					this.y = wall.corners[j].y - this.radius*(wall.corners[j].y - this.y) / mag
+				}
+			}
+		}
+		
+		if( collided )
+		{
+			gameWalls[i].collide( this );
+			this.collide( gameWalls[i] );
+		}
+	}
+	
+	// Collision with other characters
+	for( var i = 0; i < gameCharacters.length; i++ )
+	{
+		var rad = this.radius+gameCharacters[i].radius;
+		var mag = Math.sqrt( Math.pow( (gameCharacters[i].x - this.x), 2 ) + Math.pow( (gameCharacters[i].y - this.y), 2 ) );
+		gameCharacters[i].collide( this );
+		this.collide( gameCharacters[i] );
+		if( this.solid && gameCharacters[i].solid && mag > 0 && mag < rad )
+		{
+			var xDiff = this.x - (gameCharacters[i].x + rad * (this.x - gameCharacters[i].x) / mag);
+			var yDiff = this.y - (gameCharacters[i].y + rad * (this.y - gameCharacters[i].y) / mag);
+			this.x = this.x - xDiff;
+			this.y = this.y - yDiff;
+			gameCharacters[i].x = gameCharacters[i].x + xDiff;
+			gameCharacters[i].y = gameCharacters[i].y + yDiff;
+		}
+	}
+}
+
+GameObject.prototype.collide = function( other )
+{
+}
+
 function Wall( x, y, w, h )
 {
+	GameObject.call( this );
 	this.x = x;
 	this.y = y;
 	this.w = w;
@@ -10,8 +94,13 @@ function Wall( x, y, w, h )
 	this.representation;
 	this.containingStage;
 	
+	this.type = TYPE_WALL;
+	
 	this.corners = [ {x: this.x,y:this.y}, {x: this.x+this.w,y:this.y}, {x: this.x,y:this.y+this.h}, {x: this.x+this.w,y:this.y+this.h} ];
 }
+
+Wall.prototype = Object.create(GameObject.prototype);
+Wall.prototype.constructor = Wall;
 
 Wall.prototype.init = function( stage, spriteReference )
 {
@@ -31,6 +120,7 @@ Wall.prototype.destroy = function()
 
 function CharacterObject()
 {
+	GameObject.call( this );
 	this.x = 0;
 	this.y = 0;
 	this.representation;
@@ -43,11 +133,16 @@ function CharacterObject()
 	
 	this.health = 100;
 	
+	this.type = TYPE_CHARACTER;
+	
 	this.radius = 32;
 	this.alignment = 0;
 	
 	this.containingStage;
 }
+
+CharacterObject.prototype = Object.create(GameObject.prototype);
+CharacterObject.prototype.constructor = CharacterObject;
 
 CharacterObject.prototype.init = function( stage, spriteReference, shadowReference )
 {
@@ -73,51 +168,7 @@ CharacterObject.prototype.update = function(dt)
 {
 	this.innerUpdate(dt);
 	
-	// Collision with walls
-	for( var i = 0; i < gameWalls.length; i++ )
-	{
-		var wall = gameWalls[i];
-		
-		//Side checks
-		if( this.x > wall.x - this.radius && this.x < wall.x + wall.w + this.radius && this.y > wall.y && this.y < wall.y + wall.h )
-		{
-			this.x = ( this.x < wall.x + wall.w/2 ) ? wall.x - this.radius : wall.x + wall.w + this.radius;
-		}
-		if( this.y > wall.y - this.radius && this.y < wall.y + wall.h + this.radius && this.x > wall.x && this.x < wall.x + wall.w )
-		{
-			this.y = ( this.y < wall.y + wall.h/2 ) ? wall.y - this.radius : wall.y + wall.h + this.radius;
-		}
-		
-		//Corner checks
-		for( var j = 0; j < wall.corners.length; j++ )
-		{
-			var mag = Math.sqrt( Math.pow( (wall.corners[j].x - this.x), 2 ) + Math.pow( (wall.corners[j].y - this.y), 2 ) );
-			if( mag < this.radius )
-			{
-				this.x = wall.corners[j].x - this.radius*(wall.corners[j].x - this.x) / mag;
-				this.y = wall.corners[j].y - this.radius*(wall.corners[j].y - this.y) / mag;
-			}
-		}
-	}
-	
-	// Collision with other characters
-	for( var i = 0; i < gameCharacters.length; i++ )
-	{
-		var rad = this.radius+gameCharacters[i].radius;
-		var mag = Math.sqrt( Math.pow( (gameCharacters[i].x - this.x), 2 ) + Math.pow( (gameCharacters[i].y - this.y), 2 ) );
-		if( this.health > 0 && gameCharacters[i].health > 0 && mag > 0 && mag < rad )
-		{
-			var xDiff = this.x - (gameCharacters[i].x + rad * (this.x - gameCharacters[i].x) / mag);
-			var yDiff = this.y - (gameCharacters[i].y + rad * (this.y - gameCharacters[i].y) / mag);
-			this.x = this.x - xDiff;
-			this.y = this.y - yDiff;
-			gameCharacters[i].x = gameCharacters[i].x + xDiff;
-			gameCharacters[i].y = gameCharacters[i].y + yDiff;
-		}
-	}
-	
-	//this.x = Math.min( 800, Math.max( this.x, 0 ) );
-	//this.y = Math.min( 600, Math.max( this.y, 0 ) );
+	GameObject.prototype.update.call( this, dt );
 	
 	this.representation.x = this.x;
 	this.representation.y = this.y;
