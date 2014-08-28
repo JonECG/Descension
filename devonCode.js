@@ -55,9 +55,8 @@ function Bullet()
 	this.type = TYPE_BULLET;
 }
 
-Bullet.prototype.collide = function( other )
-{
-}
+Bullet.prototype = Object.create(GameObject.prototype);
+Bullet.prototype.constructor = Bullet;
 
 Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, posRef)
 {
@@ -83,6 +82,14 @@ Bullet.prototype.update = function( dt )
 {
     this.representation.x+=this.vector.x*dt;
     this.representation.y+=this.vector.y*dt;
+    
+    this.x=this.representation.x;
+    this.y=this.representation.y;
+    
+    GameObject.prototype.update.call( this, dt );
+    
+    this.representation.x=this.x;
+    this.representation.y=this.y;
 }
 
 function initDevon()
