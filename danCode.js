@@ -1,7 +1,7 @@
 //Dan's Code
 
 
-
+var wait=0;
 
 function EnemyCharacter()
 {
@@ -9,6 +9,7 @@ function EnemyCharacter()
 	this.radius = 32;
     this.alignment=1;
     this.health=100;
+    this.shoots=false;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -16,10 +17,23 @@ EnemyCharacter.prototype.constructor = EnemyCharacter;
 EnemyCharacter.prototype.innerUpdate = function( dt )
 {
    
-    
+   
     
         this.activate();
     
+}
+EnemyCharacter.prototype.shoot=function(character)
+{
+    var bul=new Bullet();
+    bul.alignment=1;
+    var bulRep=new createjs.Shape();
+    bulRep.graphics.beginFill("#FF0000").drawCircle(10,10,10);
+    bulRep.regX=10;
+    bulRep.regY=10;
+    var vec=new vector2D(character.x-this.x, character.y-this.y);
+    var vec2=new vector2D(this.x, this.y);
+    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+    gameObjects.push(bul);
 }
 EnemyCharacter.prototype.activate = function()
 {
@@ -27,10 +41,24 @@ EnemyCharacter.prototype.activate = function()
         {
             if(gameObjects[i].alignment!=this.alignment && gameObjects[i].type===TYPE_CHARACTER)
             {
-                    if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
+                     if(this.shoots)
                     {
+                        if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<350)
+                        {
+                            if(wait=1000)
+                            {
+                                this.shoot(gameObjects[i]);
+                                wait=0;
+                            }
+                            wait++;
+                        }
+                    }
+                    else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
+                    {
+                        
                         this.move(gameObjects[i]);
                     }
+                
             }
         }
 }
@@ -62,19 +90,25 @@ function initDan()
   var AIRectangle = new createjs.Shape();
     AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
    
-    
-   
-    
-    for(i=0;i<10;i++)
-    {
-        enemy1= new EnemyCharacter();
+    enemy1= new EnemyCharacter();
+    enemy1.shoots=true;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=500;
-        enemy1.y=300;
-        enemy1.x+=Math.random()*10;
-         enemy1.y+=Math.random()*10;
-        gameObjects.push(enemy1);
-    }
+        enemy1.x=400;
+        enemy1.y=100;
+   
+     gameObjects.push(enemy1);
+    
+//    for(i=0;i<10;i++)
+//    {
+//        enemy1= new EnemyCharacter();
+//        enemy1.init( gameStage, AIRectangle, AIRectangle );
+//        enemy1.x=500;
+//        enemy1.y=300;
+//        enemy1.shoots=true;
+//        enemy1.x+=Math.random()*10;
+//         enemy1.y+=Math.random()*10;
+//        gameObjects.push(enemy1);
+//    }
  
 }
 
