@@ -13,6 +13,8 @@ function EnemyCharacter()
     this.attackrate=15;
     this.isActive=false;
     this.wait=0;
+    this.targetX=0;
+    this.targetY=0;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -48,20 +50,23 @@ EnemyCharacter.prototype.activate = function(dt)
                     {
                         if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<350)
                         {
-                            this.isActive=true;
-                            if(this.wait==this.attackrate)
+                            if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
-                                this.shoot(gameObjects[i]);
-                                 this.wait=0;
+                                this.isActive=true;
+                                if(this.wait==this.attackrate)
+                                {
+                                    this.shoot(gameObjects[i]);
+                                     this.wait=0;
+                                }
+                                this.wait++;
                             }
-                            this.wait++;
                            
                         }
                         if(this.isActive)
                         {
                             var distance=length(gameObjects[i].x,gameObjects[i].y)-length(this.x,this.y);
                             
-                            if(!(distance<=350 && distance>=-350))
+                            if(segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
                                 this.move(gameObjects[i]);
                             }
@@ -69,8 +74,11 @@ EnemyCharacter.prototype.activate = function(dt)
                     }
                     else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200|| this.isActive)
                     {
-                        this.isActive=true;
-                        this.move(gameObjects[i]);
+                        if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
+                            {
+                            this.isActive=true;
+                            this.move(gameObjects[i]);
+                            }
                     }
                 
             }
@@ -82,9 +90,26 @@ EnemyCharacter.prototype.move=function(character)
     
   var velocityX=  normalized((character.x-this.x),length((character.x-this.x), (character.y-this.y)))*4;
     var velocityY=  normalized((character.y-this.y),length((character.x-this.x), (character.y-this.y)))*4;
-    
+    var lastX=this.x;
+    var lastY=this.y;
     this.x+=velocityX;
     this.y+=velocityY;
+//    var d1=Math.sqrt(Math.pow(this.x-lastX,2)+Math.pow(this.Y-lastY,2));
+//    var d2=Math.sqrt(Math.pow((lastX+velocityX)-lastX,2)+Math.pow((lastY+velocityY)-lastY,2));
+//    if(d1!=d2)
+//    {
+//        var tempX=(lastX+velocityX)-this.x;
+//         var tempY=(lastY+velocityY)-this.y;
+//        var normalizedX=normalized(tempX,length(tempX,tempY));
+//        var normalizedY=normalized(tempY,length(tempX,tempY));
+//                                  
+//            velocityX= normalizedX* (d1-d2);  
+//            velocityY= normalizedY* (d1-d2);  
+//              
+//                  this.x+=velocityX;
+//                this.y+=velocityY;
+//                 }
+//   
     
 }
 function length(x, y)
@@ -118,20 +143,20 @@ function initDan()
     enemy1.shoots=false;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
         enemy1.x=400;
-        enemy1.y=600;
+        enemy1.y=400;
    
      gameObjects.push(enemy1);
     for(i=0;i<10;i++)
     {
         enemy1= new EnemyCharacter();
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=500;
-        enemy1.y=300;
+        enemy1.x=200;
+        enemy1.y=200;
         enemy1.shoots=true;
         var positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
-        enemy1.x+=((Math.random()*1000)*positionNegOrPos);
+        enemy1.x+=((Math.random()*500)*positionNegOrPos);
         positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
-         enemy1.y+=((Math.random()*1000)*positionNegOrPos);
+         enemy1.y+=((Math.random()*500)*positionNegOrPos);
         gameObjects.push(enemy1);
     }
  
