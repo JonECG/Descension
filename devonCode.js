@@ -11,6 +11,7 @@ function Character()
 	this.radius = 32;
     this.alignment=0;
     this.lastWeapon=SWORD;
+    this.weaponChangeRate=0;
 }
 
 Character.prototype = Object.create(CharacterObject.prototype);
@@ -31,62 +32,76 @@ Character.prototype.innerUpdate = function( dt )
         this.FireBullet();
     }
     
-    if(isKeyDown("Q"))
+    if((isKeyDown("Q") || getMouseWheelDelta()<0) && this.weaponChangeRate>0.5)
     {
         switch(this.lastWeapon)
         {
             case ROCKS:
-                lastWeapon=SWORD;
+                this.lastWeapon=SWORD;
                 currentWeapon=SWORD;
+                console.log("change to sword");
                 break;
             case AXES:
-                lastWeapon=ROCKS;
+                this.lastWeapon=ROCKS;
                 currentWeapon=ROCKS;
+                console.log("change to rock");
                 break;
             case CROSSBOW:
-                lastWeapon=AXES;
+                this.lastWeapon=AXES;
                 currentWeapon=AXES;
+                console.log("change to axe");
                 break;
             case BOW_ARROW:
-                lastWeapon=CROSSBOW;
+                this.lastWeapon=CROSSBOW;
                 currentWeapon=CROSSBOW;
+                console.log("change to crossbow");
                 break;
             case SWORD:
-                lastWeapon=BOW_ARROW;
+                this.lastWeapon=BOW_ARROW;
                 currentWeapon=BOW_ARROW;
+                console.log("change to bow");
                 break;
         }
+        this.weaponChangeRate=0;
     }
-    else if(isKeyDown("E"))
+    else if((isKeyDown("E") || getMouseWheelDelta()>0) && this.weaponChangeRate>0.5)
     {
         switch(this.lastWeapon)
         {
             case ROCKS:
-                lastWeapon=AXES;
+                this.lastWeapon=AXES;
                 currentWeapon=AXES;
+                console.log("change to axe");
                 break;
             case AXES:
-                lastWeapon=CROSSBOW;
+                this.lastWeapon=CROSSBOW;
                 currentWeapon=CROSSBOW;
+                console.log("change to crossbow");
                 break;
             case CROSSBOW:
-                lastWeapon=BOW_ARROW;
+                this.lastWeapon=BOW_ARROW;
                 currentWeapon=BOW_ARROW;
+                console.log("change to bow");
                 break;
             case BOW_ARROW:
-                lastWeapon=SWORD;
+                this.lastWeapon=SWORD;
                 currentWeapon=SWORD;
+                console.log("change to sword");
                 break;
             case SWORD:
-                lastWeapon=ROCKS;
+                this.lastWeapon=ROCKS;
                 currentWeapon=ROCKS;
+                console.log("change to rock");
                 break;
         }
+        this.weaponChangeRate=0;
+        console.log(this.lastWeapon);
     }
+    this.weaponChangeRate+=dt;
 }
 Character.prototype.FireBullet = function()
 {
-    var bul=new Bullet(lastWeapon);
+    var bul=new Bullet(this.lastWeapon);
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#1AF").drawCircle(10,10,10);
     bulRep.regX=10;
@@ -184,7 +199,7 @@ function overLay(h)
     this.background=new createjs.Shape();
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
-    this.weapon=weaponBow;
+    this.weapon=weaponSword;
     this.weapon.x=600;
     this.weapon.y=this.offset;
     
@@ -227,19 +242,20 @@ function overLay(h)
                 currentWeapon=0;
                 break;
             case BOW_ARROW:
+                this.container.removeChild(this.weapon);
                 this.weapon=weaponBow;
+                this.weapon.x=600;
+                this.weapon.y=this.offset;
+                this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
             case CROSSBOW:
-                this.weapon=weaponCrossbow;
                 currentWeapon=0;
                 break;
             case AXES:
-                this.weapon=weaponAxe;
                 currentWeapon=0;
                 break;
             case ROCKS:
-                this.weapon=weaponRock;
                 currentWeapon=0;
                 break;
         }
