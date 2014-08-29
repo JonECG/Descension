@@ -70,7 +70,7 @@ function handleKeyDown(evt) {
 	if( evt.keyCode < willPressed.length && evt.keyCode >= 0 )
 		willPressed[evt.keyCode] = true;
 		
-	console.log(evt.keyCode+" down"); 
+	//console.log(evt.keyCode+" down"); 
 	return true; //True lets window catch key events
 }
 
@@ -79,7 +79,7 @@ function handleKeyUp(evt) {
     if( evt.keyCode < willPressed.length && evt.keyCode >= 0 )
 		willPressed[evt.keyCode] = false;
 		
-	console.log(evt.keyCode+" up"); 
+	//console.log(evt.keyCode+" up"); 
 	//return false;
 }
 
@@ -145,6 +145,7 @@ function isKeyReleased( keyId )
 
 var mouseX = 0, mouseY = 0;
 var willMouseDown = false, isaMouseDown = false, wasMouseDown = false;
+var willMDelta = 0, mDelta = 0;
 function mouseInit() {
     stage.on("stagemousemove", function(evt) {
 		mouseX = Math.floor(evt.stageX);
@@ -176,6 +177,8 @@ function updateMouse()
 {
 	wasMouseDown = isaMouseDown;
 	isaMouseDown = willMouseDown;
+	mDelta = willMDelta;
+	willMDelta = 0;
 }
 
 function isMouseDown()
@@ -202,6 +205,10 @@ function getMouseY()
 {
 	return mouseY;
 }
+function getMouseWheelDelta()
+{
+	return mDelta;
+}
 
 
 function loop() 
@@ -217,6 +224,7 @@ function loop()
 	//console.log( "loop" + dt );
 	updfn( dt );
 	stage.update();
+	//console.log( getMouseWheelDelta() );
 }
 
 function setupCanvas() 
@@ -224,10 +232,23 @@ function setupCanvas()
     var canvas = document.getElementById("game"); //get canvas with id='game'
     canvas.width = 800;
     canvas.height = 600;
+	if (canvas.addEventListener) 
+	{
+		canvas.addEventListener("mousewheel", MouseWheelHandler, false);
+		canvas.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+	}
+	else
+		canvas.attachEvent("onmousewheel", MouseWheelHandler);
     stage = new createjs.Stage(canvas); //makes stage object from the canvas
 	stage.enableMouseOver();
 }
 
+function MouseWheelHandler(e) 
+{
+	// cross-browser wheel delta
+	var e = window.event || e; // old IE support
+	willMDelta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+}
 function main() {
     setupCanvas(); //sets up the canvas
 	mouseInit();
