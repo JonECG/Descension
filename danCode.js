@@ -151,21 +151,17 @@ function initDan()
      enemy1= new EnemyCharacter();
     enemy1.shoots=false;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=400;
-        enemy1.y=400;
+        enemy1.x=currentFloor.getRandomCell().x;
+        enemy1.y=currentFloor.getRandomCell().y;
    
      gameObjects.push(enemy1);
     for(i=0;i<10;i++)
     {
         enemy1= new EnemyCharacter();
+         enemy1.shoots=true;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=200;
-        enemy1.y=200;
-        enemy1.shoots=true;
-        var positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
-        enemy1.x+=((Math.random()*500)*positionNegOrPos);
-        positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
-         enemy1.y+=((Math.random()*500)*positionNegOrPos);
+        enemy1.x=currentFloor.getRandomCell().x;
+        enemy1.y=currentFloor.getRandomCell().y;
         gameObjects.push(enemy1);
     }
  
