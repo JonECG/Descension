@@ -2,13 +2,15 @@
 
 var movementSpeed=5;
 var bulRep;
-var SWORD=0, ROCKS=1, AXES=2, CROSSBOW=3, BOW_ARROW=4;
+var SWORD=5, ROCKS=1, AXES=2, CROSSBOW=3, BOW_ARROW=4;
+var currentWeapon;
 
 function Character()
 {
 	CharacterObject.call( this );
 	this.radius = 32;
     this.alignment=0;
+    this.lastWeapon=SWORD;
 }
 
 Character.prototype = Object.create(CharacterObject.prototype);
@@ -28,10 +30,63 @@ Character.prototype.innerUpdate = function( dt )
     {
         this.FireBullet();
     }
+    
+    if(isKeyDown("Q"))
+    {
+        switch(this.lastWeapon)
+        {
+            case ROCKS:
+                lastWeapon=SWORD;
+                currentWeapon=SWORD;
+                break;
+            case AXES:
+                lastWeapon=ROCKS;
+                currentWeapon=ROCKS;
+                break;
+            case CROSSBOW:
+                lastWeapon=AXES;
+                currentWeapon=AXES;
+                break;
+            case BOW_ARROW:
+                lastWeapon=CROSSBOW;
+                currentWeapon=CROSSBOW;
+                break;
+            case SWORD:
+                lastWeapon=BOW_ARROW;
+                currentWeapon=BOW_ARROW;
+                break;
+        }
+    }
+    else if(isKeyDown("E"))
+    {
+        switch(this.lastWeapon)
+        {
+            case ROCKS:
+                lastWeapon=AXES;
+                currentWeapon=AXES;
+                break;
+            case AXES:
+                lastWeapon=CROSSBOW;
+                currentWeapon=CROSSBOW;
+                break;
+            case CROSSBOW:
+                lastWeapon=BOW_ARROW;
+                currentWeapon=BOW_ARROW;
+                break;
+            case BOW_ARROW:
+                lastWeapon=SWORD;
+                currentWeapon=SWORD;
+                break;
+            case SWORD:
+                lastWeapon=ROCKS;
+                currentWeapon=ROCKS;
+                break;
+        }
+    }
 }
 Character.prototype.FireBullet = function()
 {
-    var bul=new Bullet();
+    var bul=new Bullet(lastWeapon);
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#1AF").drawCircle(10,10,10);
     bulRep.regX=10;
@@ -42,7 +97,7 @@ Character.prototype.FireBullet = function()
     gameObjects.push(bul);
 }
     
-function Bullet()
+function Bullet(weaponType)
 {
     GameObject.call(this);
     this.radius=10;
@@ -50,6 +105,7 @@ function Bullet()
     this.representation;
     this.speed;
     this.vector;
+    this.weaponType=weaponType;
 
 	this.solid=false;
 	this.markedForDestroy=false;
@@ -121,15 +177,14 @@ function overLay(h)
     this.height=h;
     this.width=800;
     this.offset=600-h;
-    
-    this.currentWeapon=SWORD;
+    currentWeapon=0;
     
     this.container=new createjs.Container();
     
     this.background=new createjs.Shape();
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
-    this.weapon=weaponSword;
+    this.weapon=weaponBow;
     this.weapon.x=600;
     this.weapon.y=this.offset;
     
@@ -158,6 +213,36 @@ function overLay(h)
     this.update=function(hp)
     {
         this.HPBar.scaleX=hp/100;
+        
+        switch(currentWeapon)
+        {
+            case 0:
+                break;
+            case SWORD:
+                this.container.removeChild(this.weapon);
+                this.weapon=weaponSword;
+                this.weapon.x=600;
+                this.weapon.y=this.offset;
+                this.container.addChild(this.weapon);
+                currentWeapon=0;
+                break;
+            case BOW_ARROW:
+                this.weapon=weaponBow;
+                currentWeapon=0;
+                break;
+            case CROSSBOW:
+                this.weapon=weaponCrossbow;
+                currentWeapon=0;
+                break;
+            case AXES:
+                this.weapon=weaponAxe;
+                currentWeapon=0;
+                break;
+            case ROCKS:
+                this.weapon=weaponRock;
+                currentWeapon=0;
+                break;
+        }
     }
 }
 

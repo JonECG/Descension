@@ -101,7 +101,8 @@ manifest = [
     {src:"buttons.png", id:"buttons"},
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
-    {src:"Sword.png", id:"sword"}
+    {src:"Sword.png", id:"sword"},
+    {src:"BowAndArrow.png", id:"bow"}
 ];
 
 var queue;
@@ -131,6 +132,7 @@ function loadComplete(evt)
 	stage.addChildAt(gameoverScreen,0);
 	
     weaponSword=new createjs.Bitmap(queue.getResult("sword"));
+    weaponBow=new createjs.Bitmap(queue.getResult("bow"));
 	
 	var buttonSheet = new createjs.SpriteSheet({
         images: [queue.getResult("buttons")],
