@@ -11,6 +11,7 @@ function EnemyCharacter()
     this.health=100;
     this.shoots=false;
     this.attackrate=15;
+    this.isActive=false;
     this.wait=0;
 }
 
@@ -47,23 +48,35 @@ EnemyCharacter.prototype.activate = function(dt)
                     {
                         if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<350)
                         {
+                            this.isActive=true;
                             if(this.wait==this.attackrate)
                             {
                                 this.shoot(gameObjects[i]);
                                  this.wait=0;
                             }
                             this.wait++;
+                           
+                        }
+                        if(this.isActive)
+                        {
+                            var distance=length(gameObjects[i].x,gameObjects[i].y)-length(this.x,this.y);
+                            
+                            if(!(distance<=350 && distance>=-350))
+                            {
+                                this.move(gameObjects[i]);
+                            }
                         }
                     }
-                    else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200)
+                    else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200|| this.isActive)
                     {
-                        
+                        this.isActive=true;
                         this.move(gameObjects[i]);
                     }
                 
             }
         }
 }
+
 EnemyCharacter.prototype.move=function(character)  
 {
     
@@ -100,17 +113,27 @@ function initDan()
    
      gameObjects.push(enemy1);
     
-//    for(i=0;i<10;i++)
-//    {
-//        enemy1= new EnemyCharacter();
-//        enemy1.init( gameStage, AIRectangle, AIRectangle );
-//        enemy1.x=500;
-//        enemy1.y=300;
-//        enemy1.shoots=true;
-//        enemy1.x+=Math.random()*10;
-//         enemy1.y+=Math.random()*10;
-//        gameObjects.push(enemy1);
-//    }
+    
+     enemy1= new EnemyCharacter();
+    enemy1.shoots=false;
+        enemy1.init( gameStage, AIRectangle, AIRectangle );
+        enemy1.x=400;
+        enemy1.y=600;
+   
+     gameObjects.push(enemy1);
+    for(i=0;i<10;i++)
+    {
+        enemy1= new EnemyCharacter();
+        enemy1.init( gameStage, AIRectangle, AIRectangle );
+        enemy1.x=500;
+        enemy1.y=300;
+        enemy1.shoots=true;
+        var positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
+        enemy1.x+=((Math.random()*1000)*positionNegOrPos);
+        positionNegOrPos=Math.random() < 0.5 ? -1 : 1;
+         enemy1.y+=((Math.random()*1000)*positionNegOrPos);
+        gameObjects.push(enemy1);
+    }
  
 }
 
