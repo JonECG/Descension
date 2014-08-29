@@ -216,7 +216,7 @@ function overLay(h)
     this.HPBar.y=this.offset+25;
     
     this.HPMaxBar=new createjs.Shape();
-    this.HPMaxBar.graphics.beginLinearGradientFill(["#E62020","#800000"],[0,1],200,0,0,0).drawRoundRect(0,0,200,50,5);
+    this.HPMaxBar.graphics.beginLinearGradientFill(["#E62020","#800000"],[0,1],0,0,200,0).drawRoundRect(0,0,200,50,5);
     //beginLinearGradientFill([color1, color2], [0,1],50,0,0,130).drawRoundRect(0,0, 120, 120, 5);
     this.HPMaxBar.x=50;
     this.HPMaxBar.y=this.offset+25;
