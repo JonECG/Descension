@@ -53,6 +53,8 @@ EnemyCharacter.prototype.activate = function(dt)
                             if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
                                 this.isActive=true;
+                                this.targetX=gameObjects[i].x;
+                                this.targetY=gameObjects[i].y;
                                 if(this.wait==this.attackrate)
                                 {
                                     this.shoot(gameObjects[i]);
@@ -68,7 +70,7 @@ EnemyCharacter.prototype.activate = function(dt)
                             
                             if(segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
-                                this.move(gameObjects[i]);
+                                this.move(this.targetX,this.targetY);
                             }
                         }
                     }
@@ -79,17 +81,22 @@ EnemyCharacter.prototype.activate = function(dt)
                             this.isActive=true;
                             this.move(gameObjects[i]);
                             }
+                        
                     }
+                if(this.isActive)
+                {
+                     this.move(this.targetX,this.targetY);
+                }
                 
             }
         }
 }
 
-EnemyCharacter.prototype.move=function(character)  
+EnemyCharacter.prototype.move=function(posX,posY)  
 {
     
-  var velocityX=  normalized((character.x-this.x),length((character.x-this.x), (character.y-this.y)))*4;
-    var velocityY=  normalized((character.y-this.y),length((character.x-this.x), (character.y-this.y)))*4;
+  var velocityX=  normalized((posX-this.x),length((posX-this.x), (posY-this.y)))*4;
+    var velocityY=  normalized((posY-this.y),length((posX-this.x), (posY-this.y)))*4;
     var lastX=this.x;
     var lastY=this.y;
     this.x+=velocityX;
