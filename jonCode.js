@@ -100,7 +100,7 @@ function Wall( x, y, w, h )
 	
 	this.type = TYPE_WALL;
 	
-	this.corners = [ {x: this.x,y:this.y}, {x: this.x+this.w,y:this.y}, {x: this.x,y:this.y+this.h}, {x: this.x+this.w,y:this.y+this.h} ];
+	this.corners = [ {x: this.x,y:this.y}, {x: this.x+this.w,y:this.y}, {x: this.x+this.w,y:this.y+this.h}, {x: this.x,y:this.y+this.h} ];
 }
 
 Wall.prototype = Object.create(GameObject.prototype);
@@ -304,6 +304,45 @@ function createFloor(w, h)
 	
 }
 
+function segmentIntersectSegment( l1x1, l1y1, l1x2, l1y2, l2x1, l2y1, l2x2, l2y2 )
+{
+    var s1_x, s1_y, s2_x, s2_y;
+    s1_x = l1x2 - l1x1;     s1_y = l1y2 - l1y1;
+    s2_x = l2x2 - l2x1;     s2_y = l2y2 - l2y1;
+
+    var s, t;
+    s = (-s1_y * (l1x1 - l2x1) + s1_x * (l1y1 - l2y1)) / (-s2_x * s1_y + s1_x * s2_y);
+    t = ( s2_x * (l1y1 - l2y1) - s2_y * (l1x1 - l2x1)) / (-s2_x * s1_y + s1_x * s2_y);
+
+    return (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+    // {
+        // if (i_x != NULL)
+            // *i_x = p0_x + (t * s1_x);
+        // if (i_y != NULL)
+            // *i_y = p0_y + (t * s1_y);
+        // return 1;
+    // }
+
+    // return 0; // No collision
+}
+
+function segmentIntersectsFloor( x1, y1, x2, y2 )
+{
+	var result = false;
+	
+	for( var i = 0; i < gameWalls.length; i++ )
+	{
+		for( var j = 0; j < gameWalls[i].corners.length; j++ )
+		{
+			var p1 = gameWalls[i].corners[j];
+			var p2 = gameWalls[i].corners[(j+1)%gameWalls[i].corners.length];
+			result = result || segmentIntersectSegment( x1, y1, x2, y2, p1.x, p1.y, p2.x, p2.y );
+		}
+	}
+	
+	return result;
+}
+
 function createWall( x, y, w, h )
 {
 	var wall = new Wall( x, y, w, h );
@@ -355,6 +394,19 @@ function getMouseYInGame()
 
 function runJon( dt )
 {
+	// var play;
+	// var enem;
+	// for( var i = 0; i < gameObjects.length; i++ )
+	// {
+		// if( gameObjects[i].type == TYPE_CHARACTER )
+		// {
+			// if( gameObjects[i].alignment == 0 )
+				// play = gameObjects[i];
+			// if( gameObjects[i].alignment == 1 )
+				// enem = gameObjects[i];
+		// }
+	// }
+	// console.log( segmentIntersectsFloor( play.x, play.y, enem.x, enem.y ) );
 	cameraFollowPlayer( dt, true );
 	moveFloor();
 }
