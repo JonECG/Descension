@@ -217,7 +217,6 @@ function overLay(h)
     
     this.HPMaxBar=new createjs.Shape();
     this.HPMaxBar.graphics.beginLinearGradientFill(["#E62020","#800000"],[0,1],0,0,200,0).drawRoundRect(0,0,200,50,5);
-    //beginLinearGradientFill([color1, color2], [0,1],50,0,0,130).drawRoundRect(0,0, 120, 120, 5);
     this.HPMaxBar.x=50;
     this.HPMaxBar.y=this.offset+25;
     
@@ -250,12 +249,27 @@ function overLay(h)
                 currentWeapon=0;
                 break;
             case CROSSBOW:
+                this.container.removeChild(this.weapon);
+                this.weapon=weaponCrossbow;
+                this.weapon.x=600;
+                this.weapon.y=this.offset;
+                this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
             case AXES:
+                this.container.removeChild(this.weapon);
+                this.weapon=weaponAxe;
+                this.weapon.x=600;
+                this.weapon.y=this.offset;
+                this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
             case ROCKS:
+                this.container.removeChild(this.weapon);
+                this.weapon=weaponRock;
+                this.weapon.x=600;
+                this.weapon.y=this.offset;
+                this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
         }

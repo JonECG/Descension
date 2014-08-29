@@ -102,7 +102,10 @@ manifest = [
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
     {src:"Sword.png", id:"sword"},
-    {src:"BowAndArrow.png", id:"bow"}
+    {src:"BowAndArrow.png", id:"bow"},
+    {src:"Axe.png", id:"axe"},
+    {src:"Crossbow.png", id:"crossbow"},
+    {src:"Rock.png", id:"rock"}
 ];
 
 var queue;
@@ -133,6 +136,9 @@ function loadComplete(evt)
 	
     weaponSword=new createjs.Bitmap(queue.getResult("sword"));
     weaponBow=new createjs.Bitmap(queue.getResult("bow"));
+    weaponAxe=new createjs.Bitmap(queue.getResult("axe"));
+    weaponCrossbow=new createjs.Bitmap(queue.getResult("crossbow"));
+    weaponRock=new createjs.Bitmap(queue.getResult("rock"));
 	
 	var buttonSheet = new createjs.SpriteSheet({
         images: [queue.getResult("buttons")],
