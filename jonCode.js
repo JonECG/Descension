@@ -280,6 +280,31 @@ var floorImage;
 var floors;
 var wallRep;
 
+
+function Floor( x, y, w, h, startX, startY, cellDim )
+{
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+	
+	this.startX = startX;
+	this.startY = startY;
+	this.cellDim = cellDim;
+}
+
+Floor.prototype.getRandomCell = function()
+{
+	var rx = Math.floor( Math.random() * this.w );
+	var ry = Math.floor( Math.random() * this.h );
+	return this.getActualCell( rx, ry );
+}
+
+Floor.prototype.getActualCell = function( x, y )
+{
+	return( { x: this.x + (x+0.5)*this.cellDim, y: this.y + (y+0.5)*this.cellDim } );
+}
+
 function createFloor(w, h)
 {
 	var isInMaze = new Array(w*h);
@@ -300,6 +325,11 @@ function createFloor(w, h)
 	
 	var startX = Math.floor( Math.random()*( w-2 )+1 );
 	var startY = Math.floor( Math.random()*( h-2 )+1 );
+	
+	var cellDim = 128;
+	
+	var floor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, startX, startY, cellDim );
+	
 	
 	isInMaze[startX+w*startY] = true;
 	
@@ -337,7 +367,7 @@ function createFloor(w, h)
 		}
 	}
 	
-	var cellDim = 128;
+	
 	var wallFill = 0.2;
 	for( var j = -1; j < h; j++ )
 	{
@@ -362,6 +392,7 @@ function createFloor(w, h)
 	}
 	debugText.text = st;
 	
+	return floor;
 }
 
 function segmentIntersectSegment( l1x1, l1y1, l1x2, l1y2, l2x1, l2y1, l2x2, l2y2 )
@@ -410,8 +441,11 @@ function createWall( x, y, w, h )
 	gameWalls.push( wall );
 }
 
+var currentFloor;
+
 function initJon()
 {
+	
 	floorImage = new createjs.Bitmap(queue.getResult("gameFloor"));
 	floors = [];
 	for( var i = -floorImage.getBounds().width; i < 800; i+= floorImage.getBounds().width )
@@ -426,6 +460,8 @@ function initJon()
 	
 	wallRep = new createjs.Bitmap(queue.getResult("wallImage"));
 	
+	currentFloor = createFloor(10,10);
+	
 	// var chara = new TestCharacter();
 	// var charRep = new createjs.Shape();  //creates object to hold a shape
 	// charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
@@ -436,13 +472,17 @@ function initJon()
 	
 	var rep = new createjs.Shape();  //creates object to hold a shape
 	rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
-	var heal = new HealthPickup();
-	heal.init( gameStage, rep );
-	heal.x = -100;
-	heal.y = -100;
-	gameObjects.push(heal);
+	for( var i = 0; i < 20; i++ )
+	{
+		var heal = new HealthPickup();
+		heal.init( gameStage, rep );
+		var cell = currentFloor.getRandomCell();
+		heal.x = cell.x;
+		heal.y = cell.y;
+		gameObjects.push(heal);
+	}
 	
-	createFloor(10,10);
+	
 	//createWall( 128, 128, 64, 256 );
 	//createWall( 0, 256, 256, 64 );
 	//createWall( 128, 128, 64, 256 );
