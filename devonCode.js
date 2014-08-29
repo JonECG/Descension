@@ -2,6 +2,7 @@
 
 var movementSpeed=5;
 var bulRep;
+var SWORD=0, ROCKS=1, AXES=2, CROSSBOW=3, BOW_ARROW=4;
 
 function Character()
 {
@@ -121,22 +122,36 @@ function overLay(h)
     this.width=800;
     this.offset=600-h;
     
+    this.currentWeapon=SWORD;
+    
     this.container=new createjs.Container();
     
     this.background=new createjs.Shape();
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
-   this.HPBar=new createjs.Shape();
-   this.HPBar.graphics.beginFill("#23A31A").drawRect(0, 0, 200, 50);
+    this.weapon=weaponSword;
+    this.weapon.x=600;
+    this.weapon.y=this.offset;
+    
+    this.weaponSlot=new createjs.Shape();
+    this.weaponSlot.graphics.beginStroke("#000");
+    this.weaponSlot.graphics.setStrokeStyle(5);
+    this.weaponSlot.graphics.beginFill("#000099").drawRoundRect(0, 0, 100,100,5);
+    this.weaponSlot.x=600;
+    this.weaponSlot.y=this.offset;
+    
+    this.HPBar=new createjs.Shape();
+    this.HPBar.graphics.beginLinearGradientFill(["#23A31A","#145214"], [0,1],200,0,0,0).drawRoundRect(0, 0, 200, 50,5);
     this.HPBar.x=50;
     this.HPBar.y=this.offset+25;
     
     this.HPMaxBar=new createjs.Shape();
-    this.HPMaxBar.graphics.beginFill("#E62020").drawRect(0,0,200,50);
+    this.HPMaxBar.graphics.beginLinearGradientFill(["#E62020","#800000"],[0,1],200,0,0,0).drawRoundRect(0,0,200,50,5);
+    //beginLinearGradientFill([color1, color2], [0,1],50,0,0,130).drawRoundRect(0,0, 120, 120, 5);
     this.HPMaxBar.x=50;
     this.HPMaxBar.y=this.offset+25;
     
-    this.container.addChild(this.background, this.HPMaxBar, this.HPBar);
+    this.container.addChild(this.background,this.weaponSlot, this.weapon, this.HPMaxBar, this.HPBar);
     
     uiStage.addChild(this.container);
     

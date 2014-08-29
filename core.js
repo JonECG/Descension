@@ -92,6 +92,7 @@ function startGame()
 
 var titleScreen, instructionScreen, gameoverScreen;
 var playButton, instrButton, mainButton;
+var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 
 manifest = [
     {src:"title.png", id:"title"},
@@ -99,7 +100,8 @@ manifest = [
     {src:"gameover.png", id:"gameover"},
     {src:"buttons.png", id:"buttons"},
 	{src:"gameFloor.png", id:"gameFloor"},
-	{src:"wallImage.png", id:"wallImage"}
+	{src:"wallImage.png", id:"wallImage"},
+    {src:"Sword.png", id:"sword"}
 ];
 
 var queue;
@@ -128,6 +130,7 @@ function loadComplete(evt)
 	stage.addChildAt(instructionScreen,0);
 	stage.addChildAt(gameoverScreen,0);
 	
+    weaponSword=new createjs.Bitmap(queue.getResult("sword"));
 	
 	var buttonSheet = new createjs.SpriteSheet({
         images: [queue.getResult("buttons")],
