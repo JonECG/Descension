@@ -78,8 +78,10 @@ EnemyCharacter.prototype.activate = function(dt)
                     {
                         if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
+                                this.targetX=gameObjects[i].x;
+                                this.targetY=gameObjects[i].y;
                             this.isActive=true;
-                            this.move(gameObjects[i]);
+                            this.move(this.targetX,this.targetY);
                             }
                         
                     }
@@ -137,14 +139,14 @@ function initDan()
   var AIRectangle = new createjs.Shape();
     AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
    
-    enemy1= new EnemyCharacter();
-    enemy1.shoots=true;
-        enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=400;
-        enemy1.y=100;
-   
-     gameObjects.push(enemy1);
-    
+//    enemy1= new EnemyCharacter();
+//    enemy1.shoots=true;
+//        enemy1.init( gameStage, AIRectangle, AIRectangle );
+//        enemy1.x=400;
+//        enemy1.y=100;
+//   
+//     gameObjects.push(enemy1);
+//    
     
      enemy1= new EnemyCharacter();
     enemy1.shoots=false;
