@@ -18,7 +18,7 @@ function gameInit()
 	gameObjects = [];
 	gameWalls = [];
 	loadFiles();
-	debugText = new createjs.Text("debugstuff", "24px Arial", "#38c");
+	debugText = new createjs.Text("debugstuff", "24px Lucida Console", "#38c");
 	debugText.x = 20;
 	debugText.y = 20; 
 	stage.addChild(debugText);

@@ -220,6 +220,90 @@ var floorImage;
 var floors;
 var wallRep;
 
+function createFloor(w, h)
+{
+	var isInMaze = new Array(w*h);
+	var walls = new Array(w*h*2);
+	
+	var wallList = [];
+	
+	for( var i = 0; i < w; i ++ )
+	{
+		for( var j = 0; j < h; j++ )
+		{
+			if( i < w-1 )
+				walls[(i+w*j)*2] = true;
+			if( j < h-1 )
+				walls[(i+w*j)*2+1] = true;
+		}
+	}
+	
+	var startX = Math.floor( Math.random()*( w-2 )+1 );
+	var startY = Math.floor( Math.random()*( h-2 )+1 );
+	
+	isInMaze[startX+w*startY] = true;
+	
+	wallList.push( (startX+w*startY)*2 );
+	wallList.push( (startX+w*startY)*2+1 );
+	wallList.push( (startX+w*startY-1)*2 );
+	wallList.push( (startX+w*(startY-1))*2+1 );
+	
+	////////////////
+	
+	while( wallList.length != 0 )
+	{
+		var nindex = Math.floor( Math.random()*(wallList.length-0.001) );
+		
+		var next = wallList[nindex];
+		wallList.splice( nindex, 1 );
+		
+		var cx = Math.floor(next/2) % w;
+		var cy = Math.floor( Math.floor(next/2) / w );
+		var nx = ( next % 2 == 0 && isInMaze[cx+cy*w] ) ? cx+1 : cx;
+		var ny = ( next % 2 == 1 && isInMaze[cx+cy*w] ) ? cy+1 : cy;
+		
+		if( !isInMaze[nx+ny*w] )
+		{
+			walls[next] = false;
+			isInMaze[nx+ny*w] = true;
+			if( walls[(nx+ny*w)*2] )
+				wallList.push( (nx+ny*w)*2 );
+			if( walls[(nx+ny*w)*2+1] )
+				wallList.push( (nx+ny*w)*2+1 );
+			if( nx > 0 && walls[(nx+ny*w-1)*2] )
+				wallList.push( (nx+ny*w-1)*2 );
+			if( ny > 0 && walls[(nx+(ny-1)*w)*2+1] )
+				wallList.push( (nx+(ny-1)*w)*2+1 );
+		}
+	}
+	
+	var cellDim = 128;
+	var wallFill = 0.2;
+	for( var j = 0; j < h; j++ )
+	{
+		for( var i = 0; i < w; i++ )
+		{
+			if( walls[(i+j*w)*2] )
+				createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
+			if( walls[(i+j*w)*2+1] )
+				createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
+		}
+	}
+	
+	var st = "";
+	for( var j = 0; j < h; j++ )
+	{
+		for( var i = 0; i < w; i++ )
+		{
+			st += ( walls[(i+j*w)*2+1] ? '_' : ' ' );
+			st += (  walls[(i+j*w)*2] ? '|' : ' ' );
+		}
+		st += "\r";
+	}
+	debugText.text = st;
+	
+}
+
 function createWall( x, y, w, h )
 {
 	var wall = new Wall( x, y, w, h );
@@ -251,9 +335,10 @@ function initJon()
 	// chara.init( gameStage, charRep, charRep );
 	// gameCharacters.push( chara );
 	
-		
-	createWall( 128, 128, 64, 256 );
-	createWall( 0, 256, 256, 64 );
+	
+	createFloor(20,20);
+	//createWall( 128, 128, 64, 256 );
+	//createWall( 0, 256, 256, 64 );
 	//createWall( 128, 128, 64, 256 );
 	
 }
@@ -270,11 +355,11 @@ function getMouseYInGame()
 
 function runJon( dt )
 {
-	cameraFollowPlayer( dt );
+	cameraFollowPlayer( dt, true );
 	moveFloor();
 }
 
-function cameraFollowPlayer( dt )
+function cameraFollowPlayer( dt, tween )
 {
 	var count = 0;
 	var avx = 0, avy = 0;
@@ -297,9 +382,17 @@ function cameraFollowPlayer( dt )
 		avx += stage.canvas.width/2;
 		avy += stage.canvas.height/2;
 		
-		var tweenAmount = 30;
-		gameStage.x = ( gameStage.x * tweenAmount + avx ) / ( tweenAmount + 1 );
-		gameStage.y = ( gameStage.y * tweenAmount + avy ) / ( tweenAmount + 1 );
+		if( tween )
+		{
+			var tweenAmount = 10;
+			gameStage.x = ( gameStage.x * tweenAmount + avx ) / ( tweenAmount + 1 );
+			gameStage.y = ( gameStage.y * tweenAmount + avy ) / ( tweenAmount + 1 );
+		}
+		else
+		{
+			gameStage.x = avx;
+			gameStage.y = avy;
+		}
 	}
 	//console.log( count );
 }
