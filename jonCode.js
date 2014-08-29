@@ -1,6 +1,6 @@
 //Jon's Code
 
-var TYPE_NOTHING = 0, TYPE_CHARACTER = 1, TYPE_WALL = 2, TYPE_BULLET = 3;
+var TYPE_NOTHING = 0, TYPE_CHARACTER = 1, TYPE_WALL = 2, TYPE_BULLET = 3, TYPE_PICKUP = 4;
 
 function GameObject()
 {
@@ -138,6 +138,7 @@ function CharacterObject()
 	this.jumpHeight = 0;
 	
 	this.health = 100;
+	this.maxHealth = 100;
 	
 	this.type = TYPE_CHARACTER;
 	
@@ -175,6 +176,8 @@ CharacterObject.prototype.update = function(dt)
 	this.innerUpdate(dt);
 	
 	GameObject.prototype.update.call( this, dt );
+	
+	this.health = Math.min( this.health, this.maxHealth );
 	
 	if( this.health <= 0 )
 		this.markedForDestroy = true;
@@ -214,6 +217,63 @@ TestCharacter.prototype.move = function( dt )
 {
 	this.x = getMouseX();
 	this.y = getMouseY();
+}
+
+function Pickup()
+{
+	GameObject.call( this );
+	this.representation;
+	
+	this.type = TYPE_PICKUP;
+	
+	this.radius = 32;
+	this.solid = false;
+	
+	this.containingStage;
+}
+
+Pickup.prototype = Object.create(GameObject.prototype);
+Pickup.prototype.constructor = Pickup;
+
+Pickup.prototype.init = function( stage, spriteReference )
+{
+	this.representation = spriteReference.clone();
+	stage.addChild(this.representation);
+	this.containingStage = stage;
+}
+
+Pickup.prototype.destroy = function()
+{
+	this.containingStage.removeChild( this.representation );
+}
+
+Pickup.prototype.update = function(dt)
+{
+	GameObject.prototype.update.call( this, dt );
+	
+	this.representation.x = this.x;
+	this.representation.y = this.y;
+}
+
+function HealthPickup()
+{
+	Pickup.call( this );
+}
+
+HealthPickup.prototype = Object.create(Pickup.prototype);
+HealthPickup.prototype.constructor = HealthPickup;
+HealthPickup.prototype.collide = function( other )
+{
+	switch( other.type )
+	{
+		case TYPE_CHARACTER:
+			if( other.alignment === 0 )
+			{
+				other.health += 20;
+				this.markedForDestroy = true;
+			}
+		break;
+	}
 }
 
 var floorImage;
@@ -374,6 +434,13 @@ function initJon()
 	// chara.init( gameStage, charRep, charRep );
 	// gameCharacters.push( chara );
 	
+	var rep = new createjs.Shape();  //creates object to hold a shape
+	rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
+	var heal = new HealthPickup();
+	heal.init( gameStage, rep );
+	heal.x = -100;
+	heal.y = -100;
+	gameObjects.push(heal);
 	
 	createFloor(10,10);
 	//createWall( 128, 128, 64, 256 );
