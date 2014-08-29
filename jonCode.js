@@ -279,24 +279,24 @@ function createFloor(w, h)
 	
 	var cellDim = 128;
 	var wallFill = 0.2;
-	for( var j = 0; j < h; j++ )
+	for( var j = -1; j < h; j++ )
 	{
-		for( var i = 0; i < w; i++ )
+		for( var i = -1; i < w; i++ )
 		{
-			if( walls[(i+j*w)*2] )
+			if( j != -1 && ( i == -1 || i == w-1 || walls[(i+j*w)*2] ) )
 				createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
-			if( walls[(i+j*w)*2+1] )
+			if( i != -1 && ( j == -1 || j == h-1 || walls[(i+j*w)*2+1] ) )
 				createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
 		}
 	}
 	
 	var st = "";
-	for( var j = 0; j < h; j++ )
+	for( var j = -1; j < h; j++ )
 	{
-		for( var i = 0; i < w; i++ )
+		for( var i = -1; i < w; i++ )
 		{
-			st += ( walls[(i+j*w)*2+1] ? '_' : ' ' );
-			st += (  walls[(i+j*w)*2] ? '|' : ' ' );
+			st += ( (i != -1 && ( j == -1 || j == h-1 || walls[(i+j*w)*2+1] )) ? '_' : ' ' );
+			st += ( (j != -1 && ( i == -1 || i == w-1 || walls[(i+j*w)*2] )) ? '|' : ' ' );
 		}
 		st += "\r";
 	}
@@ -336,7 +336,7 @@ function initJon()
 	// gameCharacters.push( chara );
 	
 	
-	createFloor(20,20);
+	createFloor(10,10);
 	//createWall( 128, 128, 64, 256 );
 	//createWall( 0, 256, 256, 64 );
 	//createWall( 128, 128, 64, 256 );
