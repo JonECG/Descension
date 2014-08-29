@@ -32,7 +32,7 @@ Character.prototype.innerUpdate = function( dt )
         this.FireBullet();
     }
     
-    if((isKeyDown("Q") || getMouseWheelDelta()<0) && this.weaponChangeRate>0.5)
+    if((isKeyDown("Q") || getMouseWheelDelta()<0) && this.weaponChangeRate>0.2)
     {
         switch(this.lastWeapon)
         {
@@ -64,7 +64,7 @@ Character.prototype.innerUpdate = function( dt )
         }
         this.weaponChangeRate=0;
     }
-    else if((isKeyDown("E") || getMouseWheelDelta()>0) && this.weaponChangeRate>0.5)
+    else if((isKeyDown("E") || getMouseWheelDelta()>0) && this.weaponChangeRate>0.2)
     {
         switch(this.lastWeapon)
         {
