@@ -29,7 +29,7 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
 }
 EnemyCharacter.prototype.shoot=function(character)
 {
-    var bul=new Bullet();
+    var bul=new Bullet(BOW_ARROW);
     bul.alignment=1;
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#FF0000").drawCircle(10,10,10);
@@ -138,23 +138,9 @@ function initDan()
     var enemy1= new EnemyCharacter();
   var AIRectangle = new createjs.Shape();
     AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
-   
-//    enemy1= new EnemyCharacter();
-//    enemy1.shoots=true;
-//        enemy1.init( gameStage, AIRectangle, AIRectangle );
-//        enemy1.x=400;
-//        enemy1.y=100;
-//   
-//     gameObjects.push(enemy1);
-//    
+
     
-     enemy1= new EnemyCharacter();
-    enemy1.shoots=false;
-        enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=currentFloor.getRandomCell().x;
-        enemy1.y=currentFloor.getRandomCell().y;
    
-     gameObjects.push(enemy1);
     for(i=0;i<10;i++)
     {
         enemy1= new EnemyCharacter();
@@ -162,6 +148,18 @@ function initDan()
         enemy1.init( gameStage, AIRectangle, AIRectangle );
         enemy1.x=currentFloor.getRandomCell().x;
         enemy1.y=currentFloor.getRandomCell().y;
+        for(j=0;j<gameObjects.length;j++)
+        {
+            if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
+            {
+                while(!segmentIntersectsFloor(gameObjects[j].x, gameObjects[j].y, enemy1.x, enemy1.y ))
+                      {
+                             enemy1.x=currentFloor.getRandomCell().x;
+                            enemy1.y=currentFloor.getRandomCell().y;
+                      
+                      }
+            }
+        }
         gameObjects.push(enemy1);
     }
  
