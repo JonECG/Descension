@@ -139,8 +139,29 @@ Bullet.prototype.collide = function( other )
         case TYPE_CHARACTER:
             if(other.alignment!=this.alignment)
             {
-                other.health-=10;
-                this.markedForDestroy=true;
+                switch(this.weaponType)
+                {
+                    case SWORD:
+                        other.health-=15;
+                        this.markedForDestroy=true;
+                        break;
+                    case ROCKS:
+                        other.health-=5;
+                        this.markedForDestroy=true;
+                        break;
+                    case BOW_ARROW:
+                        other.health-=10;
+                        this.markedForDestroy=true;
+                        break;
+                    case CROSSBOW:
+                        other.health-=20;
+                        this.markedForDestroy=true;
+                        break;
+                    case AXES:
+                        other.health-=15;
+                        this.markedForDestroy=true;
+                        break;
+                }
             }
             break;
         case TYPE_WALL:
@@ -287,6 +308,9 @@ function initDevon()
 	charRep.regX = 32;
 	charRep.regY = 32;
 	Player.init( gameStage, charRep, charRep );
+    Player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
+    Player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
+
 	gameObjects.push( Player );
     
     OL=new overLay(100);
