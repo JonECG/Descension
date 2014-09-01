@@ -483,7 +483,6 @@ function placeAmmo()
         else if(swit<0.45)
         {
             //2
-            console.log("Dropped Crossbow");
             ammo = new AmmoPickup(CROSSBOW-1, 2);
             rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
