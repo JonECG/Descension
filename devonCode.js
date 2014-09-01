@@ -12,6 +12,7 @@ function Character()
     this.alignment=0;
     this.lastWeapon=SWORD;
     this.weaponChangeRate=0;
+    this.ammo=[0,0,0,0];
 }
 
 Character.prototype = Object.create(CharacterObject.prototype);
@@ -27,7 +28,13 @@ Character.prototype.innerUpdate = function( dt )
     if(isKeyDown("D"))
         this.x+=movementSpeed;
     
-    if(isMousePressed())
+    if(isMousePressed() && this.lastWeapon!=SWORD && this.ammo[this.lastWeapon-1]>0)
+    {
+        this.FireBullet();
+        this.ammo[this.lastWeapon-1]--;
+        console.log(this.ammo[this.lastWeapon-1]);
+    }
+    else if(isMousePressed() && this.lastWeapon==SWORD)
     {
         this.FireBullet();
     }
@@ -39,27 +46,22 @@ Character.prototype.innerUpdate = function( dt )
             case ROCKS:
                 this.lastWeapon=SWORD;
                 currentWeapon=SWORD;
-                console.log("change to sword");
                 break;
             case AXES:
                 this.lastWeapon=ROCKS;
                 currentWeapon=ROCKS;
-                console.log("change to rock");
                 break;
             case CROSSBOW:
                 this.lastWeapon=AXES;
                 currentWeapon=AXES;
-                console.log("change to axe");
                 break;
             case BOW_ARROW:
                 this.lastWeapon=CROSSBOW;
                 currentWeapon=CROSSBOW;
-                console.log("change to crossbow");
                 break;
             case SWORD:
                 this.lastWeapon=BOW_ARROW;
                 currentWeapon=BOW_ARROW;
-                console.log("change to bow");
                 break;
         }
         this.weaponChangeRate=0;
@@ -71,27 +73,22 @@ Character.prototype.innerUpdate = function( dt )
             case ROCKS:
                 this.lastWeapon=AXES;
                 currentWeapon=AXES;
-                console.log("change to axe");
                 break;
             case AXES:
                 this.lastWeapon=CROSSBOW;
                 currentWeapon=CROSSBOW;
-                console.log("change to crossbow");
                 break;
             case CROSSBOW:
                 this.lastWeapon=BOW_ARROW;
                 currentWeapon=BOW_ARROW;
-                console.log("change to bow");
                 break;
             case BOW_ARROW:
                 this.lastWeapon=SWORD;
                 currentWeapon=SWORD;
-                console.log("change to sword");
                 break;
             case SWORD:
                 this.lastWeapon=ROCKS;
                 currentWeapon=ROCKS;
-                console.log("change to rock");
                 break;
         }
         this.weaponChangeRate=0;
@@ -101,7 +98,7 @@ Character.prototype.innerUpdate = function( dt )
 }
 Character.prototype.FireBullet = function()
 {
-    var bul=new Bullet(this.lastWeapon);
+    var bul=new Bullet(this.lastWeapon, this.x, this.y);
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#1AF").drawCircle(10,10,10);
     bulRep.regX=10;
@@ -111,8 +108,12 @@ Character.prototype.FireBullet = function()
     bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
     gameObjects.push(bul);
 }
+Character.prototype.getAmmo=function(weaponType)
+{
+    return this.ammo[weaponType-1];
+}
     
-function Bullet(weaponType)
+function Bullet(weaponType, bX, bY)
 {
     GameObject.call(this);
     this.radius=10;
@@ -121,6 +122,27 @@ function Bullet(weaponType)
     this.speed;
     this.vector;
     this.weaponType=weaponType;
+    this.beginX=bX;
+    this.beginY=bY;
+    
+    switch(weaponType)
+    {
+        case SWORD:
+                this.pickUp=false;
+                break;
+            case ROCKS:
+                this.pickUp=true;
+                break;
+            case BOW_ARROW:
+                this.pickUp=false;
+                break;
+            case CROSSBOW:
+                this.pickUp=false;
+                break;
+            case AXES:
+                this.pickUp=true;
+                break;
+    }
 
 	this.solid=false;
 	this.markedForDestroy=false;
@@ -132,6 +154,7 @@ Bullet.prototype.constructor = Bullet;
 
 Bullet.prototype.collide = function( other )
 {
+    if( !this.markedForDestroy )
     switch(other.type)
     {
         case TYPE_BULLET:
@@ -148,6 +171,13 @@ Bullet.prototype.collide = function( other )
                     case ROCKS:
                         other.health-=5;
                         this.markedForDestroy=true;
+                        ammo = new AmmoPickup(this.weaponType-1, 1);
+                        rep = new createjs.Shape();  //creates object to hold a shape
+	                    rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		                ammo.init( gameStage, rep );
+		                ammo.x = this.x;
+		                ammo.y = this.y;
+		                gameObjects.push(ammo);
                         break;
                     case BOW_ARROW:
                         other.health-=10;
@@ -160,11 +190,43 @@ Bullet.prototype.collide = function( other )
                     case AXES:
                         other.health-=15;
                         this.markedForDestroy=true;
+                        ammo = new AmmoPickup(this.weaponType-1, 1);
+                        rep = new createjs.Shape();  //creates object to hold a shape
+	                    rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		                ammo.init( gameStage, rep );
+		                ammo.x = this.x;
+		                ammo.y = this.y;
+		                gameObjects.push(ammo);
                         break;
                 }
             }
             break;
         case TYPE_WALL:
+            if(this.pickUp)
+            {
+                switch(this.weaponType)
+                {
+                    case ROCKS:
+                        ammo = new AmmoPickup(this.weaponType-1, 1);
+                        rep = new createjs.Shape();  //creates object to hold a shape
+	                    rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		                ammo.init( gameStage, rep );
+		                ammo.x = this.x;
+		                ammo.y = this.y;
+		                gameObjects.push(ammo);
+                        break;
+                    case AXES:
+                        ammo = new AmmoPickup(this.weaponType-1, 1);
+                        rep = new createjs.Shape();  //creates object to hold a shape
+	                    rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		                ammo.init( gameStage, rep );
+		                ammo.x = this.x;
+		                ammo.y = this.y;
+		                gameObjects.push(ammo);
+                        break;
+                }
+                console.log("make anew");
+            }
             this.markedForDestroy=true;
             break;
         case TYPE_NOTHING:
@@ -202,10 +264,52 @@ Bullet.prototype.update = function( dt )
     this.x=this.representation.x;
     this.y=this.representation.y;
     
+    if(this.weaponType==SWORD)
+    {
+        var check=new vector2D(this.beginX-this.x, this.beginY-this.y);
+        
+        console.log("X: "+this.x);
+        console.log("Y: "+this.y);
+        console.log("BX: "+this.beginX);
+        console.log("BY: "+this.beginY);
+        console.log(check.length);
+        if(check.length>80)
+        {
+            this.markedForDestroy=true;
+        }
+    }
+    
     GameObject.prototype.update.call( this, dt );
     
     this.representation.x=this.x;
     this.representation.y=this.y;
+}
+
+function AmmoPickup(type, amount)
+{
+	Pickup.call( this );
+    this.weaponType=type;
+    this.amount=amount;
+}
+
+AmmoPickup.prototype = Object.create(Pickup.prototype);
+AmmoPickup.prototype.constructor = AmmoPickup;
+AmmoPickup.prototype.collide = function( other )
+{
+    if( !this.markedForDestroy )
+	switch( other.type )
+	{
+		case TYPE_CHARACTER:
+			if( other.alignment === 0 )
+			{
+                console.log(this.amount);
+                console.log("Grab anew");
+				other.ammo[this.weaponType] += this.amount;
+                
+				this.markedForDestroy=true;
+			}
+		break;
+	}
 }
 
 function overLay(h)
@@ -221,14 +325,14 @@ function overLay(h)
     this.background.graphics.beginFill("#415454").drawRect(0, this.offset, this.width, this.height);
     
     this.weapon=weaponSword;
-    this.weapon.x=600;
+    this.weapon.x=400;
     this.weapon.y=this.offset;
     
     this.weaponSlot=new createjs.Shape();
     this.weaponSlot.graphics.beginStroke("#000");
     this.weaponSlot.graphics.setStrokeStyle(5);
     this.weaponSlot.graphics.beginFill("#000099").drawRoundRect(0, 0, 100,100,5);
-    this.weaponSlot.x=600;
+    this.weaponSlot.x=400;
     this.weaponSlot.y=this.offset;
     
     this.HPBar=new createjs.Shape();
@@ -241,7 +345,11 @@ function overLay(h)
     this.HPMaxBar.x=50;
     this.HPMaxBar.y=this.offset+25;
     
-    this.container.addChild(this.background,this.weaponSlot, this.weapon, this.HPMaxBar, this.HPBar);
+    this.AmmoText=new createjs.Text(100, "100px Arial", "#000");
+    this.AmmoText.x=520;
+    this.AmmoText.y=this.offset;
+    
+    this.container.addChild(this.background,this.weaponSlot, this.weapon, this.HPMaxBar, this.HPBar, this.AmmoText);
     
     uiStage.addChild(this.container);
     
@@ -256,7 +364,7 @@ function overLay(h)
             case SWORD:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponSword;
-                this.weapon.x=600;
+                this.weapon.x=400;
                 this.weapon.y=this.offset;
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
@@ -264,7 +372,7 @@ function overLay(h)
             case BOW_ARROW:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponBow;
-                this.weapon.x=600;
+                this.weapon.x=400;
                 this.weapon.y=this.offset;
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
@@ -272,7 +380,7 @@ function overLay(h)
             case CROSSBOW:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponCrossbow;
-                this.weapon.x=600;
+                this.weapon.x=400;
                 this.weapon.y=this.offset;
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
@@ -280,7 +388,7 @@ function overLay(h)
             case AXES:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponAxe;
-                this.weapon.x=600;
+                this.weapon.x=400;
                 this.weapon.y=this.offset;
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
@@ -288,7 +396,7 @@ function overLay(h)
             case ROCKS:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponRock;
-                this.weapon.x=600;
+                this.weapon.x=400;
                 this.weapon.y=this.offset;
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
@@ -298,11 +406,51 @@ function overLay(h)
 }
 
 var OL;
+var Player;
 function initDevon()
 {
     bulRep=new Array();
     
-    var Player = new Character();
+    for( var i = 0; i < 5; i++ )
+	{
+		var ammo = new AmmoPickup(ROCKS-1, 100);
+        var rep = new createjs.Shape();  //creates object to hold a shape
+	rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		ammo.init( gameStage, rep );
+		var cell = currentFloor.getRandomCell();
+		ammo.x = cell.x;
+		ammo.y = cell.y;
+		gameObjects.push(ammo);
+        
+        ammo = new AmmoPickup(CROSSBOW-1, 20);
+        rep = new createjs.Shape();  //creates object to hold a shape
+	   rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
+		ammo.init( gameStage, rep );
+		cell = currentFloor.getRandomCell();
+		ammo.x = cell.x;
+		ammo.y = cell.y;
+		gameObjects.push(ammo);
+        
+         ammo = new AmmoPickup(BOW_ARROW-1, 50);
+        rep = new createjs.Shape();  //creates object to hold a shape
+	   rep.graphics.beginFill("#E08346").drawCircle(0, 0, 10);
+		ammo.init( gameStage, rep );
+		cell = currentFloor.getRandomCell();
+		ammo.x = cell.x;
+		ammo.y = cell.y;
+		gameObjects.push(ammo);
+        
+         ammo = new AmmoPickup(AXES-1, 30);
+        rep = new createjs.Shape();  //creates object to hold a shape
+	   rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		ammo.init( gameStage, rep );
+		cell = currentFloor.getRandomCell();
+		ammo.x = cell.x;
+		ammo.y = cell.y;
+		gameObjects.push(ammo);
+	}
+    
+    Player = new Character();
 	var charRep = new createjs.Shape();  //creates object to hold a shape
 	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
 	charRep.regX = 32;
@@ -324,6 +472,7 @@ function runDevon( dt )
         if(gameObjects[i].type==TYPE_CHARACTER && gameObjects[i].alignment==0)
         {
             OL.update(gameObjects[i].health);
+            OL.AmmoText.text=Player.getAmmo(Player.lastWeapon);
             playerFound=true;
         }
     }
