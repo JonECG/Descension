@@ -16,6 +16,7 @@ function EnemyCharacter()
     this.targetX=0;
     this.targetY=0;
     this.weaponType;
+    this.movement=4;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -98,8 +99,8 @@ EnemyCharacter.prototype.activate = function(dt)
 EnemyCharacter.prototype.move=function(posX,posY)  
 {
     
-  var velocityX=  normalized((posX-this.x),length((posX-this.x), (posY-this.y)))*4;
-    var velocityY=  normalized((posY-this.y),length((posX-this.x), (posY-this.y)))*4;
+  var velocityX=  normalized((posX-this.x),length((posX-this.x), (posY-this.y)))*this.movement;
+    var velocityY=  normalized((posY-this.y),length((posX-this.x), (posY-this.y)))*this.movement;
     var lastX=this.x;
     var lastY=this.y;
     this.x+=velocityX;
@@ -139,11 +140,14 @@ function initDan()
 }
 function placeEnemies()
 {
+      
+    
+    
      var enemy1= new EnemyCharacter();
   var AIRectangle = new createjs.Shape();
-    AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
+        AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
 
-    
+  
    
     for(i=0;i<20;i++)
     {
@@ -187,6 +191,22 @@ function placeEnemies()
         }
         gameObjects.push(enemy1);
     }
+}
+function placeMinotaur()
+{
+    var minatuar=new EnemyCharacter();
+      minatuar.shoots=true;
+    var AIRectangle = new createjs.Shape();
+  AIRectangle.graphics.beginFill("#CC33FF").drawCircle(0,0, 100);
+    minatuar.init( gameStage, AIRectangle, AIRectangle );
+    minatuar.maxHealth=1000;
+    minatuar.health=1000;
+    minatuar.weaponType=AXES;
+    minatuar.attackrate=20;
+     minatuar.movement=4;
+    minatuar.movement*=.8;
+    minatuar.radius=100;
+    gameObjects.push(minatuar);
 }
 function runDan( dt )
 {
