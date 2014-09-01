@@ -15,6 +15,7 @@ function EnemyCharacter()
     this.wait=0;
     this.targetX=0;
     this.targetY=0;
+    this.weaponType;
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -29,7 +30,7 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
 }
 EnemyCharacter.prototype.shoot=function(character)
 {
-    var bul=new Bullet(BOW_ARROW);
+    var bul=new Bullet(this.weaponType);
     bul.alignment=1;
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#FF0000").drawCircle(10,10,10);
@@ -135,19 +136,43 @@ function normalized(data,length)
 }
 function initDan()
 {
-    var enemy1= new EnemyCharacter();
+}
+function placeEnemies()
+{
+     var enemy1= new EnemyCharacter();
   var AIRectangle = new createjs.Shape();
     AIRectangle.graphics.beginFill("#99FF99").drawCircle(0,0, 32);
 
     
    
-    for(i=0;i<10;i++)
+    for(i=0;i<20;i++)
     {
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
         enemy1.x=currentFloor.getRandomCell().x;
         enemy1.y=currentFloor.getRandomCell().y;
+        var weaponRan=Math.random()*10;
+        if(weaponRan<3)
+        {
+            enemy1.weaponType=SWORD;
+        }
+        else if(weaponRan<5)
+        {
+            enemy1.weaponType=ROCKS;
+        }
+        else if(weaponRan<7)
+        {
+            enemy1.weaponType=AXES;
+        }
+        else if(weaponRan<9)
+        {
+            enemy1.weaponType=BOW_ARROW;
+        }
+        else
+        {
+            enemy1.weaponType=CROSSBOW;
+        }
         for(j=0;j<gameObjects.length;j++)
         {
             if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
@@ -162,9 +187,7 @@ function initDan()
         }
         gameObjects.push(enemy1);
     }
- 
 }
-
 function runDan( dt )
 {
   
