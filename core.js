@@ -103,6 +103,9 @@ function startGame()
 	nextLevel();
 }
 
+var cellDim = 128;
+var wallFill = 0.2;
+
 function nextLevel()
 {
 	
@@ -119,12 +122,36 @@ function nextLevel()
 	gameObjects = [];
 	gameWalls = [];
 	
-	currentFloor = createFloor(10,10);
-	placeHealth();
-	placePlayer();
-	placeEnemies();
-	placeAmmo();
-	placeEnd();
+	if( currentLevel === 1 )
+	{
+		var w = 10; 
+		var h = 10;
+		currentFloor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, 5, 8, cellDim );
+		
+		for( var j = -1; j < h; j++ )
+		{
+			for( var i = -1; i < w; i++ )
+			{
+				if( j != -1 && ( i == -1 || i == w-1 ) )
+					createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
+				if( i != -1 && ( j == -1 || j == h-1 ) )
+					createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
+			}
+		}
+	
+		placePlayer();
+		placeMinotaur();
+	}
+	else
+	{
+		currentFloor = createFloor(10,10);
+		placeHealth();
+		placePlayer();
+		placeEnemies();
+		placeAmmo();
+		placeEnd();
+	}
+	
 	gameState = PLAY;
 }
 

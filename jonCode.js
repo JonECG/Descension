@@ -347,7 +347,6 @@ function createFloor(w, h)
 	var startX = Math.floor( Math.random()*( w-2 )+1 );
 	var startY = Math.floor( Math.random()*( h-2 )+1 );
 	
-	var cellDim = 128;
 	
 	var floor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, startX, startY, cellDim );
 	
@@ -389,7 +388,6 @@ function createFloor(w, h)
 	}
 	
 	
-	var wallFill = 0.2;
 	for( var j = -1; j < h; j++ )
 	{
 		for( var i = -1; i < w; i++ )
@@ -411,7 +409,7 @@ function createFloor(w, h)
 		}
 		st += "\r";
 	}
-	debugText.text = st;
+	//debugText.text = st;
 	
 	return floor;
 }
