@@ -99,6 +99,11 @@ manifest = [
     {src:"instructions.png", id:"instructions"},
     {src:"gameover.png", id:"gameover"},
     {src:"buttons.png", id:"buttons"},
+//<<<<<<< .mine
+   
+
+    
+//=======
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
     {src:"Sword.png", id:"sword"},
@@ -106,6 +111,7 @@ manifest = [
     {src:"Axe.png", id:"axe"},
     {src:"Crossbow.png", id:"crossbow"},
     {src:"Rock.png", id:"rock"}
+//>>>>>>> .r51
 ];
 
 var queue;
@@ -192,8 +198,8 @@ function loadComplete(evt)
     stage.addChild(mainButton);
 
 	initJon();
-	initDan();
 	initDevon();
+    initDan();
 	
 	gameState = TITLE;
 }

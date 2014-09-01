@@ -10,7 +10,7 @@ function EnemyCharacter()
     this.alignment=1;
     this.health=100;
     this.shoots=false;
-    this.attackrate=15;
+    this.attackrate=10;
     this.isActive=false;
     this.wait=0;
     this.targetX=0;
