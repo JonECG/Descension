@@ -200,11 +200,11 @@ Bullet.prototype.collide = function( other )
                         }
                         break;
                     case BOW_ARROW:
-                        other.health-=15;
+                        other.health-=30;
                         this.markedForDestroy=true;
                         break;
                     case CROSSBOW:
-                        other.health-=25;
+                        other.health-=50;
                         this.markedForDestroy=true;
                         break;
                     case AXES:
@@ -483,6 +483,7 @@ function placeAmmo()
         else if(swit<0.45)
         {
             //2
+            console.log("Dropped Crossbow");
             ammo = new AmmoPickup(CROSSBOW-1, 2);
             rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
