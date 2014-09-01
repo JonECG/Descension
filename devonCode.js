@@ -426,7 +426,6 @@ function overLay(h)
 }
 
 var OL;
-var Player;
 function initDevon()
 {
     bulRep=new Array();
@@ -436,20 +435,20 @@ function initDevon()
 
 function createPlayer()
 {
-    Player = new Character();
+    player = new Character();
 	var charRep = new createjs.Shape();  //creates object to hold a shape
 	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
 	charRep.regX = 32;
 	charRep.regY = 32;
-	Player.init( gameStage, charRep, charRep );
+	player.init( gameStage, charRep, charRep );
 
-	gameObjects.push( Player );
+	gameObjects.push( player );
 }
 
 function placePlayer()
 {
-    Player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
-    Player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
+    player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
+    player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
 }
 
 function placeAmmo()
