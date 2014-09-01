@@ -82,11 +82,11 @@ function gameLoop( dt )
 			mainButton.visible = true;
 		break;
 		case COMPLETE:
-			gameoverScreen.visible = true;
-			mainButton.visible = true;
+			levelCompleteScreen.visible = true;
+			continueButton.visible = true;
 		break;
 		case WIN:
-			gameoverScreen.visible = true;
+			winScreen.visible = true;
 			mainButton.visible = true;
 		break;
 	}
@@ -136,6 +136,8 @@ manifest = [
     {src:"title.png", id:"title"},
     {src:"instructions.png", id:"instructions"},
     {src:"gameover.png", id:"gameover"},
+	{src:"win.png", id:"win"},
+	{src:"levelComplete.png", id:"levelComplete"},
     {src:"buttons.png", id:"buttons"},
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
@@ -167,10 +169,14 @@ function loadComplete(evt)
     titleScreen = new createjs.Bitmap(queue.getResult("title"));
     instructionScreen = new createjs.Bitmap(queue.getResult("instructions"));
     gameoverScreen = new createjs.Bitmap(queue.getResult("gameover"));
+	winScreen = new createjs.Bitmap(queue.getResult("win"));
+	levelCompleteScreen = new createjs.Bitmap(queue.getResult("levelComplete"));
 	
 	stage.addChildAt(titleScreen,0);
 	stage.addChildAt(instructionScreen,0);
 	stage.addChildAt(gameoverScreen,0);
+	stage.addChildAt(winScreen,0);
+	stage.addChildAt(levelCompleteScreen,0);
 	
     weaponSword=new createjs.Bitmap(queue.getResult("sword"));
     weaponBow=new createjs.Bitmap(queue.getResult("bow"));
@@ -237,10 +243,10 @@ function loadComplete(evt)
 	continueButton.x = 85;
 	continueButton.y = 594;
 	continueButton.on("click", function(evt) { nextLevel(); });
-	continueButton.on("mouseover", function(evt) { mainButton.gotoAndStop("continueHighlight"); });
-	continueButton.on("mouseout", function(evt) { mainButton.gotoAndStop("continueNormal"); });
-	continueButton.on("mousedown", function(evt) { mainButton.gotoAndStop("continueDown"); });
-    stage.addChild(mainButton);
+	continueButton.on("mouseover", function(evt) { continueButton.gotoAndStop("continueHighlight"); });
+	continueButton.on("mouseout", function(evt) { continueButton.gotoAndStop("continueNormal"); });
+	continueButton.on("mousedown", function(evt) { continueButton.gotoAndStop("continueDown"); });
+    stage.addChild(continueButton);
 
 	initJon();
 	initDevon();

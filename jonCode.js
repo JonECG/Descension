@@ -290,7 +290,7 @@ EndLevelPickup.prototype.collide = function( other )
 		case TYPE_CHARACTER:
 			if( other.alignment === 0 )
 			{
-				gameState = GAMEOVER;
+				gameState = COMPLETE;
 				//this.markedForDestroy = true;
 			}
 		break;
@@ -506,7 +506,7 @@ function placeHealth()
 {
 	var rep = new createjs.Shape();  //creates object to hold a shape
 	rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
-	for( var i = 0; i < 0; i++ )
+	for( var i = 0; i < 10; i++ )
 	{
 		var heal = new HealthPickup();
 		heal.init( gameStage, rep );
@@ -592,6 +592,10 @@ function cameraFollowPlayer( dt, tween )
 			gameStage.x = avx;
 			gameStage.y = avy;
 		}
+	}
+	else		
+	{
+		gameState = GAMEOVER;
 	}
 	//console.log( count );
 }
