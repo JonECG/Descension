@@ -30,7 +30,7 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
 }
 EnemyCharacter.prototype.shoot=function(character)
 {
-    var bul=new Bullet(this.weaponType);
+    var bul=new Bullet(this.weaponType,this.x,this.y);
     bul.alignment=1;
     var bulRep=new createjs.Shape();
     bulRep.graphics.beginFill("#FF0000").drawCircle(10,10,10);
