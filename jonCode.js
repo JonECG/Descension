@@ -276,6 +276,27 @@ HealthPickup.prototype.collide = function( other )
 	}
 }
 
+function EndLevelPickup()
+{
+	Pickup.call( this );
+}
+
+EndLevelPickup.prototype = Object.create(Pickup.prototype);
+EndLevelPickup.prototype.constructor = EndLevelPickup;
+EndLevelPickup.prototype.collide = function( other )
+{
+	switch( other.type )
+	{
+		case TYPE_CHARACTER:
+			if( other.alignment === 0 )
+			{
+				gameState = GAMEOVER;
+				//this.markedForDestroy = true;
+			}
+		break;
+	}
+}
+
 var floorImage;
 var floors;
 var wallRep;
@@ -460,7 +481,7 @@ function initJon()
 	
 	wallRep = new createjs.Bitmap(queue.getResult("wallImage"));
 	
-	currentFloor = createFloor(10,10);
+	
 	
 	// var chara = new TestCharacter();
 	// var charRep = new createjs.Shape();  //creates object to hold a shape
@@ -470,9 +491,22 @@ function initJon()
 	// chara.init( gameStage, charRep, charRep );
 	// gameCharacters.push( chara );
 	
+	
+	
+	
+	
+	
+	//createWall( 128, 128, 64, 256 );
+	//createWall( 0, 256, 256, 64 );
+	//createWall( 128, 128, 64, 256 );
+	
+}
+
+function placeHealth()
+{
 	var rep = new createjs.Shape();  //creates object to hold a shape
 	rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
-	for( var i = 0; i < 20; i++ )
+	for( var i = 0; i < 0; i++ )
 	{
 		var heal = new HealthPickup();
 		heal.init( gameStage, rep );
@@ -481,12 +515,18 @@ function initJon()
 		heal.y = cell.y;
 		gameObjects.push(heal);
 	}
-	
-	
-	//createWall( 128, 128, 64, 256 );
-	//createWall( 0, 256, 256, 64 );
-	//createWall( 128, 128, 64, 256 );
-	
+}
+
+function placeEnd()
+{
+	rep = new createjs.Shape();  //creates object to hold a shape
+	rep.graphics.beginFill("#272").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
+	var end = new EndLevelPickup();
+	end.init( gameStage, rep );
+	var cell = currentFloor.getRandomCell();
+	end.x = cell.x;
+	end.y = cell.y;
+	gameObjects.push(end);
 }
 
 function getMouseXInGame()

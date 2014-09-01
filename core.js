@@ -3,7 +3,7 @@ var debugText;
 var gameStage, uiStage;
 var cheating = false;
 
-var LOADING = -1, TITLE = 0, INSTRUCT = 1, PLAY = 2, GAMEOVER = 3; 
+var LOADING = -1, TITLE = 0, INSTRUCT = 1, PLAY = 2, GAMEOVER = 3, COMPLETE = 4, WIN = 5; 
 
 var gameState = LOADING;
 
@@ -81,17 +81,55 @@ function gameLoop( dt )
 			gameoverScreen.visible = true;
 			mainButton.visible = true;
 		break;
+		case COMPLETE:
+			gameoverScreen.visible = true;
+			mainButton.visible = true;
+		break;
+		case WIN:
+			gameoverScreen.visible = true;
+			mainButton.visible = true;
+		break;
 	}
 	
 }
 
+var currentLevel, enemiesSlain;
+var player;
 function startGame()
 {
+	currentLevel = 0;
+	enemiesSlain = 0;
+	createPlayer();
+	nextLevel();
+}
+
+function nextLevel()
+{
+	
+	currentLevel++;
+	
+	for( var i = 0; i < gameObjects.length; i++ )
+	{
+		gameObjects[i].destroy();
+	}
+	for( var i = 0; i < gameWalls.length; i++ )
+	{
+		gameWalls[i].destroy();
+	}
+	gameObjects = [];
+	gameWalls = [];
+	
+	currentFloor = createFloor(10,10);
+	placeHealth();
+	placeCharacter();
+	placeEnemies();
+	placeAmmo();
+	placeEnd();
 	gameState = PLAY;
 }
 
-var titleScreen, instructionScreen, gameoverScreen;
-var playButton, instrButton, mainButton;
+var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
+var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 
 manifest = [
@@ -99,11 +137,6 @@ manifest = [
     {src:"instructions.png", id:"instructions"},
     {src:"gameover.png", id:"gameover"},
     {src:"buttons.png", id:"buttons"},
-//<<<<<<< .mine
-   
-
-    
-//=======
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
     {src:"Sword.png", id:"sword"},
@@ -111,7 +144,6 @@ manifest = [
     {src:"Axe.png", id:"axe"},
     {src:"Crossbow.png", id:"crossbow"},
     {src:"Rock.png", id:"rock"}
-//>>>>>>> .r51
 ];
 
 var queue;
@@ -164,6 +196,9 @@ function loadComplete(evt)
 			mainNormal: [6, 6, "mainNormal"],
             mainHighlight: [7, 7, "mainHighlight"],
             mainDown: [8, 8, "mainDown"]
+			continueNormal: [9, 9, "continueNormal"],
+            continueHighlight: [10, 10, "continueHighlight"],
+            continueDown: [11, 11, "continueDown"]
             }     
         });
 	
@@ -195,6 +230,16 @@ function loadComplete(evt)
 	mainButton.on("mouseover", function(evt) { mainButton.gotoAndStop("mainHighlight"); });
 	mainButton.on("mouseout", function(evt) { mainButton.gotoAndStop("mainNormal"); });
 	mainButton.on("mousedown", function(evt) { mainButton.gotoAndStop("mainDown"); });
+    stage.addChild(mainButton);
+	
+	continueButton = new createjs.Sprite(buttonSheet);
+	continueButton.gotoAndStop("continueNormal");
+	continueButton.x = 85;
+	continueButton.y = 594;
+	continueButton.on("click", function(evt) { nextLevel(); });
+	continueButton.on("mouseover", function(evt) { mainButton.gotoAndStop("continueHighlight"); });
+	continueButton.on("mouseout", function(evt) { mainButton.gotoAndStop("continueNormal"); });
+	continueButton.on("mousedown", function(evt) { mainButton.gotoAndStop("continueDown"); });
     stage.addChild(mainButton);
 
 	initJon();
