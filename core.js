@@ -195,7 +195,7 @@ function loadComplete(evt)
             instrDown: [5, 5, "instrDown"],
 			mainNormal: [6, 6, "mainNormal"],
             mainHighlight: [7, 7, "mainHighlight"],
-            mainDown: [8, 8, "mainDown"]
+            mainDown: [8, 8, "mainDown"],
 			continueNormal: [9, 9, "continueNormal"],
             continueHighlight: [10, 10, "continueHighlight"],
             continueDown: [11, 11, "continueDown"]
