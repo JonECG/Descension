@@ -373,6 +373,15 @@ function overLay(h)
     
     uiStage.addChild(this.container);
     
+    this.init=function()
+    {
+        this.container.removeChild(this.weapon);
+        this.weapon=weaponSword;
+        this.weapon.x=400;
+        this.weapon.y=this.offset;
+        this.container.addChild(this.weapon);
+    }
+    
     this.update=function(hp)
     {
         this.HPBar.scaleX=hp/100;
@@ -429,7 +438,6 @@ var OL;
 function initDevon()
 {
     bulRep=new Array();
-    
     OL=new overLay(100);
 }
 
@@ -451,6 +459,7 @@ function placePlayer()
     player.init( gameStage, charRep, charRep );
     
     gameObjects.push( player );
+    OL.init();
 }
 
 function placeAmmo()
