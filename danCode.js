@@ -153,15 +153,15 @@ function placeEnemies()
         enemy1.x=currentFloor.getRandomCell().x;
         enemy1.y=currentFloor.getRandomCell().y;
         var weaponRan=Math.random()*10;
-        if(weaponRan<3)
+        if(weaponRan<6)
         {
             enemy1.weaponType=SWORD;
         }
-        else if(weaponRan<5)
+        else if(weaponRan<7)
         {
             enemy1.weaponType=ROCKS;
         }
-        else if(weaponRan<7)
+        else if(weaponRan<8)
         {
             enemy1.weaponType=AXES;
         }
