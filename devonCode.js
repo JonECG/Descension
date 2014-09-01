@@ -436,19 +436,21 @@ function initDevon()
 function createPlayer()
 {
     player = new Character();
-	var charRep = new createjs.Shape();  //creates object to hold a shape
-	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
-	charRep.regX = 32;
-	charRep.regY = 32;
-	player.init( gameStage, charRep, charRep );
-
-	gameObjects.push( player );
 }
 
 function placePlayer()
 {
     player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
     player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
+    
+    var charRep = new createjs.Shape();  //creates object to hold a shape
+	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
+	charRep.regX = 32;
+	charRep.regY = 32;
+
+    player.init( gameStage, charRep, charRep );
+    
+    gameObjects.push( player );
 }
 
 function placeAmmo()
@@ -516,7 +518,7 @@ function runDevon( dt )
         if(gameObjects[i].type==TYPE_CHARACTER && gameObjects[i].alignment==0)
         {
             OL.update(gameObjects[i].health);
-            OL.AmmoText.text=Player.getAmmo(Player.lastWeapon);
+            OL.AmmoText.text=player.getAmmo(player.lastWeapon);
             playerFound=true;
         }
     }
