@@ -32,7 +32,6 @@ Character.prototype.innerUpdate = function( dt )
     {
         this.FireBullet();
         this.ammo[this.lastWeapon-1]--;
-        console.log(this.ammo[this.lastWeapon-1]);
     }
     else if(isMousePressed() && this.lastWeapon==SWORD)
     {
@@ -105,7 +104,25 @@ Character.prototype.FireBullet = function()
     bulRep.regY=10;
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
-    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
+    
+    switch(this.lastWeapon)
+    {
+        case SWORD:
+            bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
+            break;
+        case ROCKS:
+            bul.init(gameStage, bulRep, bulRep, 450, vec, vec2, this.alignment);
+            break;
+        case AXES:
+            bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
+            break;
+        case BOW_ARROW:
+            bul.init(gameStage, bulRep, bulRep, 800, vec, vec2, this.alignment);
+            break;
+        case CROSSBOW:
+            bul.init(gameStage, bulRep, bulRep, 1000, vec, vec2, this.alignment);
+            break;
+    }
     gameObjects.push(bul);
 }
 Character.prototype.getAmmo=function(weaponType)
@@ -171,32 +188,38 @@ Bullet.prototype.collide = function( other )
                     case ROCKS:
                         other.health-=5;
                         this.markedForDestroy=true;
-                        ammo = new AmmoPickup(this.weaponType-1, 1);
-                        rep = new createjs.Shape();  //creates object to hold a shape
-	                    rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
-		                ammo.init( gameStage, rep );
-		                ammo.x = this.x;
-		                ammo.y = this.y;
-		                gameObjects.push(ammo);
+                        if(Math.random()<0.6 && this.pickUp)
+                        {
+                            ammo = new AmmoPickup(this.weaponType-1, 1);
+                            rep = new createjs.Shape();  //creates object to hold a shape
+	                        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		                    ammo.init( gameStage, rep );
+		                    ammo.x = this.x;
+		                    ammo.y = this.y;
+		                    gameObjects.push(ammo);
+                        }
                         break;
                     case BOW_ARROW:
-                        other.health-=10;
+                        other.health-=15;
                         this.markedForDestroy=true;
                         break;
                     case CROSSBOW:
-                        other.health-=20;
+                        other.health-=25;
                         this.markedForDestroy=true;
                         break;
                     case AXES:
                         other.health-=15;
                         this.markedForDestroy=true;
-                        ammo = new AmmoPickup(this.weaponType-1, 1);
-                        rep = new createjs.Shape();  //creates object to hold a shape
-	                    rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
-		                ammo.init( gameStage, rep );
-		                ammo.x = this.x;
-		                ammo.y = this.y;
-		                gameObjects.push(ammo);
+                        if(Math.random()<0.6 && this.pickUp)
+                        {
+                            ammo = new AmmoPickup(this.weaponType-1, 1);
+                            rep = new createjs.Shape();  //creates object to hold a shape
+	                        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		                    ammo.init( gameStage, rep );
+		                    ammo.x = this.x;
+		                    ammo.y = this.y;
+		                    gameObjects.push(ammo);
+                        }
                         break;
                 }
             }
@@ -207,25 +230,30 @@ Bullet.prototype.collide = function( other )
                 switch(this.weaponType)
                 {
                     case ROCKS:
-                        ammo = new AmmoPickup(this.weaponType-1, 1);
-                        rep = new createjs.Shape();  //creates object to hold a shape
-	                    rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
-		                ammo.init( gameStage, rep );
-		                ammo.x = this.x;
-		                ammo.y = this.y;
-		                gameObjects.push(ammo);
+                        if(Math.random()<0.2 && this.pickUp)
+                        {
+                            ammo = new AmmoPickup(this.weaponType-1, 1);
+                            rep = new createjs.Shape();  //creates object to hold a shape
+	                        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		                    ammo.init( gameStage, rep );
+		                    ammo.x = this.x;
+		                    ammo.y = this.y;
+		                    gameObjects.push(ammo);
+                        }
                         break;
                     case AXES:
-                        ammo = new AmmoPickup(this.weaponType-1, 1);
-                        rep = new createjs.Shape();  //creates object to hold a shape
-	                    rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
-		                ammo.init( gameStage, rep );
-		                ammo.x = this.x;
-		                ammo.y = this.y;
-		                gameObjects.push(ammo);
+                        if(Math.random()<0.2 && this.pickUp)
+                        {
+                            ammo = new AmmoPickup(this.weaponType-1, 1);
+                            rep = new createjs.Shape();  //creates object to hold a shape
+	                        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		                    ammo.init( gameStage, rep );
+		                    ammo.x = this.x;
+		                    ammo.y = this.y;
+		                    gameObjects.push(ammo);
+                        }
                         break;
                 }
-                console.log("make anew");
             }
             this.markedForDestroy=true;
             break;
@@ -267,12 +295,6 @@ Bullet.prototype.update = function( dt )
     if(this.weaponType==SWORD)
     {
         var check=new vector2D(this.beginX-this.x, this.beginY-this.y);
-        
-        console.log("X: "+this.x);
-        console.log("Y: "+this.y);
-        console.log("BX: "+this.beginX);
-        console.log("BY: "+this.beginY);
-        console.log(check.length);
         if(check.length>80)
         {
             this.markedForDestroy=true;
@@ -302,8 +324,6 @@ AmmoPickup.prototype.collide = function( other )
 		case TYPE_CHARACTER:
 			if( other.alignment === 0 )
 			{
-                console.log(this.amount);
-                console.log("Grab anew");
 				other.ammo[this.weaponType] += this.amount;
                 
 				this.markedForDestroy=true;
@@ -411,57 +431,82 @@ function initDevon()
 {
     bulRep=new Array();
     
-    for( var i = 0; i < 5; i++ )
-	{
-		var ammo = new AmmoPickup(ROCKS-1, 100);
-        var rep = new createjs.Shape();  //creates object to hold a shape
-	rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
-		ammo.init( gameStage, rep );
-		var cell = currentFloor.getRandomCell();
-		ammo.x = cell.x;
-		ammo.y = cell.y;
-		gameObjects.push(ammo);
-        
-        ammo = new AmmoPickup(CROSSBOW-1, 20);
-        rep = new createjs.Shape();  //creates object to hold a shape
-	   rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
-		ammo.init( gameStage, rep );
-		cell = currentFloor.getRandomCell();
-		ammo.x = cell.x;
-		ammo.y = cell.y;
-		gameObjects.push(ammo);
-        
-         ammo = new AmmoPickup(BOW_ARROW-1, 50);
-        rep = new createjs.Shape();  //creates object to hold a shape
-	   rep.graphics.beginFill("#E08346").drawCircle(0, 0, 10);
-		ammo.init( gameStage, rep );
-		cell = currentFloor.getRandomCell();
-		ammo.x = cell.x;
-		ammo.y = cell.y;
-		gameObjects.push(ammo);
-        
-         ammo = new AmmoPickup(AXES-1, 30);
-        rep = new createjs.Shape();  //creates object to hold a shape
-	   rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
-		ammo.init( gameStage, rep );
-		cell = currentFloor.getRandomCell();
-		ammo.x = cell.x;
-		ammo.y = cell.y;
-		gameObjects.push(ammo);
-	}
-    
+    OL=new overLay(100);
+}
+
+function createPlayer()
+{
     Player = new Character();
 	var charRep = new createjs.Shape();  //creates object to hold a shape
 	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
 	charRep.regX = 32;
 	charRep.regY = 32;
 	Player.init( gameStage, charRep, charRep );
-    Player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
-    Player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
 
 	gameObjects.push( Player );
-    
-    OL=new overLay(100);
+}
+
+function placePlayer()
+{
+    Player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
+    Player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
+}
+
+function placeAmmo()
+{
+    for( var i = 0; i < 20; i++ )
+	{
+        var swit=Math.random();
+        
+        if(swit<0.4)
+        {
+            //5
+		    var ammo = new AmmoPickup(ROCKS-1, 5);
+            var rep = new createjs.Shape();  //creates object to hold a shape
+	        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+		    ammo.init( gameStage, rep );
+		    var cell = currentFloor.getRandomCell();
+		    ammo.x = cell.x;
+		    ammo.y = cell.y;
+		    gameObjects.push(ammo);
+        }
+        else if(swit<0.45)
+        {
+            //2
+            ammo = new AmmoPickup(CROSSBOW-1, 2);
+            rep = new createjs.Shape();  //creates object to hold a shape
+	        rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
+		    ammo.init( gameStage, rep );
+		    cell = currentFloor.getRandomCell();
+		    ammo.x = cell.x;
+		    ammo.y = cell.y;
+		    gameObjects.push(ammo);
+        }
+        else if(swit<0.6)
+        {
+            //3
+            ammo = new AmmoPickup(BOW_ARROW-1, 3);
+            rep = new createjs.Shape();  //creates object to hold a shape
+	        rep.graphics.beginFill("#E08346").drawCircle(0, 0, 10);
+		    ammo.init( gameStage, rep );
+		    cell = currentFloor.getRandomCell();
+		    ammo.x = cell.x;
+		    ammo.y = cell.y;
+		    gameObjects.push(ammo);
+        }
+        else if(swit<1)
+        {
+            //3
+             ammo = new AmmoPickup(AXES-1, 3);
+            rep = new createjs.Shape();  //creates object to hold a shape
+	        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+		    ammo.init( gameStage, rep );
+		    cell = currentFloor.getRandomCell();
+		    ammo.x = cell.x;
+		    ammo.y = cell.y;
+		    gameObjects.push(ammo);
+        }
+	}
 }
 
 function runDevon( dt )
