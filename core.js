@@ -121,7 +121,7 @@ function nextLevel()
 	
 	currentFloor = createFloor(10,10);
 	placeHealth();
-	placeCharacter();
+	placePlayer();
 	placeEnemies();
 	placeAmmo();
 	placeEnd();
