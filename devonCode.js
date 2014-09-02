@@ -462,7 +462,7 @@ function placePlayer()
 
 function placeAmmo()
 {
-    for( var i = 0; i < 20; i++ )
+    for( var i = 0; i < currentLevel*1.5+6; i++ )
 	{
         var swit=Math.random();
         
