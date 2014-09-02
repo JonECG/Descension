@@ -336,7 +336,8 @@ Floor.prototype.getRandomEmptyCell = function()
 		cell = this.getRandomCell();
 		for( var i = 0; i < gameObjects.length && !search; i++ )
 		{
-			search = (cell.x == gameObjects[i].x && cell.y == gameObjects[i].y );
+			var mag = ( Math.pow( (gameObjects[i].x - cell.x), 2 ) + Math.pow( (gameObjects[i].y - cell.y), 2 ) );
+			search = search || mag < 2;
 		}
 	}
 	
@@ -414,9 +415,9 @@ function createFloor(w, h)
 	{
 		for( var i = -1; i < w; i++ )
 		{
-			if( j != -1 && ( i == -1 || i == w-1 || (Math.random() < 0.9 && walls[(i+j*w)*2] ) ) )
+			if( j != -1 && ( i == -1 || i == w-1 || (Math.random() < 0.8 && walls[(i+j*w)*2] ) ) )
 				createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
-			if( i != -1 && ( j == -1 || j == h-1 || (Math.random() < 0.9 && walls[(i+j*w)*2+1] ) ) )
+			if( i != -1 && ( j == -1 || j == h-1 || (Math.random() < 0.8 && walls[(i+j*w)*2+1] ) ) )
 				createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
 		}
 	}
