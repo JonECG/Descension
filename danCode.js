@@ -156,8 +156,9 @@ function placeEnemies()
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=currentFloor.getRandomEmptyCell().x;
-        enemy1.y=currentFloor.getRandomEmptyCell().y;
+        var cell=currentFloor.getRandomEmptyCell();
+        enemy1.x=cell.x;
+        enemy1.y=cell.y;
         var weaponRan=Math.random()*10;
         if(weaponRan<6)
         {
@@ -186,8 +187,9 @@ function placeEnemies()
                
                 while(!segmentIntersectsFloor(gameObjects[j].x, gameObjects[j].y, enemy1.x, enemy1.y ))
                       {
-                             enemy1.x=currentFloor.getRandomEmptyCell().x;
-                            enemy1.y=currentFloor.getRandomEmptyCell().y;
+                          cell=currentFloor.getRandomEmptyCell();
+                             enemy1.x=cell.x;
+                            enemy1.y=cell.y;
                       
                       }
                 
