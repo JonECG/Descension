@@ -178,9 +178,14 @@ CharacterObject.prototype.update = function(dt)
 	GameObject.prototype.update.call( this, dt );
 	
 	this.health = Math.min( this.health, this.maxHealth );
+
 	
 	if( this.health <= 0 )
+	{
 		this.markedForDestroy = true;
+		if( this.alignment != 0 )
+			enemiesSlain++;
+	}
 		
 	this.representation.x = this.x;
 	this.representation.y = this.y;
@@ -316,9 +321,9 @@ function Floor( x, y, w, h, startX, startY, cellDim )
 
 Floor.prototype.getRandomCell = function()
 {
-	var rx = Math.floor( Math.random() * this.w );
-	var ry = Math.floor( Math.random() * this.h );
-	return this.getActualCell( rx+Math.random()*0.01, ry+Math.random()*0.01 );
+	var rx = Math.floor( Math.random() * this.w * 0.9999 );
+	var ry = Math.floor( Math.random() * this.h * 0.9999 );
+	return this.getActualCell( rx, ry );//rx+Math.random()*0.01, ry+Math.random()*0.01 );
 }
 
 Floor.prototype.getActualCell = function( x, y )

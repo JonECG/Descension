@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -94,5 +94,32 @@
          x="766.80237"
          sodipodi:role="line"
          id="tspan3228">Scroll or Q/E - Chng Wpn</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30.14608765px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:94.99999881%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
+       x="35.373814"
+       y="619.34711"
+       id="text3006"
+       sodipodi:linespacing="94.999999%"><tspan
+         id="tspan3014"
+         sodipodi:role="line"
+         x="35.373814"
+         y="619.34711"
+         style="font-size:42.20452118px;text-align:start;line-height:94.99999881%;text-anchor:start">Find your way through the labyrinth.</tspan><tspan
+         sodipodi:role="line"
+         x="35.373814"
+         y="659.44141"
+         style="font-size:42.20452118px;text-align:start;line-height:94.99999881%;text-anchor:start"
+         id="tspan3025">Kill enemies and conserve ammo to</tspan><tspan
+         sodipodi:role="line"
+         x="35.373814"
+         y="699.53571"
+         style="font-size:42.20452118px;text-align:start;line-height:94.99999881%;text-anchor:start"
+         id="tspan3027">kill the deadly minotaur on the 10th</tspan><tspan
+         sodipodi:role="line"
+         x="35.373814"
+         y="739.63"
+         style="font-size:42.20452118px;text-align:start;line-height:94.99999881%;text-anchor:start"
+         id="tspan3029">floor. Good luck.</tspan></text>
   </g>
 </svg>
