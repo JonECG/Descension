@@ -375,12 +375,8 @@ function overLay(h)
     
     this.init=function()
     {
-        this.container.removeChild(this.weapon);
-        this.weapon=weaponSword;
-        this.weapon.x=400;
-        this.weapon.y=this.offset;
-        OL.AmmoText.text="";
-        this.container.addChild(this.weapon);
+        currentWeapon=SWORD;
+        player.lastWeapon=SWORD;
     }
     
     this.update=function(hp)
