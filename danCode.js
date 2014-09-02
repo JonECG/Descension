@@ -17,6 +17,8 @@ function EnemyCharacter()
     this.targetY=0;
     this.weaponType;
     this.movement=4;
+    this.range=350;
+    
 }
 
 EnemyCharacter.prototype = Object.create(CharacterObject.prototype);
@@ -50,7 +52,7 @@ EnemyCharacter.prototype.activate = function(dt)
             {
                      if(this.shoots)
                     {
-                        if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<350)
+                        if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<this.range)
                         {
                             if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
                             {
@@ -192,9 +194,10 @@ function placeEnemies()
         gameObjects.push(enemy1);
     }
 }
+var minatuar;
 function placeMinotaur()
 {
-    var minatuar=new EnemyCharacter();
+    minatuar=new EnemyCharacter();
       minatuar.shoots=true;
     var AIRectangle = new createjs.Shape();
   AIRectangle.graphics.beginFill("#CC33FF").drawCircle(0,0, 100);
@@ -206,10 +209,12 @@ function placeMinotaur()
      minatuar.movement=4;
     minatuar.movement*=.8;
     minatuar.radius=100;
+    minatuar.range=500;
     gameObjects.push(minatuar);
 }
 function runDan( dt )
 {
-  
+  if(minatuar&&minatuar.health<=0)
+      gameState = WIN;
     
 }
