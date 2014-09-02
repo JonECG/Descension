@@ -333,7 +333,7 @@ Floor.prototype.getRandomEmptyCell = function()
 	while( search )
 	{
 		search = false;
-		cell = getRandomCell();
+		cell = this.getRandomCell();
 		for( var i = 0; i < gameObjects.length && !search; i++ )
 		{
 			search = (cell.x == gameObjects[i].x && cell.y == gameObjects[i].y );
@@ -530,7 +530,7 @@ function placeHealth()
 	{
 		var heal = new HealthPickup();
 		heal.init( gameStage, rep );
-		var cell = currentFloor.getRandomCell();
+		var cell = currentFloor.getRandomEmptyCell();
 		heal.x = cell.x;
 		heal.y = cell.y;
 		gameObjects.push(heal);
@@ -543,7 +543,7 @@ function placeEnd()
 	rep.graphics.beginFill("#272").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
 	var end = new EndLevelPickup();
 	end.init( gameStage, rep );
-	var cell = currentFloor.getRandomCell();
+	var cell = currentFloor.getRandomEmptyCell();
 	end.x = cell.x;
 	end.y = cell.y;
 	gameObjects.push(end);
