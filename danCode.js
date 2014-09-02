@@ -151,7 +151,7 @@ function placeEnemies()
 
   
    
-    for(i=0;i<20;i++)
+    for(i=0;i<currentLevel*2;i++)
     {
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
