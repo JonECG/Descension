@@ -150,7 +150,7 @@ function nextLevel()
 	}
 	else
 	{
-		currentFloor = createFloor(10,10);
+		currentFloor = createFloor(currentLevel + 5, currentLevel + 5);
 		placeHealth();
 		placePlayer();
 		placeEnemies();
