@@ -78,14 +78,20 @@ function gameLoop( dt )
 			
 		break;
 		case GAMEOVER:
+			slainText.text = enemiesSlain + " Enemies Slain";
+			slainText.visible = true;
 			gameoverScreen.visible = true;
 			mainButton.visible = true;
 		break;
 		case COMPLETE:
+			slainText.text = enemiesSlain + " Enemies Slain";
+			slainText.visible = true;
 			levelCompleteScreen.visible = true;
 			continueButton.visible = true;
 		break;
 		case WIN:
+			slainText.text = enemiesSlain + " Enemies Slain";
+			slainText.visible = true;
 			winScreen.visible = true;
 			mainButton.visible = true;
 		break;
@@ -122,7 +128,7 @@ function nextLevel()
 	gameObjects = [];
 	gameWalls = [];
 	
-	if( currentLevel === 1 )
+	if( currentLevel === 10 )
 	{
 		var w = 10; 
 		var h = 10;
@@ -152,12 +158,15 @@ function nextLevel()
 		placeEnd();
 	}
 	
+	debugText.text = "Level " + currentLevel;
+	
 	gameState = PLAY;
 }
 
 var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
+var slainText;
 
 manifest = [
     {src:"title.png", id:"title"},
@@ -204,6 +213,11 @@ function loadComplete(evt)
 	stage.addChildAt(gameoverScreen,0);
 	stage.addChildAt(winScreen,0);
 	stage.addChildAt(levelCompleteScreen,0);
+	
+	slainText = new createjs.Text("slain", "70px Lucida Console", "#116");
+	slainText.x = 40;
+	slainText.y = 300;
+	stage.addChild( slainText );
 	
     weaponSword=new createjs.Bitmap(queue.getResult("sword"));
     weaponBow=new createjs.Bitmap(queue.getResult("bow"));

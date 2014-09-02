@@ -318,7 +318,7 @@ Floor.prototype.getRandomCell = function()
 {
 	var rx = Math.floor( Math.random() * this.w );
 	var ry = Math.floor( Math.random() * this.h );
-	return this.getActualCell( rx, ry );
+	return this.getActualCell( rx+Math.random()*0.01, ry+Math.random()*0.01 );
 }
 
 Floor.prototype.getActualCell = function( x, y )
@@ -392,9 +392,9 @@ function createFloor(w, h)
 	{
 		for( var i = -1; i < w; i++ )
 		{
-			if( j != -1 && ( i == -1 || i == w-1 || walls[(i+j*w)*2] ) )
+			if( j != -1 && ( i == -1 || i == w-1 || (Math.random() < 0.9 && walls[(i+j*w)*2] ) ) )
 				createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
-			if( i != -1 && ( j == -1 || j == h-1 || walls[(i+j*w)*2+1] ) )
+			if( i != -1 && ( j == -1 || j == h-1 || (Math.random() < 0.9 && walls[(i+j*w)*2+1] ) ) )
 				createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
 		}
 	}
@@ -554,6 +554,21 @@ function runJon( dt )
 	// console.log( segmentIntersectsFloor( play.x, play.y, enem.x, enem.y ) );
 	cameraFollowPlayer( dt, true );
 	moveFloor();
+	
+	if( cheating )
+	{
+		for( var i = 0; i < gameObjects.length; i++ )
+		{
+			if( gameObjects[i].alignment === 0 && gameObjects[i].type == TYPE_CHARACTER )
+			{
+				gameObjects[i].health = 100;
+				for( var j = 0; j < 4; j++ )
+				{
+					gameObjects[i].ammo[j]=10;
+				}
+			}
+		}
+	}
 }
 
 function cameraFollowPlayer( dt, tween )
