@@ -156,8 +156,8 @@ function placeEnemies()
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
         enemy1.init( gameStage, AIRectangle, AIRectangle );
-        enemy1.x=currentFloor.getRandomCell().x;
-        enemy1.y=currentFloor.getRandomCell().y;
+        enemy1.x=currentFloor.getRandomEmptyCell().x;
+        enemy1.y=currentFloor.getRandomEmptyCell().y;
         var weaponRan=Math.random()*10;
         if(weaponRan<6)
         {
@@ -183,12 +183,15 @@ function placeEnemies()
         {
             if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
             {
+               
                 while(!segmentIntersectsFloor(gameObjects[j].x, gameObjects[j].y, enemy1.x, enemy1.y ))
                       {
-                             enemy1.x=currentFloor.getRandomCell().x;
-                            enemy1.y=currentFloor.getRandomCell().y;
+                             enemy1.x=currentFloor.getRandomEmptyCell().x;
+                            enemy1.y=currentFloor.getRandomEmptyCell().y;
                       
                       }
+                
+               
             }
         }
         gameObjects.push(enemy1);
@@ -205,7 +208,7 @@ function placeMinotaur()
     minatuar.maxHealth=1000;
     minatuar.health=1000;
     minatuar.weaponType=AXES;
-    minatuar.attackrate=10;
+    minatuar.attackrate=20;
      minatuar.movement=4;
     minatuar.movement*=.8;
     minatuar.radius=100;
