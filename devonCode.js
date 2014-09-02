@@ -473,7 +473,7 @@ function placeAmmo()
             var rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
-		    var cell = currentFloor.getRandomCell();
+		    var cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x;
 		    ammo.y = cell.y;
 		    gameObjects.push(ammo);
@@ -485,7 +485,7 @@ function placeAmmo()
             rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
-		    cell = currentFloor.getRandomCell();
+		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x;
 		    ammo.y = cell.y;
 		    gameObjects.push(ammo);
@@ -497,7 +497,7 @@ function placeAmmo()
             rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#E08346").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
-		    cell = currentFloor.getRandomCell();
+		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x;
 		    ammo.y = cell.y;
 		    gameObjects.push(ammo);
@@ -509,7 +509,7 @@ function placeAmmo()
             rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
-		    cell = currentFloor.getRandomCell();
+		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x;
 		    ammo.y = cell.y;
 		    gameObjects.push(ammo);
