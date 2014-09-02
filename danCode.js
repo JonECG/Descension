@@ -205,7 +205,7 @@ function placeMinotaur()
     minatuar.maxHealth=1000;
     minatuar.health=1000;
     minatuar.weaponType=AXES;
-    minatuar.attackrate=20;
+    minatuar.attackrate=10;
      minatuar.movement=4;
     minatuar.movement*=.8;
     minatuar.radius=100;
