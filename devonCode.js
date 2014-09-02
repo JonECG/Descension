@@ -312,6 +312,7 @@ function AmmoPickup(type, amount)
 	Pickup.call( this );
     this.weaponType=type;
     this.amount=amount;
+    this.radius=10;
 }
 
 AmmoPickup.prototype = Object.create(Pickup.prototype);
