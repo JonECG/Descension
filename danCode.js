@@ -220,6 +220,9 @@ function placeMinotaur()
 function runDan( dt )
 {
   if(minatuar&&minatuar.health<=0)
+  {
+      minatuar=0;
       gameState = WIN;
+  }
     
 }
