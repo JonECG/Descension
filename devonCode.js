@@ -379,6 +379,7 @@ function overLay(h)
         this.weapon=weaponSword;
         this.weapon.x=400;
         this.weapon.y=this.offset;
+        OL.AmmoText.text="";
         this.container.addChild(this.weapon);
     }
     
