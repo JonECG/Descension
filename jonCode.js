@@ -326,6 +326,23 @@ Floor.prototype.getRandomCell = function()
 	return this.getActualCell( rx, ry );//rx+Math.random()*0.01, ry+Math.random()*0.01 );
 }
 
+Floor.prototype.getRandomEmptyCell = function()
+{
+	var search = true;
+	var cell;
+	while( search )
+	{
+		search = false;
+		cell = getRandomCell();
+		for( var i = 0; i < gameObjects.length && !search; i++ )
+		{
+			search = (cell.x == gameObjects[i].x && cell.y == gameObjects[i].y );
+		}
+	}
+	
+	return cell;
+}
+
 Floor.prototype.getActualCell = function( x, y )
 {
 	return( { x: this.x + (x+0.5)*this.cellDim, y: this.y + (y+0.5)*this.cellDim } );
