@@ -544,7 +544,22 @@ function placeEnd()
 	rep.graphics.beginFill("#272").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
 	var end = new EndLevelPickup();
 	end.init( gameStage, rep );
-	var cell = currentFloor.getRandomEmptyCell();
+	var safe = false;
+	var cell;
+	while( !safe )
+	{
+		safe = true;
+		cell = currentFloor.getRandomEmptyCell();
+		
+		for( var i = 0; i < gameObjects.length; i++ )
+		{
+			if( gameObjects[i].alignment === 0 && gameObjects[i].type == TYPE_CHARACTER )
+			{
+				safe = safe && segmentIntersectsFloor( gameObjects[i].x, gameObjects[i].y, cell.x, cell.y );
+				safe = safe && ( Math.pow( gameObjects[i].x-cell.x, 2 ) + Math.pow( gameObjects[i].y-cell.y, 2 ) ) > 256*256;
+			}
+		}
+	}
 	end.x = cell.x;
 	end.y = cell.y;
 	gameObjects.push(end);

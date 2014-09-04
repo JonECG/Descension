@@ -166,6 +166,7 @@ function nextLevel()
 var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
+var dudeSword, dudeRock, dudeAxe, dudeBow, dudeCrossBow;
 var slainText;
 
 manifest = [
@@ -181,7 +182,8 @@ manifest = [
     {src:"BowAndArrow.png", id:"bow"},
     {src:"Axe.png", id:"axe"},
     {src:"Crossbow.png", id:"crossbow"},
-    {src:"Rock.png", id:"rock"}
+    {src:"Rock.png", id:"rock"},
+	{src:"dudeSword_strip4.png", id:"dudeSword"}
 ];
 
 var queue;
@@ -248,6 +250,22 @@ function loadComplete(evt)
             continueDown: [11, 11, "continueDown"]
             }     
         });
+		
+	var dudeSwordSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("dudeSword")],
+		frames: {
+			width: 107,
+			height: 96,
+			regX: 27,
+			regY: 45
+		},
+		animations: {
+			idle: [0, 0, "playNormal"],
+			attack: [1, 3, "idle", 0.2],
+			}     
+		});
+	dudeSword = new createjs.Sprite(dudeSwordSheet);
+	dudeSword.gotoAndStop( "idle" );
 	
 	playButton = new createjs.Sprite(buttonSheet);
 	playButton.gotoAndStop("playNormal");
