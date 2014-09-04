@@ -13,6 +13,8 @@ function Character()
     this.lastWeapon=SWORD;
     this.weaponChangeRate=0;
     this.ammo=[0,0,0,0];
+    this.health=200;
+    this.maxHealth=200;
 }
 
 Character.prototype = Object.create(CharacterObject.prototype);
@@ -186,7 +188,7 @@ Bullet.prototype.collide = function( other )
                         this.markedForDestroy=true;
                         break;
                     case ROCKS:
-                        other.health-=5;
+                        other.health-=10;
                         this.markedForDestroy=true;
                         if(Math.random()<0.6 && this.pickUp)
                         {
@@ -382,7 +384,7 @@ function overLay(h)
     
     this.update=function(hp)
     {
-        this.HPBar.scaleX=hp/100;
+        this.HPBar.scaleX=hp/200;
         
         switch(currentWeapon)
         {
@@ -469,7 +471,7 @@ function placeAmmo()
         if(swit<0.4)
         {
             //5
-		    var ammo = new AmmoPickup(ROCKS-1, 5);
+		    var ammo = new AmmoPickup(ROCKS-1, 3);
             var rep = new createjs.Shape();  //creates object to hold a shape
 	        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
