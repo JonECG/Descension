@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="radical.svg"
+   inkscape:export-filename="D:\Final Game\assets\radical.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.34"
+     inkscape:cx="-70.714286"
+     inkscape:cy="355.46434"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect3768"
+       width="5.7140865"
+       height="37.945053"
+       x="400"
+       y="558.61987" />
+    <rect
+       style="fill:#000000;fill-opacity:1"
+       id="rect3770"
+       width="39.88224"
+       height="6.8181815"
+       x="318.58725"
+       y="644.40759" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0000ff;fill-opacity:0;stroke:#0000ff;stroke-opacity:1"
+       id="path3774"
+       sodipodi:cx="403.42465"
+       sodipodi:cy="646.19781"
+       sodipodi:rx="48.630138"
+       sodipodi:ry="77.397263"
+       d="m 452.05479,646.19781 a 48.630138,77.397263 0 1 1 -97.26028,0 48.630138,77.397263 0 1 1 97.26028,0 z"
+       transform="matrix(1.430279,0,0,1,-173.62395,0)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-opacity:1"
+       id="path3782"
+       sodipodi:cx="402.94116"
+       sodipodi:cy="648.68573"
+       sodipodi:rx="5.8823528"
+       sodipodi:ry="8.0882349"
+       d="m 408.82351,648.68573 a 5.8823528,8.0882349 0 1 1 -11.7647,0 5.8823528,8.0882349 0 1 1 11.7647,0 z" />
+    <rect
+       y="644.40759"
+       x="453.88138"
+       height="6.8181815"
+       width="39.882244"
+       id="rect3786"
+       style="fill:#000000;fill-opacity:1" />
+    <rect
+       y="701.26691"
+       x="400"
+       height="46.768574"
+       width="5.7140865"
+       id="rect3788"
+       style="fill:#000000;fill-opacity:1" />
+  </g>
+</svg>
