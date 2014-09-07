@@ -167,9 +167,10 @@ var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow;
+var rockAmmo, axeAmmo, bowAmmo;
+var swordBullet, rockBullet, axeBullet, bowBullet;
 var shadowImage;
 var slainText;
-var theRadical;
 
 manifest = [
     {src:"title.png", id:"title"},
@@ -180,17 +181,23 @@ manifest = [
     {src:"buttons.png", id:"buttons"},
 	{src:"gameFloor.png", id:"gameFloor"},
 	{src:"wallImage.png", id:"wallImage"},
-    {src:"Sword.png", id:"sword"},
-    {src:"BowAndArrow.png", id:"bow"},
-    {src:"Axe.png", id:"axe"},
-    {src:"Crossbow.png", id:"crossbow"},
-    {src:"Rock.png", id:"rock"},
+    {src:"swordNext.png", id:"sword"},
+    {src:"bowNext.png", id:"bow"},
+    {src:"AxeNext.png", id:"axe"},
+    {src:"RockNext.png", id:"rock"},
 	{src:"shadow.png", id:"shadow"},
 	{src:"dudeSword_strip4.png", id:"dudeSword"},
 	{src:"dudeAxe_strip3.png", id:"dudeAxe"},
 	{src:"dudeRock_strip5.png", id:"dudeRock"},
 	{src:"dudeBow_strip4.png", id:"dudeBow"},
-    {src: "radical.png",id:"radical"}
+    {src:"rockPickup.png", id:"rockPickup"},
+    {src:"axePickup.png", id:"axePickup"},
+    {src:"bowPickup.png", id:"bowPickup"},
+    {src:"swordBullet.png", id:"SwordBullet"},
+    {src:"rockBullet.png", id:"RockBullet"},
+    {src:"AxeBullet.png", id:"AxeBullet"},
+    {src:"bowBullet.png", id:"BowBullet"},
+    {src:"radical.png",id:"radical"}
 ];
 
 var queue;
@@ -235,11 +242,17 @@ function loadComplete(evt)
     weaponSword=new createjs.Bitmap(queue.getResult("sword"));
     weaponBow=new createjs.Bitmap(queue.getResult("bow"));
     weaponAxe=new createjs.Bitmap(queue.getResult("axe"));
-    weaponCrossbow=new createjs.Bitmap(queue.getResult("crossbow"));
     weaponRock=new createjs.Bitmap(queue.getResult("rock"));
-	theRadical=new createjs.Bitmap(queue.getResult("radical"));
-    theRadical.x=-100;
-    theRadical.y=-110;
+    
+    rockAmmo=new createjs.Bitmap(queue.getResult("rockPickup"));
+    axeAmmo=new createjs.Bitmap(queue.getResult("axePickup"));
+    bowAmmo=new createjs.Bitmap(queue.getResult("bowPickup"));
+    
+    swordBullet=new createjs.Bitmap(queue.getResult("SwordBullet"));
+    rockBullet=new createjs.Bitmap(queue.getResult("RockBullet"));
+    axeBullet=new createjs.Bitmap(queue.getResult("AxeBullet"));
+    bowBullet=new createjs.Bitmap(queue.getResult("BowBullet"));
+	
 	var buttonSheet = new createjs.SpriteSheet({
         images: [queue.getResult("buttons")],
         frames: {

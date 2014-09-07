@@ -196,10 +196,6 @@ Character.prototype.innerUpdate = function( dt )
 Character.prototype.FireBullet = function()
 {
     var bul=new Bullet(this.lastWeapon, this.x, this.y);
-    var bulRep=new createjs.Shape();
-    bulRep.graphics.beginFill().drawCircle(10,10,10);
-    bulRep.regX=10;
-    bulRep.regY=10;
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     
@@ -208,15 +204,31 @@ Character.prototype.FireBullet = function()
     switch(this.lastWeapon)
     {
         case SWORD:
+                var bulRep=swordBullet;
+                bulRep.regX=32;
+                bulRep.regY=32;
+                bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case ROCKS:
+                var bulRep=rockBullet;
+                bulRep.regX=-2;
+                bulRep.regY=0;
+                bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 450, vec, vec2, this.alignment);
             break;
         case AXES:
+                var bulRep=axeBullet;
+                bulRep.regX=32;
+                bulRep.regY=32;
+                bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case BOW_ARROW:
+                var bulRep=bowBullet;
+                bulRep.regX=0;
+                bulRep.regY=0;
+                bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 800, vec, vec2, this.alignment);
             break;
     }
@@ -244,6 +256,7 @@ function Bullet(weaponType, bX, bY)
     {
         case SWORD:
                 this.pickUp=false;
+            this.radius=30;
                 break;
             case ROCKS:
                 this.pickUp=true;
@@ -482,8 +495,8 @@ function overLay(h)
             case SWORD:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponSword;
-                this.weapon.x=400;
-                this.weapon.y=this.offset;
+                this.weapon.x=410;
+                this.weapon.y=this.offset+10;
                 player.destroy();
                 player.init(gameStage, dudeSword, shadowImage);
                 this.container.addChild(this.weapon);
@@ -492,8 +505,8 @@ function overLay(h)
             case BOW_ARROW:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponBow;
-                this.weapon.x=400;
-                this.weapon.y=this.offset;
+                this.weapon.x=410;
+                this.weapon.y=this.offset+20;
                 player.destroy();
                 player.init(gameStage, dudeBow, shadowImage);
                 this.container.addChild(this.weapon);
@@ -502,8 +515,8 @@ function overLay(h)
             case AXES:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponAxe;
-                this.weapon.x=400;
-                this.weapon.y=this.offset;
+                this.weapon.x=420;
+                this.weapon.y=this.offset+10;
                 player.destroy();
                 player.init(gameStage, dudeAxe, shadowImage);
                 this.container.addChild(this.weapon);
@@ -512,8 +525,8 @@ function overLay(h)
             case ROCKS:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponRock;
-                this.weapon.x=400;
-                this.weapon.y=this.offset;
+                this.weapon.x=410;
+                this.weapon.y=this.offset+20;
                 player.destroy();
                 player.init(gameStage, dudeRock, shadowImage);
                 this.container.addChild(this.weapon);
@@ -556,36 +569,33 @@ function placeAmmo()
         {
             //5
 		    var ammo = new AmmoPickup(ROCKS-1, 3);
-            var rep = new createjs.Shape();  //creates object to hold a shape
-	        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+            var rep = rockAmmo;
 		    ammo.init( gameStage, rep );
 		    var cell = currentFloor.getRandomEmptyCell();
-		    ammo.x = cell.x;
-		    ammo.y = cell.y;
+		    ammo.x = cell.x-10;
+		    ammo.y = cell.y-10;
 		    gameObjects.push(ammo);
         }
         else if(swit<0.6)
         {
             //3
             ammo = new AmmoPickup(BOW_ARROW-1, 3);
-            rep = new createjs.Shape();  //creates object to hold a shape
-	        rep.graphics.beginFill("#E08346").drawCircle(0, 0, 10);
+            rep = bowAmmo;
 		    ammo.init( gameStage, rep );
 		    cell = currentFloor.getRandomEmptyCell();
-		    ammo.x = cell.x;
-		    ammo.y = cell.y;
+		    ammo.x = cell.x-30;
+		    ammo.y = cell.y-20;
 		    gameObjects.push(ammo);
         }
         else if(swit<1)
         {
             //3
              ammo = new AmmoPickup(AXES-1, 3);
-            rep = new createjs.Shape();  //creates object to hold a shape
-	        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+            rep = axeAmmo;
 		    ammo.init( gameStage, rep );
 		    cell = currentFloor.getRandomEmptyCell();
-		    ammo.x = cell.x;
-		    ammo.y = cell.y;
+		    ammo.x = cell.x-20;
+		    ammo.y = cell.y-20;
 		    gameObjects.push(ammo);
         }
 	}
