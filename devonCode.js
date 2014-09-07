@@ -205,28 +205,28 @@ Character.prototype.FireBullet = function()
     {
         case SWORD:
                 var bulRep=swordBullet;
-                bulRep.regX=32;
-                bulRep.regY=32;
+                bulRep.regX=-10;
+                bulRep.regY=20;
                 bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case ROCKS:
                 var bulRep=rockBullet;
-                bulRep.regX=-2;
-                bulRep.regY=0;
+                bulRep.regX=10;
+                bulRep.regY=10;
                 bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 450, vec, vec2, this.alignment);
             break;
         case AXES:
                 var bulRep=axeBullet;
-                bulRep.regX=32;
-                bulRep.regY=32;
+                bulRep.regX=25;
+                bulRep.regY=10;
                 bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case BOW_ARROW:
                 var bulRep=bowBullet;
-                bulRep.regX=0;
+                bulRep.regX=20;
                 bulRep.regY=0;
                 bulRep.rotation=vec.getAngle();
                 bul.init(gameStage, bulRep, bulRep, 800, vec, vec2, this.alignment);
@@ -256,7 +256,7 @@ function Bullet(weaponType, bX, bY)
     {
         case SWORD:
                 this.pickUp=false;
-            this.radius=30;
+                this.radius=30;
                 break;
             case ROCKS:
                 this.pickUp=true;
@@ -396,10 +396,15 @@ Bullet.prototype.update = function( dt )
     this.x=this.representation.x;
     this.y=this.representation.y;
     
+    if(this.weaponType==ROCKS || this.weaponType==AXES)
+    {
+        this.representation.rotation+=20;   
+    }
+    
     if(this.weaponType==SWORD)
     {
         var check=new vector2D(this.beginX-this.x, this.beginY-this.y);
-        if(check.length>80)
+        if(check.length>150)
         {
             this.markedForDestroy=true;
         }
@@ -416,7 +421,7 @@ function AmmoPickup(type, amount)
 	Pickup.call( this );
     this.weaponType=type;
     this.amount=amount;
-    this.radius=10;
+    this.radius=20;
 }
 
 AmmoPickup.prototype = Object.create(Pickup.prototype);
