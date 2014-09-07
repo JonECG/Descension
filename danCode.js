@@ -6,7 +6,7 @@
 function EnemyCharacter()
 {
 	CharacterObject.call( this );
-	this.radius = 23;
+	this.radius = 28;
     this.alignment=1;
     this.health=100;
     this.shoots=false;
@@ -212,6 +212,7 @@ function placeEnemies()
         enemy1.x=cell.x;
         enemy1.y=cell.y;
         enemy1.direction=0;
+        enemy1.movement=2;
         for(j=0;j<gameObjects.length;j++)
         {
             if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
