@@ -126,6 +126,9 @@ function normalized(data,length)
 }
 function initDan()
 {
+    theRadical.x=mouseX;
+    theRadical.y=mouseY;
+    uiStage.addChild(theRadical);
 }
 function placeEnemies()
 {
@@ -253,5 +256,7 @@ function runDan( dt )
       minatuar=0;
       gameState = WIN;
   }
-    
+    theRadical.visible=true;
+    theRadical.x=mouseX-35;
+    theRadical.y=mouseY-35;
 }

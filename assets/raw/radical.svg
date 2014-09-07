@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="176.09"
+   height="190.36"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -37,7 +37,9 @@
      inkscape:window-height="1018"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     borderlayer="true"
+     showborder="true" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -53,21 +55,28 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-862.00214)">
     <rect
        style="fill:#000000;fill-opacity:1"
        id="rect3768"
-       width="5.7140865"
-       height="37.945053"
-       x="400"
-       y="558.61987" />
+       width="2.2606893"
+       height="14.210836"
+       x="86.556732"
+       y="931.89099"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <rect
        style="fill:#000000;fill-opacity:1"
        id="rect3770"
-       width="39.88224"
-       height="6.8181815"
-       x="318.58725"
-       y="644.40759" />
+       width="15.778786"
+       height="2.553483"
+       x="54.347054"
+       y="964.01935"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        sodipodi:type="arc"
        style="fill:#0000ff;fill-opacity:0;stroke:#0000ff;stroke-opacity:1"
@@ -77,7 +86,10 @@
        sodipodi:rx="48.630138"
        sodipodi:ry="77.397263"
        d="m 452.05479,646.19781 a 48.630138,77.397263 0 1 1 -97.26028,0 48.630138,77.397263 0 1 1 97.26028,0 z"
-       transform="matrix(1.430279,0,0,1,-173.62395,0)" />
+       transform="matrix(0.56586755,0,0,0.37451087,-140.38862,722.68174)"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <path
        sodipodi:type="arc"
        style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-opacity:1"
@@ -86,20 +98,30 @@
        sodipodi:cy="648.68573"
        sodipodi:rx="5.8823528"
        sodipodi:ry="8.0882349"
-       d="m 408.82351,648.68573 a 5.8823528,8.0882349 0 1 1 -11.7647,0 5.8823528,8.0882349 0 1 1 11.7647,0 z" />
+       d="m 408.82351,648.68573 a 5.8823528,8.0882349 0 1 1 -11.7647,0 5.8823528,8.0882349 0 1 1 11.7647,0 z"
+       transform="matrix(0.39563439,0,0,0.37451087,-71.697016,722.68174)"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <rect
-       y="644.40759"
-       x="453.88138"
-       height="6.8181815"
-       width="39.882244"
+       y="964.01935"
+       x="107.87407"
+       height="2.553483"
+       width="15.778788"
        id="rect3786"
-       style="fill:#000000;fill-opacity:1" />
+       style="fill:#000000;fill-opacity:1"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <rect
-       y="701.26691"
-       x="400"
-       height="46.768574"
-       width="5.7140865"
+       y="985.31384"
+       x="86.556732"
+       height="17.515337"
+       width="2.2606893"
        id="rect3788"
-       style="fill:#000000;fill-opacity:1" />
+       style="fill:#000000;fill-opacity:1"
+       inkscape:export-filename="D:\Final Game\assets\radical.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>

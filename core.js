@@ -169,6 +169,7 @@ var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow;
 var shadowImage;
 var slainText;
+var theRadical;
 
 manifest = [
     {src:"title.png", id:"title"},
@@ -188,7 +189,8 @@ manifest = [
 	{src:"dudeSword_strip4.png", id:"dudeSword"},
 	{src:"dudeAxe_strip3.png", id:"dudeAxe"},
 	{src:"dudeRock_strip5.png", id:"dudeRock"},
-	{src:"dudeBow_strip4.png", id:"dudeBow"}
+	{src:"dudeBow_strip4.png", id:"dudeBow"},
+    {src: "radical.png",id:"radical"}
 ];
 
 var queue;
@@ -235,7 +237,9 @@ function loadComplete(evt)
     weaponAxe=new createjs.Bitmap(queue.getResult("axe"));
     weaponCrossbow=new createjs.Bitmap(queue.getResult("crossbow"));
     weaponRock=new createjs.Bitmap(queue.getResult("rock"));
-	
+	theRadical=new createjs.Bitmap(queue.getResult("radical"));
+    theRadical.x=-100;
+    theRadical.y=-110;
 	var buttonSheet = new createjs.SpriteSheet({
         images: [queue.getResult("buttons")],
         frames: {
