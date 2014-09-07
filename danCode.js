@@ -178,7 +178,7 @@ function placeEnemies()
                 enemy1.weaponType=AXES;
             }
         }
-        else if(currentLevel<=7)
+        else
         {
             if(weaponRan<6)
             {
@@ -198,29 +198,7 @@ function placeEnemies()
             }
             
         }
-        else
-        {
-            if(weaponRan<6)
-            {
-                enemy1.weaponType=SWORD;
-            }
-            else if(weaponRan<7)
-            {
-                enemy1.weaponType=ROCKS;
-            }
-            else if(weaponRan<8)
-            {
-                enemy1.weaponType=AXES;
-            }
-            else if(weaponRan<9)
-            {
-                enemy1.weaponType=BOW_ARROW;
-            }
-            else
-            {
-                enemy1.weaponType=CROSSBOW;
-            }
-        }
+    
         for(j=0;j<gameObjects.length;j++)
         {
             if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
