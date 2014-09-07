@@ -6,7 +6,7 @@
 function EnemyCharacter()
 {
 	CharacterObject.call( this );
-	this.radius = 32;
+	this.radius = 23;
     this.alignment=1;
     this.health=100;
     this.shoots=false;
@@ -142,24 +142,24 @@ function placeEnemies()
     {
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
-        enemy1.init( gameStage, dudeSword, dudeSword );
-        var cell=currentFloor.getRandomEmptyCell();
-        enemy1.x=cell.x;
-        enemy1.y=cell.y;
-        enemy1.direction=0;
+        
+       
         var weaponRan=Math.random()*10;
         if(currentLevel<=2)
         {
+            enemy1.init( gameStage, dudeSword, shadowImage );
             enemy1.weaponType=SWORD;
         }
         else if(currentLevel<=4)
         {
             if(weaponRan<6)
             {
+                enemy1.init( gameStage, dudeSword, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<10)
             {
+                enemy1.init( gameStage, dudeRock, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
         }
@@ -167,14 +167,17 @@ function placeEnemies()
         {
             if(weaponRan<6)
             {
+                enemy1.init( gameStage, dudeSword, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<8)
             {
+                enemy1.init( gameStage, dudeRock, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
             else if(weaponRan<10)
             {
+                enemy1.init( gameStage, dudeAxe, shadowImage );
                 enemy1.weaponType=AXES;
             }
         }
@@ -182,23 +185,30 @@ function placeEnemies()
         {
             if(weaponRan<6)
             {
+                enemy1.init( gameStage, dudeSword, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<7)
             {
+                enemy1.init( gameStage, dudeRock, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
             else if(weaponRan<8)
             {
+                enemy1.init( gameStage, dudeAxe, shadowImage );
                 enemy1.weaponType=AXES;
             }
             else if(weaponRan<10)
             {
+                enemy1.init( gameStage, dudeBow, shadowImage );
                 enemy1.weaponType=BOW_ARROW;
             }
             
         }
-    
+     var cell=currentFloor.getRandomEmptyCell();
+        enemy1.x=cell.x;
+        enemy1.y=cell.y;
+        enemy1.direction=0;
         for(j=0;j<gameObjects.length;j++)
         {
             if(gameObjects[j].alignment!=enemy1.alignment && gameObjects[j].type===TYPE_CHARACTER)
