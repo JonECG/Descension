@@ -167,6 +167,7 @@ var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow, dudeCrossBow;
+var shadowImage;
 var slainText;
 
 manifest = [
@@ -183,6 +184,7 @@ manifest = [
     {src:"Axe.png", id:"axe"},
     {src:"Crossbow.png", id:"crossbow"},
     {src:"Rock.png", id:"rock"},
+	{src:"shadow.png", id:"shadow"},
 	{src:"dudeSword_strip4.png", id:"dudeSword"}
 ];
 
@@ -209,6 +211,7 @@ function loadComplete(evt)
     gameoverScreen = new createjs.Bitmap(queue.getResult("gameover"));
 	winScreen = new createjs.Bitmap(queue.getResult("win"));
 	levelCompleteScreen = new createjs.Bitmap(queue.getResult("levelComplete"));
+	shadowImage = new createjs.Bitmap(queue.getResult("shadow"));
 	
 	stage.addChildAt(titleScreen,0);
 	stage.addChildAt(instructionScreen,0);
@@ -254,10 +257,10 @@ function loadComplete(evt)
 	var dudeSwordSheet = new createjs.SpriteSheet({
 		images: [queue.getResult("dudeSword")],
 		frames: {
-			width: 107,
-			height: 96,
-			regX: 27,
-			regY: 45
+			width: 160,
+			height: 143,
+			regX: 40,
+			regY: 68
 		},
 		animations: {
 			idle: [0, 0, "playNormal"],
