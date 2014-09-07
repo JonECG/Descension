@@ -166,7 +166,7 @@ function nextLevel()
 var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
-var dudeSword, dudeRock, dudeAxe, dudeBow, dudeCrossBow;
+var dudeSword, dudeRock, dudeAxe, dudeBow;
 var shadowImage;
 var slainText;
 
@@ -269,7 +269,7 @@ function loadComplete(evt)
 			regY: 68
 		},
 		animations: {
-			idle: [0, 0, "playNormal"],
+			idle: [0, 0, "idle"],
 			attack: [1, 3, "idle", 0.2],
 			}     
 		});
@@ -285,7 +285,7 @@ function loadComplete(evt)
 			regY: 68
 		},
 		animations: {
-			idle: [0, 0, "playNormal"],
+			idle: [0, 0, "idle"],
 			attack: [1, 2, "idle", 0.2],
 			}     
 		});
@@ -301,7 +301,7 @@ function loadComplete(evt)
 			regY: 68
 		},
 		animations: {
-			idle: [0, 0, "playNormal"],
+			idle: [0, 0, "idle"],
 			attack: [1, 4, "idle", 0.2],
 			}     
 		});
@@ -317,7 +317,7 @@ function loadComplete(evt)
 			regY: 68
 		},
 		animations: {
-			idle: [0, 0, "playNormal"],
+			idle: [0, 0, "idle"],
 			attack: [1, 3, "idle", 0.2],
 			}     
 		});
