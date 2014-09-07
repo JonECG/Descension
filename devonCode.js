@@ -2,7 +2,7 @@
 
 var movementSpeed=5;
 var bulRep;
-var SWORD=5, ROCKS=1, AXES=2, CROSSBOW=3, BOW_ARROW=4;
+var SWORD=5, ROCKS=1, AXES=2, BOW_ARROW=4;
 var currentWeapon;
 
 function Character()
@@ -15,12 +15,19 @@ function Character()
     this.ammo=[0,0,0,0];
     this.health=200;
     this.maxHealth=200;
+    this.fireRate=0;
+    this.swordFireRate=0.4;
+    this.rockFireRate=0.6;
+    this.bowFireRate=0.8;
+    this.axeFireRate=0.7;
 }
 
 Character.prototype = Object.create(CharacterObject.prototype);
 Character.prototype.constructor = Character;
 Character.prototype.innerUpdate = function( dt )
 {
+    console.log(this.fireRate);
+    
 	if(isKeyDown("W"))
        this.y-=movementSpeed;
     if(isKeyDown("S"))
@@ -32,13 +39,49 @@ Character.prototype.innerUpdate = function( dt )
     
     if(isMousePressed() && this.lastWeapon!=SWORD && this.ammo[this.lastWeapon-1]>0)
     {
-        this.FireBullet();
-        this.ammo[this.lastWeapon-1]--;
+        switch(this.lastWeapon)
+        {
+            case ROCKS:
+                if(this.fireRate>this.rockFireRate)
+                {
+                    this.FireBullet();
+                    this.ammo[this.lastWeapon-1]--;
+                    this.fireRate=0;
+                }
+                break;
+            case BOW_ARROW:
+                if(this.fireRate>this.bowFireRate)
+                {
+                    this.FireBullet();
+                    this.ammo[this.lastWeapon-1]--;
+                    this.fireRate=0;
+                }
+                break;
+            case AXES:
+                if(this.fireRate>this.axeFireRate)
+                {
+                    this.FireBullet();
+                    this.ammo[this.lastWeapon-1]--;
+                    this.fireRate=0;
+                }
+                break;
+        }
     }
-    else if(isMousePressed() && this.lastWeapon==SWORD)
+    else if(isMousePressed() && this.lastWeapon==SWORD && this.fireRate>this.swordFireRate)
     {
         this.FireBullet();
+        this.fireRate=0;
     }
+    
+    if(this.lastWeapon!=SWORD && this.ammo[this.lastWeapon-1]==0)
+    {
+        this.lastWeapon=SWORD;
+        currentWeapon=SWORD;
+    }
+    
+    var dirVec=new vector2D(getMouseXInGame()-this.representation.x, getMouseYInGame()-this.representation.y);
+    
+    this.direction=dirVec.getAngle();
     
     if((isKeyDown("Q") || getMouseWheelDelta()<0) && this.weaponChangeRate>0.2)
     {
@@ -49,20 +92,40 @@ Character.prototype.innerUpdate = function( dt )
                 currentWeapon=SWORD;
                 break;
             case AXES:
-                this.lastWeapon=ROCKS;
-                currentWeapon=ROCKS;
-                break;
-            case CROSSBOW:
-                this.lastWeapon=AXES;
-                currentWeapon=AXES;
+                if(this.ammo[0]>0)
+                {
+                    this.lastWeapon=ROCKS;
+                    currentWeapon=ROCKS;
+                }
+                else
+                {
+                    this.lastWeapon=SWORD;
+                    currentWeapon=SWORD;
+                }
                 break;
             case BOW_ARROW:
-                this.lastWeapon=CROSSBOW;
-                currentWeapon=CROSSBOW;
+                if(this.ammo[1]>0)
+                {
+                    this.lastWeapon=AXES;
+                    currentWeapon=AXES;
+                }
+                else if(this.ammo[0]>0)
+                {
+                    this.lastWeapon=ROCKS;
+                    currentWeapon=ROCKS;
+                }
+                else
+                {
+                    this.lastWeapon=SWORD;
+                    currentWeapon=SWORD;
+                }
                 break;
             case SWORD:
-                this.lastWeapon=BOW_ARROW;
-                currentWeapon=BOW_ARROW;
+                if(this.ammo[3]>0)
+                {
+                    this.lastWeapon=BOW_ARROW;
+                    currentWeapon=BOW_ARROW;
+                }
                 break;
         }
         this.weaponChangeRate=0;
@@ -72,59 +135,94 @@ Character.prototype.innerUpdate = function( dt )
         switch(this.lastWeapon)
         {
             case ROCKS:
-                this.lastWeapon=AXES;
-                currentWeapon=AXES;
+                if(this.ammo[1]>0)
+                {
+                    this.lastWeapon=AXES;
+                    currentWeapon=AXES;
+                }
+                else if(this.ammo[3]>0)
+                {
+                    this.lastWeapon=BOW_ARROW;
+                    currentWeapon=BOW_ARROW;
+                }
+                else
+                {
+                    this.lastWeapon=SWORD;
+                    currentWeapon=SWORD;
+                }
                 break;
             case AXES:
-                this.lastWeapon=CROSSBOW;
-                currentWeapon=CROSSBOW;
-                break;
-            case CROSSBOW:
-                this.lastWeapon=BOW_ARROW;
-                currentWeapon=BOW_ARROW;
+                if(this.ammo[3]>0)
+                {
+                    this.lastWeapon=BOW_ARROW;
+                    currentWeapon=BOW_ARROW;
+                }
+                else
+                {
+                    this.lastWeapon=SWORD;
+                    currentWeapon=SWORD;
+                }
                 break;
             case BOW_ARROW:
                 this.lastWeapon=SWORD;
                 currentWeapon=SWORD;
                 break;
             case SWORD:
-                this.lastWeapon=ROCKS;
-                currentWeapon=ROCKS;
+                if(this.ammo[0]>0)
+                {
+                    this.lastWeapon=ROCKS;
+                    currentWeapon=ROCKS;
+                }
+                else if(this.ammo[1]>0)
+                {
+                    this.lastWeapon=AXES;
+                    currentWeapon=AXES;
+                }
+                else if(this.ammo[3]>0)
+                {
+                    this.lastWeapon=BOW_ARROW;
+                    currentWeapon=BOW_ARROW;
+                }
+                else
+                {
+                    this.lastWeapon=SWORD;
+                    currentWeapon=SWORD;
+                }
                 break;
         }
         this.weaponChangeRate=0;
-        console.log(this.lastWeapon);
     }
     this.weaponChangeRate+=dt;
+    this.fireRate+=dt;
 }
 Character.prototype.FireBullet = function()
 {
     var bul=new Bullet(this.lastWeapon, this.x, this.y);
     var bulRep=new createjs.Shape();
-    bulRep.graphics.beginFill("#1AF").drawCircle(10,10,10);
+    bulRep.graphics.beginFill().drawCircle(10,10,10);
     bulRep.regX=10;
     bulRep.regY=10;
     var vec=new vector2D(getMouseXInGame()-this.x, getMouseYInGame()-this.y);
     var vec2=new vector2D(this.x, this.y);
     
+    this.representation.gotoAndPlay("attack");
+    
     switch(this.lastWeapon)
     {
         case SWORD:
-            bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
+                bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case ROCKS:
-            bul.init(gameStage, bulRep, bulRep, 450, vec, vec2, this.alignment);
+                bul.init(gameStage, bulRep, bulRep, 450, vec, vec2, this.alignment);
             break;
         case AXES:
-            bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
+                bul.init(gameStage, bulRep, bulRep, 500, vec, vec2, this.alignment);
             break;
         case BOW_ARROW:
-            bul.init(gameStage, bulRep, bulRep, 800, vec, vec2, this.alignment);
-            break;
-        case CROSSBOW:
-            bul.init(gameStage, bulRep, bulRep, 1000, vec, vec2, this.alignment);
+                bul.init(gameStage, bulRep, bulRep, 800, vec, vec2, this.alignment);
             break;
     }
+    
     gameObjects.push(bul);
 }
 Character.prototype.getAmmo=function(weaponType)
@@ -153,9 +251,6 @@ function Bullet(weaponType, bX, bY)
                 this.pickUp=true;
                 break;
             case BOW_ARROW:
-                this.pickUp=false;
-                break;
-            case CROSSBOW:
                 this.pickUp=false;
                 break;
             case AXES:
@@ -202,11 +297,7 @@ Bullet.prototype.collide = function( other )
                         }
                         break;
                     case BOW_ARROW:
-                        other.health-=30;
-                        this.markedForDestroy=true;
-                        break;
-                    case CROSSBOW:
-                        other.health-=50;
+                        other.health-=40;
                         this.markedForDestroy=true;
                         break;
                     case AXES:
@@ -406,14 +497,6 @@ function overLay(h)
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
-            case CROSSBOW:
-                this.container.removeChild(this.weapon);
-                this.weapon=weaponCrossbow;
-                this.weapon.x=400;
-                this.weapon.y=this.offset;
-                this.container.addChild(this.weapon);
-                currentWeapon=0;
-                break;
             case AXES:
                 this.container.removeChild(this.weapon);
                 this.weapon=weaponAxe;
@@ -451,12 +534,7 @@ function placePlayer()
     player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
     player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
     
-    var charRep = new createjs.Shape();  //creates object to hold a shape
-	charRep.graphics.beginFill("#1AF").drawCircle(32, 32, 32);  //creates circle at 0,0, with radius of 40
-	charRep.regX = 32;
-	charRep.regY = 32;
-
-    player.init( gameStage, charRep, charRep );
+    player.init( gameStage, dudeSword, dudeSword );
     
     gameObjects.push( player );
     OL.init();
@@ -468,7 +546,7 @@ function placeAmmo()
 	{
         var swit=Math.random();
         
-        if(swit<0.4)
+        if(swit<0.45)
         {
             //5
 		    var ammo = new AmmoPickup(ROCKS-1, 3);
@@ -476,18 +554,6 @@ function placeAmmo()
 	        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
 		    ammo.init( gameStage, rep );
 		    var cell = currentFloor.getRandomEmptyCell();
-		    ammo.x = cell.x;
-		    ammo.y = cell.y;
-		    gameObjects.push(ammo);
-        }
-        else if(swit<0.45)
-        {
-            //2
-            ammo = new AmmoPickup(CROSSBOW-1, 2);
-            rep = new createjs.Shape();  //creates object to hold a shape
-	        rep.graphics.beginFill("#633A1F").drawCircle(0, 0, 10);
-		    ammo.init( gameStage, rep );
-		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x;
 		    ammo.y = cell.y;
 		    gameObjects.push(ammo);
@@ -543,5 +609,10 @@ function vector2D(x,y)
     this.getVector=function()
     {
         return "("+this.x+", "+this.y+")";
+    }
+    
+    this.getAngle=function()
+    {
+        return (Math.atan2(this.y, this.x)/Math.PI)*180;
     }
 }
