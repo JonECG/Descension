@@ -17,7 +17,7 @@ function Character()
     this.maxHealth=200;
     this.fireRate=0;
     this.swordFireRate=0.4;
-    this.rockFireRate=0.6;
+    this.rockFireRate=0.7;
     this.bowFireRate=0.8;
     this.axeFireRate=0.7;
 }
@@ -484,6 +484,8 @@ function overLay(h)
                 this.weapon=weaponSword;
                 this.weapon.x=400;
                 this.weapon.y=this.offset;
+                player.destroy();
+                player.init(gameStage, dudeSword, shadowImage);
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
@@ -492,6 +494,8 @@ function overLay(h)
                 this.weapon=weaponBow;
                 this.weapon.x=400;
                 this.weapon.y=this.offset;
+                player.destroy();
+                player.init(gameStage, dudeBow, shadowImage);
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
@@ -500,6 +504,8 @@ function overLay(h)
                 this.weapon=weaponAxe;
                 this.weapon.x=400;
                 this.weapon.y=this.offset;
+                player.destroy();
+                player.init(gameStage, dudeAxe, shadowImage);
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
@@ -508,6 +514,8 @@ function overLay(h)
                 this.weapon=weaponRock;
                 this.weapon.x=400;
                 this.weapon.y=this.offset;
+                player.destroy();
+                player.init(gameStage, dudeRock, shadowImage);
                 this.container.addChild(this.weapon);
                 currentWeapon=0;
                 break;
