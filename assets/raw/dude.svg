@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="dude.svg">
+   sodipodi:docname="dude.svg"
+   inkscape:export-filename="C:\Users\Jon\Google Drive\NU Laptop\Assignments\GAT Rich Animation\FinalProject\assets\raw\SpriteSubImages\dudeRockAttack4.png"
+   inkscape:export-xdpi="10.276598"
+   inkscape:export-ydpi="10.276598">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,7 +29,7 @@
      inkscape:cx="913.93782"
      inkscape:cy="697.11822"
      inkscape:document-units="px"
-     inkscape:current-layer="g4782"
+     inkscape:current-layer="g3996"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -45,12 +48,12 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     style="display:inline"
+     style="display:none"
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
@@ -837,7 +840,7 @@
        inkscape:connector-curvature="0"
        id="path4034"
        d="m 464.98878,321.21166 c 0,0 75.24207,19.49192 95.9237,38.16811 18.74271,16.9253 66.63306,57.18677 96.85064,78.97331 60.43514,43.57307 71.01679,70.11278 71.01679,70.11278 l 81.76967,-57.20927 c 0,0 -83.20571,-97.18154 -121.09203,-135.53185 C 651.57122,277.37441 495.32053,193.33103 495.32053,193.33103"
-       style="fill:#104c37;fill-opacity:1;stroke:#000000;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;opacity:0.96" />
+       style="fill:#104c37;fill-opacity:1;stroke:#000000;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <path
        style="fill:#543d08;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 616.1444,248.28438 c 0,0 178.70828,97.51904 207.77439,216.33141 29.06611,118.81236 -71.98999,167.48876 -71.98999,167.48876 0,0 17.31413,3.35634 36.30642,-1.9444 18.99228,-5.30073 24.46892,-15.01795 24.46892,-15.01795 0,0 85.59602,-89.39931 42.22033,-171.46311 C 811.54879,361.61527 657.92745,236.62276 633.0164,235.38672 c -24.91104,-1.23602 -16.872,12.89766 -16.872,12.89766 z"
@@ -2865,7 +2868,7 @@
      inkscape:label="Layer 1 copy copy copy#1"
      inkscape:groupmode="layer"
      id="g4782"
-     style="display:none">
+     style="display:inline">
     <path
        style="fill:#fcd18d;fill-opacity:1;stroke:#000000;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 497.8067,525.3244 c 0,0 -7.30381,40.55384 -28.2683,49.66095 -10.48224,4.55356 -28.77695,-24.00897 -45.89088,-32.92876 -17.11392,-8.91979 -33.04705,1.80315 -33.84165,-7.19692 -1.58921,-18.00014 2.75026,-51.03608 23.71474,-60.14319 20.96449,-9.10711 28.48239,-6.14276 28.48239,-6.14276"

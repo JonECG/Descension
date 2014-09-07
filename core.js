@@ -185,7 +185,10 @@ manifest = [
     {src:"Crossbow.png", id:"crossbow"},
     {src:"Rock.png", id:"rock"},
 	{src:"shadow.png", id:"shadow"},
-	{src:"dudeSword_strip4.png", id:"dudeSword"}
+	{src:"dudeSword_strip4.png", id:"dudeSword"},
+	{src:"dudeAxe_strip3.png", id:"dudeAxe"},
+	{src:"dudeRock_strip5.png", id:"dudeRock"},
+	{src:"dudeBow_strip4.png", id:"dudeBow"}
 ];
 
 var queue;
@@ -272,6 +275,54 @@ function loadComplete(evt)
 		});
 	dudeSword = new createjs.Sprite(dudeSwordSheet);
 	dudeSword.gotoAndStop( "idle" );
+	
+	var dudeAxeSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("dudeAxe")],
+		frames: {
+			width: 160,
+			height: 143,
+			regX: 40,
+			regY: 68
+		},
+		animations: {
+			idle: [0, 0, "playNormal"],
+			attack: [1, 2, "idle", 0.2],
+			}     
+		});
+	dudeAxe = new createjs.Sprite(dudeAxeSheet);
+	dudeAxe.gotoAndStop( "idle" );
+	
+	var dudeRockSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("dudeRock")],
+		frames: {
+			width: 160,
+			height: 143,
+			regX: 40,
+			regY: 68
+		},
+		animations: {
+			idle: [0, 0, "playNormal"],
+			attack: [1, 4, "idle", 0.2],
+			}     
+		});
+	dudeRock = new createjs.Sprite(dudeRockSheet);
+	dudeRock.gotoAndStop( "idle" );
+	
+	var dudeBowSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("dudeBow")],
+		frames: {
+			width: 160,
+			height: 143,
+			regX: 40,
+			regY: 68
+		},
+		animations: {
+			idle: [0, 0, "playNormal"],
+			attack: [1, 3, "idle", 0.2],
+			}     
+		});
+	dudeBow = new createjs.Sprite(dudeBowSheet);
+	dudeBow.gotoAndStop( "idle" );
 	
 	playButton = new createjs.Sprite(buttonSheet);
 	playButton.gotoAndStop("playNormal");
