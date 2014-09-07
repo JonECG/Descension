@@ -171,6 +171,7 @@ var rockAmmo, axeAmmo, bowAmmo;
 var swordBullet, rockBullet, axeBullet, bowBullet;
 var shadowImage;
 var slainText;
+var theRadical;
 
 manifest = [
     {src:"title.png", id:"title"},
@@ -224,7 +225,9 @@ function loadComplete(evt)
 	winScreen = new createjs.Bitmap(queue.getResult("win"));
 	levelCompleteScreen = new createjs.Bitmap(queue.getResult("levelComplete"));
 	shadowImage = new createjs.Bitmap(queue.getResult("shadow"));
-	
+    theRadical= new createjs.Bitmap(queue.getResult("radical"));
+	theRadical.x=-100;
+    theRadical.y=-110;
     shadowImage.regX=32;
     shadowImage.regY=32;
     
