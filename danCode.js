@@ -27,7 +27,7 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
 {
    
    
-    
+   
         this.activate();
     
 }
@@ -63,6 +63,7 @@ EnemyCharacter.prototype.activate = function(dt)
                                 {
                                     this.shoot(gameObjects[i]);
                                      this.wait=0;
+                                    this.representation.gotoAndPlay("attack");
                                 }
                                 this.wait++;
                             }
@@ -107,22 +108,8 @@ EnemyCharacter.prototype.move=function(posX,posY)
     var lastY=this.y;
     this.x+=velocityX;
     this.y+=velocityY;
-//    var d1=Math.sqrt(Math.pow(this.x-lastX,2)+Math.pow(this.Y-lastY,2));
-//    var d2=Math.sqrt(Math.pow((lastX+velocityX)-lastX,2)+Math.pow((lastY+velocityY)-lastY,2));
-//    if(d1!=d2)
-//    {
-//        var tempX=(lastX+velocityX)-this.x;
-//         var tempY=(lastY+velocityY)-this.y;
-//        var normalizedX=normalized(tempX,length(tempX,tempY));
-//        var normalizedY=normalized(tempY,length(tempX,tempY));
-//                                  
-//            velocityX= normalizedX* (d1-d2);  
-//            velocityY= normalizedY* (d1-d2);  
-//              
-//                  this.x+=velocityX;
-//                this.y+=velocityY;
-//                 }
-//   
+     this.direction=Math.atan2(velocityY,velocityX)/Math.PI*180;
+   
     
 }
 function length(x, y)
@@ -155,30 +142,84 @@ function placeEnemies()
     {
         enemy1= new EnemyCharacter();
          enemy1.shoots=true;
-        enemy1.init( gameStage, AIRectangle, AIRectangle );
+        enemy1.init( gameStage, dudeSword, dudeSword );
         var cell=currentFloor.getRandomEmptyCell();
         enemy1.x=cell.x;
         enemy1.y=cell.y;
+        enemy1.direction=0;
         var weaponRan=Math.random()*10;
-        if(weaponRan<6)
+        if(currentLevel<=2)
         {
             enemy1.weaponType=SWORD;
         }
-        else if(weaponRan<7)
+        else if(currentLevel<=4)
         {
-            enemy1.weaponType=ROCKS;
+            if(weaponRan<6)
+            {
+                enemy1.weaponType=SWORD;
+            }
+            else if(weaponRan<10)
+            {
+                enemy1.weaponType=ROCKS;
+            }
         }
-        else if(weaponRan<8)
+        else if(currentLevel<=6)
         {
-            enemy1.weaponType=AXES;
+            if(weaponRan<6)
+            {
+                enemy1.weaponType=SWORD;
+            }
+            else if(weaponRan<8)
+            {
+                enemy1.weaponType=ROCKS;
+            }
+            else if(weaponRan<10)
+            {
+                enemy1.weaponType=AXES;
+            }
         }
-        else if(weaponRan<9)
+        else if(currentLevel<=7)
         {
-            enemy1.weaponType=BOW_ARROW;
+            if(weaponRan<6)
+            {
+                enemy1.weaponType=SWORD;
+            }
+            else if(weaponRan<7)
+            {
+                enemy1.weaponType=ROCKS;
+            }
+            else if(weaponRan<8)
+            {
+                enemy1.weaponType=AXES;
+            }
+            else if(weaponRan<10)
+            {
+                enemy1.weaponType=BOW_ARROW;
+            }
+            
         }
         else
         {
-            enemy1.weaponType=CROSSBOW;
+            if(weaponRan<6)
+            {
+                enemy1.weaponType=SWORD;
+            }
+            else if(weaponRan<7)
+            {
+                enemy1.weaponType=ROCKS;
+            }
+            else if(weaponRan<8)
+            {
+                enemy1.weaponType=AXES;
+            }
+            else if(weaponRan<9)
+            {
+                enemy1.weaponType=BOW_ARROW;
+            }
+            else
+            {
+                enemy1.weaponType=CROSSBOW;
+            }
         }
         for(j=0;j<gameObjects.length;j++)
         {
@@ -209,7 +250,7 @@ function placeMinotaur()
     minatuar.init( gameStage, AIRectangle, AIRectangle );
     minatuar.maxHealth=1000;
     minatuar.health=1000;
-    minatuar.weaponType=AXES;
+    minatuar.weaponType=BOW_ARROW;
     minatuar.attackrate=20;
      minatuar.movement=4;
     minatuar.movement*=.8;
