@@ -129,6 +129,7 @@ function CharacterObject()
 	GameObject.call( this );
 	this.x = 0;
 	this.y = 0;
+	this.direction = 0;
 	this.representation;
 	this.shadow;
 	
@@ -189,6 +190,7 @@ CharacterObject.prototype.update = function(dt)
 		
 	this.representation.x = this.x;
 	this.representation.y = this.y;
+	this.representation.rotation = this.direction;
 	this.shadow.x = this.x;
 	this.shadow.y = this.y;
 }
@@ -599,7 +601,7 @@ function runJon( dt )
 		{
 			if( gameObjects[i].alignment === 0 && gameObjects[i].type == TYPE_CHARACTER )
 			{
-				gameObjects[i].health = 100;
+				gameObjects[i].health = gameObjects[i].maxHealth;
 				for( var j = 0; j < 4; j++ )
 				{
 					gameObjects[i].ammo[j]=10;
