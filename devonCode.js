@@ -26,8 +26,6 @@ Character.prototype = Object.create(CharacterObject.prototype);
 Character.prototype.constructor = Character;
 Character.prototype.innerUpdate = function( dt )
 {
-    console.log(this.fireRate);
-    
 	if(isKeyDown("W"))
        this.y-=movementSpeed;
     if(isKeyDown("S"))
@@ -534,7 +532,7 @@ function placePlayer()
     player.x=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).x;
     player.y=currentFloor.getActualCell(currentFloor.startX, currentFloor.startY).y;
     
-    player.init( gameStage, dudeSword, dudeSword );
+    player.init( gameStage, dudeSword, shadowImage );
     
     gameObjects.push( player );
     OL.init();

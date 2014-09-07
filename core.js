@@ -213,6 +213,9 @@ function loadComplete(evt)
 	levelCompleteScreen = new createjs.Bitmap(queue.getResult("levelComplete"));
 	shadowImage = new createjs.Bitmap(queue.getResult("shadow"));
 	
+    shadowImage.regX=32;
+    shadowImage.regY=32;
+    
 	stage.addChildAt(titleScreen,0);
 	stage.addChildAt(instructionScreen,0);
 	stage.addChildAt(gameoverScreen,0);
