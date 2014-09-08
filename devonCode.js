@@ -577,19 +577,23 @@ function placeAmmo()
             var rep = rockAmmo;
 		    ammo.init( gameStage, rep );
 		    var cell = currentFloor.getRandomEmptyCell();
-		    ammo.x = cell.x-10;
+		    ammo.x = cell.x-20;
 		    ammo.y = cell.y-10;
+            ammo.regX=cell.x;
+            ammo.regY=cell.y;
 		    gameObjects.push(ammo);
         }
         else if(swit<0.6)
         {
-            //3
+            //3w
             ammo = new AmmoPickup(BOW_ARROW-1, 3);
             rep = bowAmmo;
 		    ammo.init( gameStage, rep );
 		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x-30;
 		    ammo.y = cell.y-20;
+            ammo.regX=cell.x;
+            ammo.regY=cell.y;
 		    gameObjects.push(ammo);
         }
         else if(swit<1)
@@ -601,6 +605,8 @@ function placeAmmo()
 		    cell = currentFloor.getRandomEmptyCell();
 		    ammo.x = cell.x-20;
 		    ammo.y = cell.y-20;
+            ammo.regX=cell.x;
+            ammo.regY=cell.y;
 		    gameObjects.push(ammo);
         }
 	}
