@@ -147,7 +147,7 @@ EnemyCharacter.prototype.bossAttack=function(character)
     var velocY=character.y-this.targetY;
     var newCharX=character.x+velocX;
     var newCharY=character.y+velocY;
-
+this.representation.gotoAndPlay("attack");
     this.shoot(newCharX,newCharY);
     
 }
@@ -202,19 +202,19 @@ function placeEnemies()
         var weaponRan=Math.random()*10;
         if(currentLevel<=2)
         {
-            enemy1.init( gameStage, dudeSword, shadowImage );
+            enemy1.init( gameStage, werewolf, shadowImage );
             enemy1.weaponType=SWORD;
         }
         else if(currentLevel<=4)
         {
             if(weaponRan<6)
             {
-                enemy1.init( gameStage, dudeSword, shadowImage );
+                enemy1.init( gameStage, werewolf, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<10)
             {
-                enemy1.init( gameStage, dudeRock, shadowImage );
+                enemy1.init( gameStage, cyclops, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
         }
@@ -222,17 +222,17 @@ function placeEnemies()
         {
             if(weaponRan<6)
             {
-                enemy1.init( gameStage, dudeSword, shadowImage );
+                enemy1.init( gameStage, werewolf, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<8)
             {
-                enemy1.init( gameStage, dudeRock, shadowImage );
+                enemy1.init( gameStage, cyclops, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
             else if(weaponRan<10)
             {
-                enemy1.init( gameStage, dudeAxe, shadowImage );
+                enemy1.init( gameStage, centaur, shadowImage );
                 enemy1.weaponType=AXES;
             }
         }
@@ -240,22 +240,22 @@ function placeEnemies()
         {
             if(weaponRan<6)
             {
-                enemy1.init( gameStage, dudeSword, shadowImage );
+                enemy1.init( gameStage, werewolf, shadowImage );
                 enemy1.weaponType=SWORD;
             }
             else if(weaponRan<7)
             {
-                enemy1.init( gameStage, dudeRock, shadowImage );
+                enemy1.init( gameStage, cyclops, shadowImage );
                 enemy1.weaponType=ROCKS;
             }
             else if(weaponRan<8)
             {
-                enemy1.init( gameStage, dudeAxe, shadowImage );
+                enemy1.init( gameStage, centaur, shadowImage );
                 enemy1.weaponType=AXES;
             }
             else if(weaponRan<10)
             {
-                enemy1.init( gameStage, dudeBow, shadowImage );
+                enemy1.init( gameStage, harpie, shadowImage );
                 enemy1.weaponType=BOW_ARROW;
             }
             
@@ -291,13 +291,13 @@ function placeMinotaur()
       minatuar.shoots=true;
     var AIRectangle = new createjs.Shape();
   AIRectangle.graphics.beginFill("#CC33FF").drawCircle(0,0, 100);
-    minatuar.init( gameStage, AIRectangle, AIRectangle );
+    minatuar.init( gameStage, minotaur, shadowImage );
     minatuar.maxHealth=1000;
     minatuar.health=1000;
     minatuar.weaponType=BOW_ARROW;
-    minatuar.attackrate=20;
+    minatuar.attackrate=40;
      minatuar.movement=4;
-    minatuar.movement*=.8;
+    minatuar.movement*=.6;
     minatuar.radius=100;
     minatuar.range=500;
     minatuar.isBoss=true;
