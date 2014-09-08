@@ -35,13 +35,35 @@ EnemyCharacter.prototype.shoot=function(character)
 {
     var bul=new Bullet(this.weaponType,this.x,this.y);
     bul.alignment=1;
-    var bulRep=new createjs.Shape();
-    bulRep.graphics.beginFill("#FF0000").drawCircle(10,10,10);
-    bulRep.regX=10;
-    bulRep.regY=10;
+    var bulRep
+    
     var vec=new vector2D(character.x-this.x, character.y-this.y);
     var vec2=new vector2D(this.x, this.y);
-    bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+    if(this.weaponType===SWORD)
+    {
+         var bulRep=swordBullet;
+        bulRep.rotation=vec.getAngle();
+        bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+    }
+    else if(this.weaponType===ROCKS)
+    {
+        var bulRep=rockBullet;
+        bulRep.rotation=vec.getAngle();
+        bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+    }
+    else if(this.weaponType===AXES)
+    {
+        var bulRep=axeBullet;
+        bulRep.rotation=vec.getAngle();
+        bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+    }
+    else
+    {
+        var bulRep=bowBullet;
+        bulRep.rotation=vec.getAngle();
+        bul.init(gameStage, bulRep, bulRep, 500, vec, vec2,1);
+      
+    }
     gameObjects.push(bul);
 }
 EnemyCharacter.prototype.activate = function(dt)
