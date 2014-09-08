@@ -167,6 +167,7 @@ var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow;
+var health, goal;
 var rockAmmo, axeAmmo, bowAmmo;
 var swordBullet, rockBullet, axeBullet, bowBullet;
 var shadowImage;
@@ -198,6 +199,8 @@ manifest = [
     {src:"rockBullet.png", id:"RockBullet"},
     {src:"AxeBullet.png", id:"AxeBullet"},
     {src:"bowBullet.png", id:"BowBullet"},
+	{src:"health.png", id:"health"},
+	{src:"goal.png", id:"goal"},
     {src:"radical.png",id:"radical"}
 ];
 
@@ -230,6 +233,12 @@ function loadComplete(evt)
     theRadical.y=-110;
     shadowImage.regX=32;
     shadowImage.regY=32;
+	health = new createjs.Bitmap(queue.getResult("health"));
+	health.regX = 32;
+	health.regY = 23;
+	goal = new createjs.Bitmap(queue.getResult("goal"));
+	goal.regX = 32;
+	goal.regY = 32;
     
 	stage.addChildAt(titleScreen,0);
 	stage.addChildAt(instructionScreen,0);

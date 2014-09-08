@@ -527,12 +527,12 @@ function initJon()
 
 function placeHealth()
 {
-	var rep = new createjs.Shape();  //creates object to hold a shape
-	rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
+	//var rep = new createjs.Shape();  //creates object to hold a shape
+	//rep.graphics.beginFill("#813").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
 	for( var i = 0; i < currentLevel + 4; i++ )
 	{
 		var heal = new HealthPickup();
-		heal.init( gameStage, rep );
+		heal.init( gameStage, health );
 		var cell = currentFloor.getRandomEmptyCell();
 		heal.x = cell.x;
 		heal.y = cell.y;
@@ -542,10 +542,10 @@ function placeHealth()
 
 function placeEnd()
 {
-	rep = new createjs.Shape();  //creates object to hold a shape
-	rep.graphics.beginFill("#272").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
+	//rep = new createjs.Shape();  //creates object to hold a shape
+	//rep.graphics.beginFill("#272").drawCircle(0, 0, 32);  //creates circle at 0,0, with radius of 40
 	var end = new EndLevelPickup();
-	end.init( gameStage, rep );
+	end.init( gameStage, goal );
 	var safe = false;
 	var cell;
 	while( !safe )
