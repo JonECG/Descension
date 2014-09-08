@@ -18,6 +18,7 @@ function EnemyCharacter()
     this.weaponType;
     this.movement=4;
     this.range=350;
+    this.isBoss=false;
     
 }
 
@@ -31,13 +32,13 @@ EnemyCharacter.prototype.innerUpdate = function( dt )
         this.activate();
     
 }
-EnemyCharacter.prototype.shoot=function(character)
+EnemyCharacter.prototype.shoot=function(x,y)
 {
     var bul=new Bullet(this.weaponType,this.x,this.y);
     bul.alignment=1;
     var bulRep
     
-    var vec=new vector2D(character.x-this.x, character.y-this.y);
+    var vec=new vector2D(x-this.x, y-this.y);
     var vec2=new vector2D(this.x, this.y);
     if(this.weaponType===SWORD)
     {
@@ -68,59 +69,88 @@ EnemyCharacter.prototype.shoot=function(character)
 }
 EnemyCharacter.prototype.activate = function(dt)
 {
+    
     for(i=0;i<gameObjects.length;i++)
         {
+        
             if(gameObjects[i].alignment!=this.alignment && gameObjects[i].type===TYPE_CHARACTER)
             {
-                     if(this.shoots)
-                    {
-                        if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<this.range)
+                    if(!this.isBoss)
+        {
+                         if(this.shoots)
+                        {
+                            if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<this.range)
+                            {
+                                if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
+                                {
+                                    this.isActive=true;
+                                    this.targetX=gameObjects[i].x;
+                                    this.targetY=gameObjects[i].y;
+                                    if(this.wait==this.attackrate)
+                                    {
+                                        this.shoot(gameObjects[i].x,gameObjects[i].y);
+                                         this.wait=0;
+                                        this.representation.gotoAndPlay("attack");
+                                    }
+                                    this.wait++;
+                                }
+
+                            }
+
+                            if(this.isActive)
+                            {
+                                var distance=length(gameObjects[i].x,gameObjects[i].y)-length(this.x,this.y);
+
+                                if(segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
+                                {
+                                    this.move(this.targetX,this.targetY);
+                                }
+                            }
+                        }
+                        else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200|| this.isActive)
                         {
                             if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
-                            {
-                                this.isActive=true;
-                                this.targetX=gameObjects[i].x;
-                                this.targetY=gameObjects[i].y;
-                                if(this.wait==this.attackrate)
                                 {
-                                    this.shoot(gameObjects[i]);
-                                     this.wait=0;
-                                    this.representation.gotoAndPlay("attack");
-                                }
-                                this.wait++;
-                            }
-                           
-                        }
-                        if(this.isActive)
-                        {
-                            var distance=length(gameObjects[i].x,gameObjects[i].y)-length(this.x,this.y);
-                            
-                            if(segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
-                            {
+                                    this.targetX=gameObjects[i].x;
+                                    this.targetY=gameObjects[i].y;
+                                this.isActive=true;
                                 this.move(this.targetX,this.targetY);
-                            }
+                                }
+
                         }
-                    }
-                    else if(Math.sqrt( Math.pow( (gameObjects[i].x - this.x), 2 ) + Math.pow( (gameObjects[i].y - this.y), 2 ) )<200|| this.isActive)
+                    if(this.isActive)
                     {
-                        if(!segmentIntersectsFloor(gameObjects[i].x, gameObjects[i].y, this.x, this.y ))
-                            {
-                                this.targetX=gameObjects[i].x;
-                                this.targetY=gameObjects[i].y;
-                            this.isActive=true;
-                            this.move(this.targetX,this.targetY);
-                            }
-                        
+                         this.move(this.targetX,this.targetY);
                     }
-                if(this.isActive)
-                {
-                     this.move(this.targetX,this.targetY);
+
                 }
-                
+                else
+                {
+                     if(this.wait==this.attackrate)
+                    {
+                        this.wait=0;
+                        this.bossAttack(gameObjects[i]);
+                        this.targetX=gameObjects[i].x;
+                        this.targetY=gameObjects[i].y;
+                    }
+                     this.move(gameObjects[i].x,gameObjects[i].y);
+                    this.wait++;
+                }
+            
             }
+                
         }
 }
+EnemyCharacter.prototype.bossAttack=function(character)
+{
+    var velocX=character.x-this.targetX;
+    var velocY=character.y-this.targetY;
+    var newCharX=character.x+velocX;
+    var newCharY=character.y+velocY;
 
+    this.shoot(newCharX,newCharY);
+    
+}
 EnemyCharacter.prototype.move=function(posX,posY)  
 {
     
@@ -270,6 +300,8 @@ function placeMinotaur()
     minatuar.movement*=.8;
     minatuar.radius=100;
     minatuar.range=500;
+    minatuar.isBoss=true;
+    
     gameObjects.push(minatuar);
 }
 function runDan( dt )
