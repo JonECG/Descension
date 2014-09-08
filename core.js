@@ -167,6 +167,7 @@ var titleScreen, instructionScreen, gameoverScreen, continueScreen, winScreen;
 var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow;
+var centaur, werewolf, harpie, cyclops, minotaur;
 var health, goal;
 var rockAmmo, axeAmmo, bowAmmo;
 var swordBullet, rockBullet, axeBullet, bowBullet;
@@ -192,6 +193,11 @@ manifest = [
 	{src:"dudeAxe_strip3.png", id:"dudeAxe"},
 	{src:"dudeRock_strip5.png", id:"dudeRock"},
 	{src:"dudeBow_strip4.png", id:"dudeBow"},
+	{src:"centaur_strip3.png", id:"centaur"},
+	{src:"werewolf_strip4.png", id:"werewolf"},
+	{src:"harpie_strip4.png", id:"harpie"},
+	{src:"harpie_strip4.png", id:"minotaur"},
+	{src:"cyclops_strip5.png", id:"cyclops"},
     {src:"rockPickup.png", id:"rockPickup"},
     {src:"axePickup.png", id:"axePickup"},
     {src:"bowPickup.png", id:"bowPickup"},
@@ -289,6 +295,8 @@ function loadComplete(evt)
             }     
         });
 		
+	var speed = 0.25;
+		
 	var dudeSwordSheet = new createjs.SpriteSheet({
 		images: [queue.getResult("dudeSword")],
 		frames: {
@@ -299,7 +307,7 @@ function loadComplete(evt)
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 3, "idle", 0.2],
+			attack: [1, 3, "idle", speed],
 			}     
 		});
 	dudeSword = new createjs.Sprite(dudeSwordSheet);
@@ -315,7 +323,7 @@ function loadComplete(evt)
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 2, "idle", 0.2],
+			attack: [1, 2, "idle", speed],
 			}     
 		});
 	dudeAxe = new createjs.Sprite(dudeAxeSheet);
@@ -331,7 +339,7 @@ function loadComplete(evt)
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 4, "idle", 0.2],
+			attack: [1, 4, "idle", speed],
 			}     
 		});
 	dudeRock = new createjs.Sprite(dudeRockSheet);
@@ -347,11 +355,97 @@ function loadComplete(evt)
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 3, "idle", 0.2],
+			attack: [1, 3, "idle", speed],
 			}     
 		});
 	dudeBow = new createjs.Sprite(dudeBowSheet);
 	dudeBow.gotoAndStop( "idle" );
+	
+	var centaurSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("centaur")],
+		frames: {
+			width: 130,
+			height: 103,
+			regX: 55,
+			regY: 55
+		},
+		animations: {
+			idle: [0, 0, "idle"],
+			attack: [1, 2, "idle", speed],
+			}     
+		});
+	centaur = new createjs.Sprite(centaurSheet);
+	centaur.gotoAndStop( "idle" );
+	
+	
+	var wereWolfSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("werewolf")],
+		frames: {
+			width: 130,
+			height: 103,
+			regX: 55,
+			regY: 55
+		},
+		animations: {
+			idle: [0, 0, "idle"],
+			attack: [1, 3, "idle", speed],
+			}     
+		});
+	werewolf = new createjs.Sprite(wereWolfSheet);
+	werewolf.gotoAndStop( "idle" );
+	
+	var cyclopsSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("cyclops")],
+		frames: {
+			width: 130,
+			height: 103,
+			regX: 55,
+			regY: 55
+		},
+		animations: {
+			idle: [0, 0, "idle"],
+			attack: [1, 4, "idle", speed],
+			}     
+		});
+	cyclops = new createjs.Sprite(cyclopsSheet);
+	cyclops.gotoAndStop( "idle" );
+	
+	
+	var harpieSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("harpie")],
+		frames: {
+			width: 130,
+			height: 103,
+			regX: 55,
+			regY: 55
+		},
+		animations: {
+			idle: [0, 0, "idle"],
+			attack: [1, 3, "idle", speed],
+			}     
+		});
+	harpie = new createjs.Sprite(harpieSheet);
+	harpie.gotoAndStop( "idle" );
+	
+	
+	var minotaurSheet = new createjs.SpriteSheet({
+		images: [queue.getResult("minotaur")],
+		frames: {
+			width: 130,
+			height: 103,
+			regX: 55,
+			regY: 55
+		},
+		animations: {
+			idle: [0, 0, "idle"],
+			attack: [1, 3, "idle", speed],
+			}     
+		});
+	minotaur = new createjs.Sprite(minotaurSheet);
+	minotaur.gotoAndStop( "idle" );
+	minotaur.scaleX = 4;
+	minotaur.scaleY = 4;
+	
 	
 	playButton = new createjs.Sprite(buttonSheet);
 	playButton.gotoAndStop("playNormal");
