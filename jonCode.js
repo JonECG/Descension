@@ -613,8 +613,8 @@ function runJon( dt )
 
 function cameraFollowPlayer( dt, tween )
 {
-	var count = 0;
-	var avx = 0, avy = 0;
+	var count = 0.25;
+	var avx = -getMouseXInGame()/4, avy = -getMouseYInGame()/4;
 	
 	for( var i = 0; i < gameObjects.length; i++ )
 	{
@@ -626,7 +626,7 @@ function cameraFollowPlayer( dt, tween )
 		}
 	}
 	
-	if( count != 0 )
+	if( count > 0.25 )
 	{
 		avx /= count;
 		avy /= count;
