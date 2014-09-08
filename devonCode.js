@@ -27,13 +27,25 @@ Character.prototype.constructor = Character;
 Character.prototype.innerUpdate = function( dt )
 {
 	if(isKeyDown("W"))
-       this.y-=movementSpeed;
+        if(this.fireRate<1)
+            this.y-=movementSpeed*0.5;
+        else
+            this.y-=movementSpeed;
     if(isKeyDown("S"))
-        this.y+=movementSpeed;
+        if(this.fireRate<1)
+            this.y+=movementSpeed*0.5;
+        else
+            this.y+=movementSpeed;
     if(isKeyDown("A"))
-        this.x-=movementSpeed;
+        if(this.fireRate<1)
+            this.x-=movementSpeed*0.5;
+        else
+            this.x-=movementSpeed;
     if(isKeyDown("D"))
-        this.x+=movementSpeed;
+        if(this.fireRate<1)
+            this.x+=movementSpeed*0.5;
+        else
+            this.x+=movementSpeed;
     
     if(isMousePressed() && this.lastWeapon!=SWORD && this.ammo[this.lastWeapon-1]>0)
     {
@@ -299,8 +311,7 @@ Bullet.prototype.collide = function( other )
                         if(Math.random()<0.6 && this.pickUp)
                         {
                             ammo = new AmmoPickup(this.weaponType-1, 1);
-                            rep = new createjs.Shape();  //creates object to hold a shape
-	                        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+                            rep = rockBullet;
 		                    ammo.init( gameStage, rep );
 		                    ammo.x = this.x;
 		                    ammo.y = this.y;
@@ -317,8 +328,7 @@ Bullet.prototype.collide = function( other )
                         if(Math.random()<0.6 && this.pickUp)
                         {
                             ammo = new AmmoPickup(this.weaponType-1, 1);
-                            rep = new createjs.Shape();  //creates object to hold a shape
-	                        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+                            rep = axeBullet;
 		                    ammo.init( gameStage, rep );
 		                    ammo.x = this.x;
 		                    ammo.y = this.y;
@@ -337,8 +347,7 @@ Bullet.prototype.collide = function( other )
                         if(Math.random()<0.2 && this.pickUp)
                         {
                             ammo = new AmmoPickup(this.weaponType-1, 1);
-                            rep = new createjs.Shape();  //creates object to hold a shape
-	                        rep.graphics.beginFill("#636363").drawCircle(0, 0, 10);
+                            rep = rockBullet;
 		                    ammo.init( gameStage, rep );
 		                    ammo.x = this.x;
 		                    ammo.y = this.y;
@@ -349,8 +358,7 @@ Bullet.prototype.collide = function( other )
                         if(Math.random()<0.2 && this.pickUp)
                         {
                             ammo = new AmmoPickup(this.weaponType-1, 1);
-                            rep = new createjs.Shape();  //creates object to hold a shape
-	                        rep.graphics.beginFill("#4F2C94").drawCircle(0, 0, 10);
+                            rep = axeBullet;
 		                    ammo.init( gameStage, rep );
 		                    ammo.x = this.x;
 		                    ammo.y = this.y;
@@ -566,14 +574,14 @@ function placePlayer()
 
 function placeAmmo()
 {
-    for( var i = 0; i < currentLevel*1.5+6; i++ )
+    for( var i = 0; i < currentLevel*0.75+3; i++ )
 	{
         var swit=Math.random();
         
         if(swit<0.45)
         {
             //5
-		    var ammo = new AmmoPickup(ROCKS-1, 3);
+		    var ammo = new AmmoPickup(ROCKS-1, 6);
             var rep = rockAmmo;
 		    ammo.init( gameStage, rep );
 		    var cell = currentFloor.getRandomEmptyCell();
@@ -586,7 +594,7 @@ function placeAmmo()
         else if(swit<0.6)
         {
             //3w
-            ammo = new AmmoPickup(BOW_ARROW-1, 3);
+            ammo = new AmmoPickup(BOW_ARROW-1, 6);
             rep = bowAmmo;
 		    ammo.init( gameStage, rep );
 		    cell = currentFloor.getRandomEmptyCell();
@@ -599,7 +607,7 @@ function placeAmmo()
         else if(swit<1)
         {
             //3
-             ammo = new AmmoPickup(AXES-1, 3);
+             ammo = new AmmoPickup(AXES-1, 6);
             rep = axeAmmo;
 		    ammo.init( gameStage, rep );
 		    cell = currentFloor.getRandomEmptyCell();
