@@ -151,9 +151,9 @@ function nextLevel()
 	else
 	{
 		currentFloor = createFloor(currentLevel + 5, currentLevel + 5);
-		placeHealth();
 		placePlayer();
 		placeEnemies();
+		placeHealth();
 		placeAmmo();
 		placeEnd();
 	}
