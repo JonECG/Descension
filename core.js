@@ -207,7 +207,19 @@ manifest = [
     {src:"bowBullet.png", id:"BowBullet"},
 	{src:"health.png", id:"health"},
 	{src:"goal.png", id:"goal"},
-    {src:"radical.png",id:"radical"}
+    {src:"radical.png",id:"radical"},
+	
+	//Sounds
+	{src:"rock-fire.ogg",	id:"rockFire"},
+	{src:"rock-hit.ogg",	id:"rockHit"},
+	{src:"sword-fire.ogg",	id:"swordFire"},
+	{src:"sword-hit.ogg",	id:"swordHit"},
+	{src:"arrow-fire.ogg",	id:"arrowFire"},
+	{src:"arrow-hit.ogg",	id:"arrowHit"},
+	{src:"axe-fire.ogg",	id:"axeFire"},
+	{src:"axe-hit.ogg",		id:"axeHit"},
+	{src:"pickup-health.ogg",id:"pickupHealth"},
+	{src:"pickup-ammo.ogg",	id:"pickupAmmo"},
 ];
 
 var queue;
@@ -443,8 +455,8 @@ function loadComplete(evt)
 		});
 	minotaur = new createjs.Sprite(minotaurSheet);
 	minotaur.gotoAndStop( "idle" );
-	minotaur.scaleX = 4;
-	minotaur.scaleY = 4;
+	minotaur.scaleX = 3;
+	minotaur.scaleY = 3;
 	
 	
 	playButton = new createjs.Sprite(buttonSheet);

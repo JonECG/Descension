@@ -278,6 +278,7 @@ HealthPickup.prototype.collide = function( other )
 			{
 				other.health += 80;
 				this.markedForDestroy = true;
+				createjs.Sound.play( "pickupHealth" );
 			}
 		break;
 	}
