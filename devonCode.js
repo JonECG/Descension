@@ -54,6 +54,7 @@ Character.prototype.innerUpdate = function( dt )
             case ROCKS:
                 if(this.fireRate>this.rockFireRate)
                 {
+                    createjs.Sound.play("rockFire", {loop:0});
                     this.FireBullet();
                     this.ammo[this.lastWeapon-1]--;
                     this.fireRate=0;
@@ -62,6 +63,7 @@ Character.prototype.innerUpdate = function( dt )
             case BOW_ARROW:
                 if(this.fireRate>this.bowFireRate)
                 {
+                    createjs.Sound.play("arrowFire", {loop:0});
                     this.FireBullet();
                     this.ammo[this.lastWeapon-1]--;
                     this.fireRate=0;
@@ -70,6 +72,7 @@ Character.prototype.innerUpdate = function( dt )
             case AXES:
                 if(this.fireRate>this.axeFireRate)
                 {
+                    createjs.Sound.play("axeFire",{loop:0});
                     this.FireBullet();
                     this.ammo[this.lastWeapon-1]--;
                     this.fireRate=0;
@@ -79,6 +82,7 @@ Character.prototype.innerUpdate = function( dt )
     }
     else if(isMousePressed() && this.lastWeapon==SWORD && this.fireRate>this.swordFireRate)
     {
+        createjs.Sound.play("swordFire",{loop:0});
         this.FireBullet();
         this.fireRate=0;
     }
@@ -302,10 +306,12 @@ Bullet.prototype.collide = function( other )
                 switch(this.weaponType)
                 {
                     case SWORD:
+                        createjs.Sound.play("swordHit");
                         other.health-=15;
                         this.markedForDestroy=true;
                         break;
                     case ROCKS:
+                        createjs.Sound.play("rockHit");
                         other.health-=10;
                         this.markedForDestroy=true;
                         if(Math.random()<0.6 && this.pickUp)
@@ -319,10 +325,12 @@ Bullet.prototype.collide = function( other )
                         }
                         break;
                     case BOW_ARROW:
+                        createjs.Sound.play("arrowHit");
                         other.health-=40;
                         this.markedForDestroy=true;
                         break;
                     case AXES:
+                        createjs.Sound.play("axeHit");
                         other.health-=15;
                         this.markedForDestroy=true;
                         if(Math.random()<0.6 && this.pickUp)
