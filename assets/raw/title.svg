@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="375"
-     inkscape:cy="520"
+     inkscape:zoom="0.55222222"
+     inkscape:cx="625.41247"
+     inkscape:cy="182.49497"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -37,7 +37,9 @@
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata3200">
     <rdf:RDF>
@@ -46,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,6 +57,13 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-452.36218)">
+    <rect
+       style="fill:#b0d4d4;fill-opacity:1;stroke:none"
+       id="rect3002"
+       width="867.13263"
+       height="659.02081"
+       x="-25.446089"
+       y="439.99466" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
@@ -70,24 +79,70 @@
     <text
        sodipodi:linespacing="94.999999%"
        id="text3207"
-       y="909.50507"
-       x="778.23328"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:94.99999881%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
+       y="850.50769"
+       x="518.82031"
+       style="font-size:26.68511391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:94.99999881%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
        xml:space="preserve"><tspan
-         style="font-size:56px;text-align:end;line-height:94.99999881%;text-anchor:end"
-         y="909.50507"
-         x="778.23328"
+         style="font-size:37.35916138px;text-align:end;line-height:94.99999881%;text-anchor:end"
+         y="850.50769"
+         x="518.82031"
          sodipodi:role="line"
          id="tspan3211">Daniel</tspan><tspan
-         style="font-size:56px;text-align:end;line-height:94.99999881%;text-anchor:end"
-         y="962.70508"
-         x="778.23328"
+         style="font-size:37.35916138px;text-align:end;line-height:94.99999881%;text-anchor:end"
+         y="885.9989"
+         x="518.82031"
+         sodipodi:role="line"
+         id="tspan2997" /><tspan
+         style="font-size:37.35916138px;text-align:end;line-height:94.99999881%;text-anchor:end"
+         y="921.49011"
+         x="518.82031"
          sodipodi:role="line"
          id="tspan3215">Devon</tspan><tspan
-         style="font-size:56px;text-align:end;line-height:94.99999881%;text-anchor:end"
-         y="1015.9051"
-         x="778.23328"
+         style="font-size:37.35916138px;text-align:end;line-height:94.99999881%;text-anchor:end"
+         y="956.98132"
+         x="518.82031"
+         sodipodi:role="line"
+         id="tspan2999" /><tspan
+         style="font-size:37.35916138px;text-align:end;line-height:94.99999881%;text-anchor:end"
+         y="992.47247"
+         x="518.82031"
          sodipodi:role="line"
          id="tspan3217">Jon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:26.68511391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
+       x="519.83099"
+       y="871.21277"
+       id="text3001"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3003"
+         x="519.83099"
+         y="871.21277"
+         style="font-size:24.01660347px;text-align:start;text-anchor:start;fill:#4d4d4d">AI and SFX</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3009"
+       y="943.09344"
+       x="519.83099"
+       style="font-size:26.68511391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
+       xml:space="preserve"><tspan
+         style="font-size:24.01660347px;text-align:start;text-anchor:start;fill:#4d4d4d"
+         y="943.09344"
+         x="519.83099"
+         id="tspan3011"
+         sodipodi:role="line">Gameplay and BGM</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3013"
+       y="1015.5781"
+       x="519.83099"
+       style="font-size:26.68511391px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Batang;-inkscape-font-specification:Batang"
+       xml:space="preserve"><tspan
+         style="font-size:24.01660347px;text-align:start;text-anchor:start;fill:#4d4d4d"
+         y="1015.5781"
+         x="519.83099"
+         id="tspan3015"
+         sodipodi:role="line">Engine and GFX</tspan></text>
   </g>
 </svg>

@@ -457,7 +457,7 @@ function loadComplete(evt)
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 1, "idle"]
+			attack: [1, 1, "attack"]
 			}     
 		});
 	minotaur = new createjs.Sprite(minotaurSheet);
