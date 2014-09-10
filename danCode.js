@@ -371,7 +371,7 @@ function placeMinotaur()
   AIRectangle.graphics.beginFill("#CC33FF").drawCircle(0,0, 100);
     minatuar.init( gameStage, minotaur, shadowImage );
     minatuar.maxHealth=1000;
-    minatuar.health=700;
+    minatuar.health=1000;
     minatuar.weaponType=BOW_ARROW;
     minatuar.attackrate=40;
      minatuar.movement=4;
