@@ -98,6 +98,7 @@ function gameLoop( dt )
 			slainText.visible = true;
 			winScreen.visible = true;
 			mainButton.visible = true;
+            setBackgroundMusic("winMusic");
 		break;
 	}
 	
@@ -134,6 +135,7 @@ function nextLevel()
 	
 	if( currentLevel === 10 )
 	{
+        setBackgroundMusic("bossMusic");
 		var w = 10; 
 		var h = 10;
 		currentFloor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, 5, 8, cellDim );
@@ -225,7 +227,10 @@ manifest = [
 	{src:"axe-hit.ogg",		id:"axeHit"},
 	{src:"pickup-health.ogg",id:"pickupHealth"},
 	{src:"pickup-ammo.ogg",	id:"pickupAmmo"},
-    {src:"Title-Music.ogg", id:"titleMusic"}
+    {src:"Title-Music.ogg", id:"titleMusic"},
+    {src:"Boss-Loop.ogg", id:"bossMusic"},
+    {src:"Game-Loop.ogg", id:"gameMusic"},
+    {src:"win.ogg", id:"winMusic"}
 ];
 
 var queue;
@@ -468,7 +473,7 @@ function loadComplete(evt)
 	playButton.gotoAndStop("playNormal");
 	playButton.x = 85;
 	playButton.y = 594;
-	playButton.on("click", function(evt) { startGame(); });
+	playButton.on("click", function(evt) { startGame(); setBackgroundMusic("gameMusic");});
 	playButton.on("mouseover", function(evt) { playButton.gotoAndStop("playHighlight"); });
 	playButton.on("mouseout", function(evt) { playButton.gotoAndStop("playNormal"); });
 	playButton.on("mousedown", function(evt) { playButton.gotoAndStop("playDown"); });
@@ -488,7 +493,7 @@ function loadComplete(evt)
 	mainButton.gotoAndStop("mainNormal");
 	mainButton.x = 85;
 	mainButton.y = 594;
-	mainButton.on("click", function(evt) { gameState = TITLE; setBackgroundMusic( "menuMusic" ); });
+	mainButton.on("click", function(evt) { gameState = TITLE; setBackgroundMusic( "titleMusic" ); });
 	mainButton.on("mouseover", function(evt) { mainButton.gotoAndStop("mainHighlight"); });
 	mainButton.on("mouseout", function(evt) { mainButton.gotoAndStop("mainNormal"); });
 	mainButton.on("mousedown", function(evt) { mainButton.gotoAndStop("mainDown"); });
@@ -507,6 +512,8 @@ function loadComplete(evt)
 	initJon();
 	initDevon();
     initDan();
+    
+    setBackgroundMusic("titleMusic");
 	
 	gameState = TITLE;
 }
