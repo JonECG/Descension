@@ -151,8 +151,8 @@ EnemyCharacter.prototype.activate = function(dt)
                     {
                         this.targetX=player.x;
                             this.targetY=player.y;
-                          this.bossMoveX=  normalized((this.targetX-this.x),length((this.targetX-this.x), (this.targetY-this.y)))*15;
-                        this.bossMoveY=  normalized((this.targetY-this.y),length((this.targetX-this.x), (this.targetY-this.y)))*15;
+                          this.bossMoveX=  normalized((this.targetX-this.x),length((this.targetX-this.x), (this.targetY-this.y)))*13;
+                        this.bossMoveY=  normalized((this.targetY-this.y),length((this.targetX-this.x), (this.targetY-this.y)))*13;
 
                             this.BosshitWall=false;
                         this.bosschargeTime=0;
