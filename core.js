@@ -75,11 +75,6 @@ function gameLoop( dt )
 				}
 			}
 			
-			if( isKeyPressed( 'G' ) )
-			{
-				gameState = GAMEOVER;
-			}
-			
 		break;
 		case GAMEOVER:
 			slainText.text = enemiesSlain + " Enemies Slain";
@@ -109,7 +104,7 @@ var currentLevel, enemiesSlain;
 var player;
 function startGame()
 {
-	currentLevel = 0;
+	currentLevel = 9;
 	enemiesSlain = 0;
 	createPlayer();
 	nextLevel();
