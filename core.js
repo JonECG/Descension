@@ -133,8 +133,8 @@ function nextLevel()
 	{
         setBackgroundMusic("bossMusic");
 		var wallyFill = 0.8;
-		var w = 10; 
-		var h = 10;
+		var w = 9; 
+		var h = 9;
 		currentFloor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, 5, 8, cellDim );
 		
 		for( var j = -1; j < h; j++ )
@@ -153,6 +153,7 @@ function nextLevel()
 	}
 	else
 	{
+		setBackgroundMusic("gameMusic");
 		currentFloor = createFloor(currentLevel + 5, currentLevel + 5);
 		placePlayer();
 		placeEnemies();
@@ -471,7 +472,7 @@ function loadComplete(evt)
 	playButton.gotoAndStop("playNormal");
 	playButton.x = 85;
 	playButton.y = 594;
-	playButton.on("click", function(evt) { startGame(); setBackgroundMusic("gameMusic");});
+	playButton.on("click", function(evt) { startGame();});
 	playButton.on("mouseover", function(evt) { playButton.gotoAndStop("playHighlight"); });
 	playButton.on("mouseout", function(evt) { playButton.gotoAndStop("playNormal"); });
 	playButton.on("mousedown", function(evt) { playButton.gotoAndStop("playDown"); });

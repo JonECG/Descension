@@ -478,15 +478,15 @@ function segmentIntersectsFloor( x1, y1, x2, y2 )
 {
 	var result = true;
 	
-	// for( var i = 0; i < gameWalls.length; i++ )
-	// {
-		// for( var j = 0; j < gameWalls[i].corners.length; j++ )
-		// {
-			// var p1 = gameWalls[i].corners[j];
-			// var p2 = gameWalls[i].corners[(j+1)%gameWalls[i].corners.length];
-			// result = result || segmentIntersectSegment( x1, y1, x2, y2, p1.x, p1.y, p2.x, p2.y );
-		// }
-	// }
+	for( var i = 0; i < gameWalls.length; i++ )
+	{
+		for( var j = 0; j < gameWalls[i].corners.length; j++ )
+		{
+			var p1 = gameWalls[i].corners[j];
+			var p2 = gameWalls[i].corners[(j+1)%gameWalls[i].corners.length];
+			result = result || segmentIntersectSegment( x1, y1, x2, y2, p1.x, p1.y, p2.x, p2.y );
+		}
+	}
 	
 	return result;
 }
