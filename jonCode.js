@@ -10,13 +10,23 @@ function GameObject()
 	this.solid = true;
 	this.markedForDestroy=false;
 	this.type = TYPE_NOTHING;
+	this.representation;
+	this.containingStage;
 }
 GameObject.prototype.destroy = function()
 {
 }
 
+function sqr( n )
+{
+	return n*n;
+}
+
 GameObject.prototype.update = function( dt )
 {
+	// Visibility test
+	this.representation.visible = ( Math.abs(this.x-(-this.containingStage.x+stage.canvas.width/2)) < stage.canvas.width/2 + 150 ) && ( Math.abs(this.y-(-this.containingStage.y+stage.canvas.height/2) ) < stage.canvas.height/2 + 150 );
+	
 	// Collision with walls
 	for( var i = 0; i < gameWalls.length; i++ )
 	{
@@ -72,12 +82,13 @@ GameObject.prototype.update = function( dt )
 			gameObjects[i].collide( this );
 			if( this.solid && gameObjects[i].solid )
 			{
+				var thisToThatRat = this.radius*this.radius/(this.radius*this.radius+gameObjects[i].radius*gameObjects[i].radius);
 				var xDiff = this.x - (gameObjects[i].x + rad * (this.x - gameObjects[i].x) / mag);
 				var yDiff = this.y - (gameObjects[i].y + rad * (this.y - gameObjects[i].y) / mag);
-				this.x = this.x - xDiff;
-				this.y = this.y - yDiff;
-				gameObjects[i].x = gameObjects[i].x + xDiff;
-				gameObjects[i].y = gameObjects[i].y + yDiff;
+				this.x = this.x - xDiff*(1-thisToThatRat);
+				this.y = this.y - yDiff*(1-thisToThatRat);
+				gameObjects[i].x = gameObjects[i].x + xDiff*thisToThatRat;
+				gameObjects[i].y = gameObjects[i].y + yDiff*thisToThatRat;
 			}
 		}
 	}
@@ -95,8 +106,8 @@ function Wall( x, y, w, h )
 	this.w = w;
 	this.h = h;
 	
-	this.representation;
-	this.containingStage;
+	//this.representation;
+	//this.containingStage;
 	
 	this.type = TYPE_WALL;
 	
@@ -130,7 +141,7 @@ function CharacterObject()
 	this.x = 0;
 	this.y = 0;
 	this.direction = 0;
-	this.representation;
+	//this.representation;
 	this.shadow;
 	
 	this.xspeed = 0;
@@ -146,7 +157,7 @@ function CharacterObject()
 	this.radius = 32;
 	this.alignment = 0;
 	
-	this.containingStage;
+	//this.containingStage;
 }
 
 CharacterObject.prototype = Object.create(GameObject.prototype);
@@ -229,14 +240,14 @@ TestCharacter.prototype.move = function( dt )
 function Pickup()
 {
 	GameObject.call( this );
-	this.representation;
+	//this.representation;
 	
 	this.type = TYPE_PICKUP;
 	
 	this.radius = 32;
 	this.solid = false;
 	
-	this.containingStage;
+	//this.containingStage;
 }
 
 Pickup.prototype = Object.create(GameObject.prototype);
@@ -277,6 +288,7 @@ HealthPickup.prototype.collide = function( other )
 			if( other.alignment === 0 )
 			{
 				other.health += 80;
+				other.health = Math.min( other.health, other.maxHealth );
 				this.markedForDestroy = true;
 				createjs.Sound.play( "pickupHealth" );
 			}
@@ -565,6 +577,14 @@ function placeEnd()
 	}
 	end.x = cell.x;
 	end.y = cell.y;
+	gameObjects.push(end);
+	
+	
+	
+	var end = new EndLevelPickup();
+	end.init( gameStage, jamie );
+	end.x = currentFloor.getActualCell( 0, 0 ).x-stage.canvas.width/2 - 100;
+	end.y = currentFloor.getActualCell( 0, 0 ).y-stage.canvas.height/2 - 100;
 	gameObjects.push(end);
 }
 

@@ -57,6 +57,10 @@ function gameLoop( dt )
 			runDan( dt );
 			runDevon( dt );
 			
+			for(var i = 0; i < gameWalls.length; i++) 
+			{
+				gameWalls[i].update( dt );
+			}
 			for(var i = 0; i < gameObjects.length; i++) 
 			{
 				gameObjects[i].update( dt );
@@ -103,7 +107,7 @@ var currentLevel, enemiesSlain;
 var player;
 function startGame()
 {
-	currentLevel = 0;
+	currentLevel = 9;
 	enemiesSlain = 0;
 	createPlayer();
 	nextLevel();
@@ -168,7 +172,7 @@ var playButton, instrButton, mainButton, continueButton;
 var weaponSword, weaponBow, weaponCrossbow, weaponAxe, weaponRock;
 var dudeSword, dudeRock, dudeAxe, dudeBow;
 var centaur, werewolf, harpie, cyclops, minotaur;
-var health, goal;
+var health, goal, jamie;
 var rockAmmo, axeAmmo, bowAmmo;
 var swordBullet, rockBullet, axeBullet, bowBullet;
 var shadowImage;
@@ -196,7 +200,7 @@ manifest = [
 	{src:"centaur_strip3.png", id:"centaur"},
 	{src:"werewolf_strip4.png", id:"werewolf"},
 	{src:"harpie_strip4.png", id:"harpie"},
-	{src:"harpie_strip4.png", id:"minotaur"},
+	{src:"minotaur_strip2.png", id:"minotaur"},
 	{src:"cyclops_strip5.png", id:"cyclops"},
     {src:"rockPickup.png", id:"rockPickup"},
     {src:"axePickup.png", id:"axePickup"},
@@ -208,6 +212,7 @@ manifest = [
 	{src:"health.png", id:"health"},
 	{src:"goal.png", id:"goal"},
     {src:"radical.png",id:"radical"},
+	{src:"jking.png", id:"jamie"},
 	
 	//Sounds
 	{src:"rock-fire.ogg",	id:"rockFire"},
@@ -247,6 +252,7 @@ function loadComplete(evt)
 	levelCompleteScreen = new createjs.Bitmap(queue.getResult("levelComplete"));
 	shadowImage = new createjs.Bitmap(queue.getResult("shadow"));
     theRadical= new createjs.Bitmap(queue.getResult("radical"));
+	jamie= new createjs.Bitmap(queue.getResult("jamie"));
 	theRadical.x=-100;
     theRadical.y=-110;
     shadowImage.regX=32;
@@ -443,20 +449,18 @@ function loadComplete(evt)
 	var minotaurSheet = new createjs.SpriteSheet({
 		images: [queue.getResult("minotaur")],
 		frames: {
-			width: 130,
-			height: 103,
-			regX: 55,
-			regY: 55
+			width: 309,
+			height: 320,
+			regX: 72,
+			regY: 125
 		},
 		animations: {
 			idle: [0, 0, "idle"],
-			attack: [1, 3, "idle", speed],
+			attack: [1, 1, "idle"]
 			}     
 		});
 	minotaur = new createjs.Sprite(minotaurSheet);
 	minotaur.gotoAndStop( "idle" );
-	minotaur.scaleX = 3;
-	minotaur.scaleY = 3;
 	
 	
 	playButton = new createjs.Sprite(buttonSheet);

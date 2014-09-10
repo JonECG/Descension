@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1136.1302"
-   height="902.46771"
+   width="1080.9803"
+   height="1118.907"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="monsters.svg"
-   inkscape:export-filename="C:\Users\Jon\Google Drive\NU Laptop\Assignments\GAT Rich Animation\FinalProject\assets\raw\SpriteSubImages\cyclopsAttack4.png"
-   inkscape:export-xdpi="10.298115"
-   inkscape:export-ydpi="10.298115">
+   sodipodi:docname="minotaur.svg"
+   inkscape:export-filename="C:\Users\Jon\Google Drive\NU Laptop\Assignments\GAT Rich Animation\FinalProject\assets\raw\SpriteSubImages\minotaurIdle.png"
+   inkscape:export-xdpi="25.726646"
+   inkscape:export-ydpi="25.726646">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.54536878"
-     inkscape:cx="761.59476"
-     inkscape:cy="400.32545"
+     inkscape:cx="446.62601"
+     inkscape:cy="669.33344"
      inkscape:document-units="px"
      inkscape:current-layer="g4755"
      showgrid="false"
@@ -36,10 +36,10 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     fit-margin-left="-0.1"
-     fit-margin-top="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-left="30"
+     fit-margin-top="30"
+     fit-margin-right="30"
+     fit-margin-bottom="30" />
   <defs
      id="defs4" />
   <metadata
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,7 +59,7 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <path
        sodipodi:nodetypes="ssscs"
        inkscape:connector-curvature="0"
@@ -208,7 +208,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy#5"
      inkscape:groupmode="layer"
      id="g5143"
@@ -361,7 +361,7 @@
        style="fill:none;stroke:#000000;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy#6"
      inkscape:groupmode="layer"
      id="g5201"
@@ -525,7 +525,7 @@
      id="g5261"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy#7"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <path
        sodipodi:nodetypes="ssscs"
        inkscape:connector-curvature="0"
@@ -674,7 +674,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy"
      inkscape:groupmode="layer"
      id="g3067"
@@ -757,7 +757,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)" />
     <path
        style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -782,7 +782,7 @@
        sodipodi:nodetypes="cssssc" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="0 copy"
      inkscape:groupmode="layer"
      id="g3887"
@@ -877,7 +877,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)" />
     <path
        style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:9;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -906,7 +906,7 @@
      id="g3960"
      inkscape:groupmode="layer"
      inkscape:label="0 copy copy"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <rect
        ry="73.734543"
        rx="81.416245"
@@ -953,7 +953,7 @@
        inkscape:connector-curvature="0" />
     <path
        transform="translate(45.714285,-149.00745)"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        sodipodi:ry="142.85715"
        sodipodi:rx="142.85715"
        sodipodi:cy="543.79077"
@@ -978,7 +978,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy#1"
      inkscape:groupmode="layer"
      id="g3996"
@@ -1194,7 +1194,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)"
        inkscape:transform-center-x="2.2858657"
        inkscape:transform-center-y="-2.5595665" />
@@ -1228,7 +1228,7 @@
      id="g5443"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy#8"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <g
        id="g5592"
        transform="matrix(-0.00154805,-0.9999988,0.9999988,-0.00154805,-80.610659,1101.6318)">
@@ -1425,7 +1425,7 @@
        inkscape:transform-center-y="-2.5595665"
        inkscape:transform-center-x="2.2858657"
        transform="translate(45.714285,-149.00745)"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        sodipodi:ry="142.85715"
        sodipodi:rx="142.85715"
        sodipodi:cy="543.79077"
@@ -1477,7 +1477,7 @@
        transform="translate(0,-199.99789)" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy#9"
      inkscape:groupmode="layer"
      id="g5601"
@@ -1629,7 +1629,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)"
        inkscape:transform-center-x="2.2858657"
        inkscape:transform-center-y="-2.5595665" />
@@ -1735,7 +1735,7 @@
      id="g5700"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy#10"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <g
        transform="matrix(-1,0,0,1,640.7574,59.832514)"
        id="g5702">
@@ -1879,7 +1879,7 @@
        inkscape:transform-center-y="-2.5595665"
        inkscape:transform-center-x="2.2858657"
        transform="translate(45.714285,-149.00745)"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        sodipodi:ry="142.85715"
        sodipodi:rx="142.85715"
        sodipodi:cy="543.79077"
@@ -2000,7 +2000,7 @@
      id="g4157"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy copy"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <path
        sodipodi:nodetypes="ssscs"
        inkscape:connector-curvature="0"
@@ -2268,7 +2268,7 @@
        transform="translate(0,-199.99789)" />
     <path
        transform="translate(45.714285,-149.00745)"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        sodipodi:ry="142.85715"
        sodipodi:rx="142.85715"
        sodipodi:cy="543.79077"
@@ -2367,7 +2367,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy copy copy#2"
      inkscape:groupmode="layer"
      id="g5812"
@@ -2645,7 +2645,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)" />
     <path
        sodipodi:nodetypes="cssc"
@@ -2747,7 +2747,7 @@
      id="g5939"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy copy copy"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <path
        sodipodi:nodetypes="ssscs"
        inkscape:connector-curvature="0"
@@ -3023,7 +3023,7 @@
        transform="translate(0,-199.99789)" />
     <path
        transform="translate(45.714285,-149.00745)"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        sodipodi:ry="142.85715"
        sodipodi:rx="142.85715"
        sodipodi:cy="543.79077"
@@ -3069,7 +3069,7 @@
        sodipodi:nodetypes="cscsc" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy copy copy copy"
      inkscape:groupmode="layer"
      id="g6068"
@@ -3355,7 +3355,7 @@
        sodipodi:cy="543.79077"
        sodipodi:rx="142.85715"
        sodipodi:ry="142.85715"
-       d="m 442.85715,543.79077 a 142.85715,142.85715 0 1 1 -285.7143,0 142.85715,142.85715 0 1 1 285.7143,0 z"
+       d="m 442.85715,543.79077 c 0,78.89783 -63.95933,142.85715 -142.85715,142.85715 -78.89782,0 -142.85715,-63.95932 -142.85715,-142.85715 0,-78.89782 63.95933,-142.85715 142.85715,-142.85715 78.89782,0 142.85715,63.95933 142.85715,142.85715 z"
        transform="translate(45.714285,-149.00745)" />
     <path
        sodipodi:nodetypes="cssssscsc"
@@ -3389,7 +3389,7 @@
        sodipodi:nodetypes="cssssc" />
   </g>
   <g
-     transform="translate(125.13318,81.657516)"
+     transform="translate(-189.83557,30.005683)"
      inkscape:label="Layer 1 copy#2"
      inkscape:groupmode="layer"
      id="g3838"
@@ -3576,7 +3576,7 @@
      id="g4755"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1 copy#3"
-     transform="translate(125.13318,81.657516)">
+     transform="translate(-189.83557,30.005683)">
     <g
        id="g4771"
        transform="matrix(-0.49301534,0.87002062,-0.87002062,-0.49301534,1747.4746,-808.01736)">
