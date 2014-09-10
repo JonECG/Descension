@@ -27,23 +27,23 @@ Character.prototype.constructor = Character;
 Character.prototype.innerUpdate = function( dt )
 {
 	if(isKeyDown("W"))
-        if(this.fireRate<1)
-            this.y-=movementSpeed*0.5;
+        if(this.fireRate<0.8)
+            this.y-=movementSpeed*0.7;
         else
             this.y-=movementSpeed;
     if(isKeyDown("S"))
-        if(this.fireRate<1)
-            this.y+=movementSpeed*0.5;
+        if(this.fireRate<0.8)
+            this.y+=movementSpeed*0.7;
         else
             this.y+=movementSpeed;
     if(isKeyDown("A"))
-        if(this.fireRate<1)
-            this.x-=movementSpeed*0.5;
+        if(this.fireRate<0.8)
+            this.x-=movementSpeed*0.7;
         else
             this.x-=movementSpeed;
     if(isKeyDown("D"))
-        if(this.fireRate<1)
-            this.x+=movementSpeed*0.5;
+        if(this.fireRate<0.8)
+            this.x+=movementSpeed*0.7;
         else
             this.x+=movementSpeed;
     
@@ -387,6 +387,11 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     this.representation=spriteRef.clone();
     this.representation.x=posRef.x;
     this.representation.y=posRef.y;
+    if(al==0)
+    {
+        this.representation.regX=0;
+        this.representation.regY=-10;
+    }
     this.shadow=shadowRef.clone();
     this.shadow.x=posRef.x;
     this.shadow.y=posRef.y;
@@ -420,7 +425,7 @@ Bullet.prototype.update = function( dt )
     if(this.weaponType==SWORD)
     {
         var check=new vector2D(this.beginX-this.x, this.beginY-this.y);
-        if(check.length>150)
+        if(check.length>80)
         {
             this.markedForDestroy=true;
         }

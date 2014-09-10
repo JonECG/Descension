@@ -225,6 +225,7 @@ manifest = [
 	{src:"axe-hit.ogg",		id:"axeHit"},
 	{src:"pickup-health.ogg",id:"pickupHealth"},
 	{src:"pickup-ammo.ogg",	id:"pickupAmmo"},
+    {src:"Title-Music.ogg", id:"titleMusic"}
 ];
 
 var queue;
