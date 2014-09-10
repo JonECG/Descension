@@ -387,11 +387,6 @@ Bullet.prototype.init = function(stage, spriteRef, shadowRef, speedRef, vecRef, 
     this.representation=spriteRef.clone();
     this.representation.x=posRef.x;
     this.representation.y=posRef.y;
-    if(al==0)
-    {
-        this.representation.regX=0;
-        this.representation.regY=-10;
-    }
     this.shadow=shadowRef.clone();
     this.shadow.x=posRef.x;
     this.shadow.y=posRef.y;
