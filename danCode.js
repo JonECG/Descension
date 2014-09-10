@@ -147,12 +147,12 @@ EnemyCharacter.prototype.activate = function(dt)
                   
                  
            
-                    if(this.bosschargeTime===70 && player.type=== TYPE_CHARACTER)
+                    if(this.bosschargeTime===70 )
                     {
                         this.targetX=player.x;
                             this.targetY=player.y;
-                          this.bossMoveX=  normalized((this.targetX-this.x),length((this.targetX-this.x), (this.targetY-this.y)))*7;
-                        this.bossMoveY=  normalized((this.targetY-this.y),length((this.targetX-this.x), (this.targetY-this.y)))*7;
+                          this.bossMoveX=  normalized((this.targetX-this.x),length((this.targetX-this.x), (this.targetY-this.y)))*15;
+                        this.bossMoveY=  normalized((this.targetY-this.y),length((this.targetX-this.x), (this.targetY-this.y)))*15;
 
                             this.BosshitWall=false;
                         this.bosschargeTime=0;
@@ -161,11 +161,17 @@ EnemyCharacter.prototype.activate = function(dt)
                     
              
            
-           
+            this.representation.gotoAndPlay("attack");
                 this.bossMove();
              }
+            else{
+                this.representation.gotoAndPlay("idle");
+            }
+           
+                
+            }
          
-        }
+        
                 
        
     if(this.isBoss)
@@ -173,11 +179,12 @@ EnemyCharacter.prototype.activate = function(dt)
           if(this.bosschargeTime<70 )
                 {
                     this.bosschargeTime++;
-                    this.representation.gotoAndPlay("attack");
+                   
 
                 }
         if(this.bosschargeTime===69 )
         {
+             
             this.wait=0;
         }
         this.wait++;
@@ -210,28 +217,13 @@ EnemyCharacter.prototype.bossAttack=function(character)
     var velocY=character.y-this.targetY;
     var newCharX=character.x+velocX;
     var newCharY=character.y+velocY;
-this.representation.gotoAndPlay("attack");
+
     this.shoot(newCharX,newCharY);
     
 }
 EnemyCharacter.prototype.bossMove=function()
 {
-    if(this.bossMoveX>7)
-    {
-        this.bossMoveX=7;
-    }
-    if(this.bossMoveX<-7)
-    {
-        this.bossMoveX=-7;
-    }
-    if(this.bossMoveY>7)
-    {
-        this.bossMoveY=7;
-    }
-    if(this.bossMoveY<-7)
-    {
-        this.bossMoveY=-7;
-    }
+    
     this.x+=this.bossMoveX;
     this.y+=this.bossMoveY;
     //this.representation.gotoAndPlay("attack");
@@ -379,7 +371,7 @@ function placeMinotaur()
   AIRectangle.graphics.beginFill("#CC33FF").drawCircle(0,0, 100);
     minatuar.init( gameStage, minotaur, shadowImage );
     minatuar.maxHealth=1000;
-    minatuar.health=1000;
+    minatuar.health=700;
     minatuar.weaponType=BOW_ARROW;
     minatuar.attackrate=40;
      minatuar.movement=4;
