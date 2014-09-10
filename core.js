@@ -104,7 +104,7 @@ var currentLevel, enemiesSlain;
 var player;
 function startGame()
 {
-	currentLevel = 9;
+	currentLevel = 0;
 	enemiesSlain = 0;
 	createPlayer();
 	nextLevel();

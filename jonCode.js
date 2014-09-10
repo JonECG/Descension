@@ -476,7 +476,7 @@ function segmentIntersectSegment( l1x1, l1y1, l1x2, l1y2, l2x1, l2y1, l2x2, l2y2
 
 function segmentIntersectsFloor( x1, y1, x2, y2 )
 {
-	var result = true;
+	var result = false;
 	
 	for( var i = 0; i < gameWalls.length; i++ )
 	{
