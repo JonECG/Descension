@@ -312,7 +312,7 @@ Bullet.prototype.collide = function( other )
                         break;
                     case ROCKS:
                         createjs.Sound.play("rockHit");
-                        other.health-=10;
+                        other.health-=15;
                         this.markedForDestroy=true;
                         if(Math.random()<0.6 && this.pickUp)
                         {
@@ -331,7 +331,7 @@ Bullet.prototype.collide = function( other )
                         break;
                     case AXES:
                         createjs.Sound.play("axeHit");
-                        other.health-=15;
+                        other.health-=20;
                         this.markedForDestroy=true;
                         if(Math.random()<0.6 && this.pickUp)
                         {

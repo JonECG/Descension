@@ -86,6 +86,7 @@ function gameLoop( dt )
 			slainText.visible = true;
 			gameoverScreen.visible = true;
 			mainButton.visible = true;
+            setBackgroundMusic("gameoverMusic");
 		break;
 		case COMPLETE:
 			slainText.text = enemiesSlain + " Enemies Slain";
@@ -108,7 +109,7 @@ var currentLevel, enemiesSlain;
 var player;
 function startGame()
 {
-	currentLevel = 9;
+	currentLevel = 0;
 	enemiesSlain = 0;
 	createPlayer();
 	nextLevel();
@@ -230,7 +231,8 @@ manifest = [
     {src:"Title-Music.ogg", id:"titleMusic"},
     {src:"Boss-Loop.ogg", id:"bossMusic"},
     {src:"Game-Loop.ogg", id:"gameMusic"},
-    {src:"win.ogg", id:"winMusic"}
+    {src:"win.ogg", id:"winMusic"},
+    {src:"GameOver.ogg", id:"gameoverMusic"}
 ];
 
 var queue;
