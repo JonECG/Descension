@@ -126,8 +126,8 @@ Wall.prototype.init = function( stage, spriteReference )
 	
 	this.representation.x = this.x;
 	this.representation.y = this.y;
-	this.representation.scaleX = (this.w+0.01) / this.representation.getBounds().width;
-	this.representation.scaleY = (this.h+0.01) / this.representation.getBounds().height;
+	this.representation.scaleX = this.representation.visible ? (this.w+0.01) / this.representation.getBounds().width : 1;
+	this.representation.scaleY = this.representation.visible ? (this.h+0.01) / this.representation.getBounds().height : 1;
 }
 
 Wall.prototype.destroy = function()
@@ -476,17 +476,17 @@ function segmentIntersectSegment( l1x1, l1y1, l1x2, l1y2, l2x1, l2y1, l2x2, l2y2
 
 function segmentIntersectsFloor( x1, y1, x2, y2 )
 {
-	var result = false;
+	var result = true;
 	
-	for( var i = 0; i < gameWalls.length; i++ )
-	{
-		for( var j = 0; j < gameWalls[i].corners.length; j++ )
-		{
-			var p1 = gameWalls[i].corners[j];
-			var p2 = gameWalls[i].corners[(j+1)%gameWalls[i].corners.length];
-			result = result || segmentIntersectSegment( x1, y1, x2, y2, p1.x, p1.y, p2.x, p2.y );
-		}
-	}
+	// for( var i = 0; i < gameWalls.length; i++ )
+	// {
+		// for( var j = 0; j < gameWalls[i].corners.length; j++ )
+		// {
+			// var p1 = gameWalls[i].corners[j];
+			// var p2 = gameWalls[i].corners[(j+1)%gameWalls[i].corners.length];
+			// result = result || segmentIntersectSegment( x1, y1, x2, y2, p1.x, p1.y, p2.x, p2.y );
+		// }
+	// }
 	
 	return result;
 }

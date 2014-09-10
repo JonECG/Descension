@@ -137,6 +137,7 @@ function nextLevel()
 	if( currentLevel === 10 )
 	{
         setBackgroundMusic("bossMusic");
+		var wallyFill = 0.8;
 		var w = 10; 
 		var h = 10;
 		currentFloor = new Floor( -cellDim*w/2, -cellDim*h/2, w, h, 5, 8, cellDim );
@@ -146,9 +147,9 @@ function nextLevel()
 			for( var i = -1; i < w; i++ )
 			{
 				if( j != -1 && ( i == -1 || i == w-1 ) )
-					createWall( (i+1-wallFill/2-w/2)*cellDim, (j-wallFill/2-h/2)*cellDim, cellDim*wallFill, (1+wallFill)*cellDim );
+					createWall( (i+1-wallyFill/2-w/2)*cellDim, (j-wallyFill/2-h/2)*cellDim, cellDim*wallyFill, (1+wallyFill)*cellDim );
 				if( i != -1 && ( j == -1 || j == h-1 ) )
-					createWall( (i-wallFill/2-w/2)*cellDim, (j+1-wallFill/2-h/2)*cellDim, (1+wallFill)*cellDim, cellDim*wallFill );
+					createWall( (i-wallyFill/2-w/2)*cellDim, (j+1-wallyFill/2-h/2)*cellDim, (1+wallyFill)*cellDim, cellDim*wallyFill );
 			}
 		}
 	
